@@ -9,7 +9,7 @@ The public `skills/` tree contains reusable workflows. Private work instructions
 - **Mandatory public/private contract for each skill owned by Caiqueoak/skills:**
   - Include `<!-- skill-source: Caiqueoak/skills -->` and a "Public and private responsibilities" section.
   - Tell the user that private additions go to `~/.claude/skill-overrides/<name>.md`, and explicitly forbid editing public or installed skill files for workplace customization.
-  - Include the exact matching optional Claude Code injection `!\`cat "$HOME/.claude/skill-overrides/<name>.md" 2>/dev/null || true\`` and narrow `allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/<name>.md" 2>/dev/null || true)` frontmatter to permit it under normal Claude Code permissions.
+  - Keep the **exact per-skill loader and matching narrow `allowed-tools` grant** from the bundled template; the shell command must read only `~/.claude/skill-overrides/<name>.md` and tolerate a missing file.
   - Do not create or commit private override files when publishing a public skill. Create a private file **only** when a local change is requested.
 - Never include internal company data, secrets, proprietary examples, URLs, or private override contents in public source, commits, or PRs.
 - Keep referenced templates and helper resources inside an installed skill directory so `npx skills add Caiqueoak/skills -g` is sufficient for skill functionality.
