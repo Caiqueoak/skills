@@ -1,40 +1,47 @@
-# Agent guidelines — Caiqueoak/skills
+# Skill authoring and maintenance standards
 
-This repository is the **public source** of reusable skills. Keep all public content free of workplace-only or confidential details.
+These rules apply to public skills maintained in this repository, independent of the tool used to author them.
 
-## Create skills
+## Creating skills
 
-- Prefer using `/create-skill` when authoring a new skill. Follow `templates/skill/SKILL.md` and the official Agent Skills format.
-- New public skills belong at `skills/<kebab-case-name>/SKILL.md`.
-- Each public skill needs valid `name` and trigger-oriented `description`, a concise single-purpose workflow, this repository's source marker, and an optional Claude Code private loader.
-- Use extra reference files or scripts only if needed. Test the skill's intended trigger and scope before publishing.
-- Company-owned skills belong in authorized company locations, **not** this repository. Do not add this repository's ownership marker to company skills.
+- Use `skills/<kebab-case-name>/SKILL.md`, with valid `name` and a trigger-oriented `description`.
+- Base public skills on the canonical `skills/create-skill/references/public-skill-template.md`. The template is bundled with the installable `/create-skill` skill.
+- Define a narrow responsibility. Keep steps, necessary inputs, constraints, and completion checks concise. Prefer readable and maintainable instructions.
+- Place only required resources inside `skills/<name>/references/` or `skills/<name>/scripts/`, and use paths that work from the installed skill directory.
+- Do not require global configuration or unrelated local repository files for basic skill use.
 
-## Review before publishing
+## Required public/private pattern
 
-- Confirm that the skill triggers for its intended task and does not unnecessarily match unrelated tasks.
-- Confirm that every required file lives inside the installable skill directory, with no dependency on a local working copy.
-- Confirm that public instructions, per-skill private paths, ownership marker, and loader all use the same skill name.
-- Keep generic public instructions separate from private workplace or machine-specific additions.
+Every skill originating from this repository must:
 
-## Modify existing skills
+1. Preserve `<!-- skill-source: Caiqueoak/skills -->`.
+2. Include the canonical template's public/private responsibilities section and explain what belongs in the public workflow versus a private extension.
+3. Include an optional Claude Code loader for `~/.claude/skill-overrides/<skill-name>.md` and matching narrowly scoped `allowed-tools` permission, using the same skill name.
+4. Load only its matching private extension when invoked; never import unrelated private context globally.
+5. Keep private overrides outside this repository. Never commit, push, quote, or reproduce private contents in public files, issues, PRs, or logs.
 
-- Prefer using `/modify-skill` for existing skills. **Determine origin before editing; never infer ownership from name alone.**
-- Skills originating from `Caiqueoak/skills`: for local/workplace customization, write only to `~/.claude/skill-overrides/<skill-name>.md`. Do not change the published skill or installed copies.
-- Company-owned skills: direct edits to the company's canonical skill are **allowed when authorized**. Never block them just because they live under `~/.claude/skills/` or `~/.agents/skills/`.
-- Other/unknown skills: inspect ownership and applicable policy before editing.
-- Only edit a public skill in this repository if the user explicitly requests a **reusable upstream improvement**. Never publish company-specific content in that change.
-- Preserve the per-skill optional loader and source marker when editing public skills.
+The private file is created only when a local customization is requested. A missing private extension must not prevent the public skill from working. Never add internal or confidential context to the public template.
 
-## Protect only this repository's installations
+## Modifying existing skills
 
-- Do not deny `Edit(~/.claude/skills/**)` or `Edit(~/.agents/skills/**)`: these broad rules block company-owned skills.
-- `scripts/protect-installed-skills.py --apply`, when run on the user's machine, applies scoped deny rules only for verified installations of this repository's skills plus that checkout's public `skills/` directory.
-- The installer never adds a deny for an unmarked same-named company skill. Re-run after installing/updating public skills.
-- Permission denies are a guard for Claude Code file tools and recognized shell operations, **not** a full filesystem security boundary.
+- Identify ownership from source path and provenance, not from name alone.
+- For skills from this repository, environment-specific changes go to the matching local private file. Do not modify public source or installed copies for those changes.
+- Public-source improvements must be generally reusable, explicitly intended for publication, and free of private or proprietary details.
+- For organization-owned skills, follow the owner's rules and edit the canonical source directly when authorized. Do not impose this repository's edit denies on unrelated skills.
+- Preserve the skill name, owner marker, loader, and private-path contract when changing a public skill.
 
-## Privacy and scope
+## Review and publishing
 
-- Private overrides are neither source files nor artifacts to commit. Never quote them in public issues, PRs, logs, commits, or README examples.
-- Do not add global `CLAUDE.md` or `~/.claude/rules/` instructions for per-skill customization. Private additions should load only with the matching skill.
-- Follow company policy for use of local instructions and external AI tools.
+- Verify the skill triggers for intended tasks and avoids unrelated triggers.
+- Verify frontmatter, naming, bundled references, source markers, matching loader and private paths.
+- Run `python -m unittest discover -s tests -v`; check GitHub Actions and inspect changes before merging.
+- Use a reviewable branch/PR with purpose, decisions, validation, and any known limitations.
+- Never include internal code, proprietary examples, credentials, internal URLs, or other private information in this public repository.
+
+## Installation and safeguards
+
+- Public skills must work after `npx skills add Caiqueoak/skills -g`; do not require a separate clone for their references.
+- The Skills CLI does not apply global Claude Code permission denies or run a post-install setup script.
+- Optional `scripts/protect-installed-skills.py` adds scoped deny rules only for verified copies owned by this repository.
+- Never use broad `Edit(~/.claude/skills/**)` or `Edit(~/.agents/skills/**)` denies, which could block unrelated skills.
+- Treat `allowed-tools` and dynamic injection as Claude Code-specific capabilities subject to managed policies.
