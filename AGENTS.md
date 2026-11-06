@@ -2,9 +2,11 @@
 
 The public `skills/` tree contains reusable workflows. Private work instructions belong outside this repository and load only when the matching skill is invoked.
 
-## Create public skills
+## Create public skills (ChatGPT-first)
 
-- Use `/create-skill` and its **installed** template at `skills/create-skill/references/public-skill-template.md`. Never assume a repository-root template exists on a work machine.
+- **Primary authoring environment: ChatGPT with the connected GitHub repository.** Read [docs/chatgpt-authoring.md](docs/chatgpt-authoring.md) and the canonical bundled template at `skills/create-skill/references/public-skill-template.md` from GitHub. Do not assume an installed `/create-skill` is available in ChatGPT or require users to run Claude Code to create public skills.
+- `/create-skill` remains an optional Claude Code authoring workflow and shares the same canonical template; it is not a prerequisite for ChatGPT authoring.
+- Make public changes in a branch/PR with validation evidence. GitHub remains the source of truth; do not edit the user’s work-machine skill copies through public authoring.
 - New public skills belong in `skills/<kebab-case-name>/SKILL.md`. Use concise `name`, trigger-oriented `description`, and a focused workflow.
 - **Mandatory public/private contract for each skill owned by Caiqueoak/skills:**
   - Include `<!-- skill-source: Caiqueoak/skills -->` and a "Public and private responsibilities" section.
