@@ -34,22 +34,18 @@ class SkillContractTests(unittest.TestCase):
                 self.assertNotIn("{{SKILL_NAME}}", frontmatter)
                 self.assertNotIn("{{DESCRIPTION}}", frontmatter)
 
-    def test_creation_template_is_installed_with_create_skill(self):
-        bundled = SKILLS_DIR / "create-skill/references/public-skill-template.md"
-        create_skill = (SKILLS_DIR / "create-skill/SKILL.md").read_text(encoding="utf-8")
-        self.assertTrue(bundled.is_file())
-        self.assertIn("references/public-skill-template.md", create_skill)
-        template = bundled.read_text(encoding="utf-8")
+    def test_creation_template_is_repository_only(self):
+        template_file = ROOT / "templates/skill/SKILL.md"
+        self.assertTrue(template_file.is_file())
+        template = template_file.read_text(encoding="utf-8")
         self.assertIn(MARKER, template)
         self.assertIn("## Public and private responsibilities", template)
         self.assertIn("allowed-tools: Bash(cat", template)
         self.assertIn('!\x60cat "$HOME/.claude/skill-overrides/{{SKILL_NAME}}.md"', template)
-        self.assertFalse((ROOT / "templates/skill/SKILL.md").exists())
+        self.assertFalse((SKILLS_DIR / "create-skill/SKILL.md").exists())
 
     def test_company_skill_edits_are_not_redirected(self):
-        creator = (SKILLS_DIR / "create-skill/SKILL.md").read_text(encoding="utf-8")
         modifier = (SKILLS_DIR / "modify-skill/SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("Company skills may be edited directly", creator)
         self.assertIn("Edit the **authorized company skill itself**", modifier)
 
     def test_private_files_are_never_committed_as_skills(self):
