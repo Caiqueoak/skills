@@ -5,7 +5,7 @@ These rules apply to public skills maintained in this repository, independent of
 ## Creating skills
 
 - Use `skills/<kebab-case-name>/SKILL.md`, with valid `name` and a trigger-oriented `description`.
-- Base public skills on the canonical `skills/create-skill/references/public-skill-template.md`. The template is bundled with the installable `/create-skill` skill.
+- Base public skills on the canonical `templates/skill/SKILL.md`. The template is maintained in this repository and is not installed as an executable skill.
 - Define a narrow responsibility. Keep steps, necessary inputs, constraints, and completion checks concise. Prefer readable and maintainable instructions.
 - Place only required resources inside `skills/<name>/references/` or `skills/<name>/scripts/`, and use paths that work from the installed skill directory.
 - Do not require global configuration or unrelated local repository files for basic skill use.
