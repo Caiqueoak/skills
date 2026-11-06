@@ -36,9 +36,11 @@ This loads only the matching private file when the skill runs. The file is not a
 Install the public skills:
 
 ```sh
-npx skills add Caiqueoak/skills -g
+npx skills add Caiqueoak/skills -g -a claude-code
 mkdir -p ~/.claude/skill-overrides
 ```
+
+If you installed the old `/customize-skill` from the previous version, remove that obsolete command with `npx skills remove customize-skill -g -a claude-code`; `/modify-skill` replaces it.
 
 Optionally set up ownership-scoped file edit protection:
 
