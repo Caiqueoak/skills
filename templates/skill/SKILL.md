@@ -3,21 +3,22 @@ name: {{SKILL_NAME}}
 description: {{DESCRIPTION}}
 ---
 
+<!-- skill-source: Caiqueoak/skills -->
+
 # {{SKILL_NAME}}
 
-<!-- Replace placeholders before publishing a skill. This template is not an installed skill. -->
+<!-- Replace placeholders before publishing. This is a template, not an installed skill. -->
 
 ## Public workflow
 
-Write the reusable, platform-independent workflow here.
+Write the concise, reusable workflow here. Include task inputs, key steps, safeguards, and a completion check.
 
-## Customization policy
+## Local customization policy
 
-- The public skill is the upstream source of reusable behavior.
-- If asked to tailor this skill for a workplace, organization, machine, or personal preference, change **only** `~/.claude/skill-overrides/{{SKILL_NAME}}.md` on that machine. Create the private file if needed.
-- Do **not** change this public `SKILL.md`, installed copies, or upstream repositories for local customization, even if a public file is writable.
-- Only modify the public skill when the user explicitly asks for a public, reusable change. Do not include confidential context in public changes.
-- Apply the private file as additional constraints when it exists. Surface conflicting instructions rather than silently dropping either set. Follow applicable safety and organizational policies.
+- This skill comes from `Caiqueoak/skills`. For a personal or workplace adaptation, update **only** `~/.claude/skill-overrides/{{SKILL_NAME}}.md` locally.
+- Do not edit this public skill, its installed copy, or its symlink targets to implement local changes.
+- A public, reusable improvement requires a separate explicit request and must not contain proprietary context.
+- Apply private instructions as additional constraints when present. Explain conflicts rather than silently discarding instructions; follow applicable company policy.
 
 ## Optional private instructions (Claude Code only)
 
