@@ -1,33 +1,37 @@
 # Agent guidelines — Caiqueoak/skills
 
-This repository is the **public source** of reusable skills. Keep all public content free of workplace-only or confidential details.
+The public `skills/` tree contains reusable workflows. Private work instructions belong outside this repository and load only when the matching skill is invoked.
 
-## Create skills
+## Create public skills
 
-- Prefer using `/create-skill` when authoring a new skill. Follow `templates/skill/SKILL.md` and the official Agent Skills format.
-- New public skills belong at `skills/<kebab-case-name>/SKILL.md`.
-- Each public skill needs valid `name` and trigger-oriented `description`, a concise single-purpose workflow, this repository's source marker, and an optional Claude Code private loader.
-- Use extra reference files or scripts only if needed. Test the skill's intended trigger and scope before publishing.
-- Company-owned skills belong in authorized company locations, **not** this repository. Do not add this repository's ownership marker to company skills.
+- Use `/create-skill` and its **installed** template at `skills/create-skill/references/public-skill-template.md`. Never assume a repository-root template exists on a work machine.
+- New public skills belong in `skills/<kebab-case-name>/SKILL.md`. Use concise `name`, trigger-oriented `description`, and a focused workflow.
+- **Mandatory public/private contract for each skill owned by Caiqueoak/skills:**
+  - Include `<!-- skill-source: Caiqueoak/skills -->` and a "Public and private responsibilities" section.
+  - Tell the user that private additions go to `~/.claude/skill-overrides/<name>.md`, and explicitly forbid editing public or installed skill files for workplace customization.
+  - Keep the **exact per-skill loader and matching narrow `allowed-tools` grant** from the bundled template; the shell command must read only `~/.claude/skill-overrides/<name>.md` and tolerate a missing file.
+  - Do not create or commit private override files when publishing a public skill. Create a private file **only** when a local change is requested.
+- Never include internal company data, secrets, proprietary examples, URLs, or private override contents in public source, commits, or PRs.
+- Keep referenced templates and helper resources inside an installed skill directory so `npx skills add Caiqueoak/skills -g` is sufficient for skill functionality.
+- Validate metadata, matching private paths, loaders, source markers, resource paths, and non-matching triggers before publishing.
 
 ## Modify existing skills
 
-- Prefer using `/modify-skill` for existing skills. **Determine origin before editing; never infer ownership from name alone.**
-- Skills originating from `Caiqueoak/skills`: for local/workplace customization, write only to `~/.claude/skill-overrides/<skill-name>.md`. Do not change the published skill or installed copies.
-- Company-owned skills: direct edits to the company's canonical skill are **allowed when authorized**. Never block them just because they live under `~/.claude/skills/` or `~/.agents/skills/`.
-- Other/unknown skills: inspect ownership and applicable policy before editing.
-- Only edit a public skill in this repository if the user explicitly requests a **reusable upstream improvement**. Never publish company-specific content in that change.
-- Preserve the per-skill optional loader and source marker when editing public skills.
+- Prefer `/modify-skill`; determine ownership from trusted provenance and source marker, **not** from name alone.
+- Skills owned by `Caiqueoak/skills`: local/work modifications belong exclusively in `~/.claude/skill-overrides/<name>.md`. Never modify installed copies or symlink targets for local adaptations.
+- Company-owned skills: authorized direct modifications of the company's canonical `SKILL.md` are allowed; do not apply this repo's private routing or read-only rules to them.
+- Public reusable improvements require an explicit request and an appropriate upstream change, without private context.
 
-## Protect only this repository's installations
+## Installation and optional protection
 
-- Do not deny `Edit(~/.claude/skills/**)` or `Edit(~/.agents/skills/**)`: these broad rules block company-owned skills.
-- `scripts/protect-installed-skills.py --apply`, when run on the user's machine, applies scoped deny rules only for verified installations of this repository's skills plus that checkout's public `skills/` directory.
-- The installer never adds a deny for an unmarked same-named company skill. Re-run after installing/updating public skills.
-- Permission denies are a guard for Claude Code file tools and recognized shell operations, **not** a full filesystem security boundary.
+- The expected installation is **one** command: `npx skills add Caiqueoak/skills -g`. Skills must not depend on external repository files or private directory initialization.
+- The skills CLI does **not** execute post-install scripts or install Claude Code settings; don't claim automatic permission-level protection.
+- `scripts/protect-installed-skills.py --apply` is an **optional** manual hardening step, and must only target verified installations of this repository.
+- Never apply `Edit(~/.claude/skills/**)` or `Edit(~/.agents/skills/**)`: broad denies could block company skills.
+- Follow organization policies; managed Claude settings may disable skill shell injection or ignore per-skill `allowed-tools`. Do not bypass those restrictions.
 
-## Privacy and scope
+## Context
 
-- Private overrides are neither source files nor artifacts to commit. Never quote them in public issues, PRs, logs, commits, or README examples.
-- Do not add global `CLAUDE.md` or `~/.claude/rules/` instructions for per-skill customization. Private additions should load only with the matching skill.
-- Follow company policy for use of local instructions and external AI tools.
+- Do not add global `CLAUDE.md` or `~/.claude/rules/` to implement skill-specific customization.
+- A public skill's `SKILL.md` and its optional private companion must be the only sources of its skill-specific instructions.
+- Avoid duplicated templates and source definitions. The bundled create-skill reference is the single source of truth for the authoring template.
