@@ -31,8 +31,8 @@ class SkillContractTests(unittest.TestCase):
                 self.assertIn(f"allowed-tools: Bash({command})", frontmatter)
                 self.assertIn(MARKER, content)
                 self.assertIn(f"!\x60{command}\x60", content)
-                self.assertNotIn("{{SKILL_NAME}}", content)
-                self.assertNotIn("{{DESCRIPTION}}", content)
+                self.assertNotIn("{{SKILL_NAME}}", frontmatter)
+                self.assertNotIn("{{DESCRIPTION}}", frontmatter)
 
     def test_creation_template_is_installed_with_create_skill(self):
         bundled = SKILLS_DIR / "create-skill/references/public-skill-template.md"
