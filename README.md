@@ -66,13 +66,14 @@ On the work machine, consider adding these rules to **your existing** `~/.claude
   "permissions": {
     "deny": [
       "Edit(~/.claude/skills/**)",
+      "Edit(~/.agents/skills/**)",
       "Edit(~/skills-public/**)"
     ]
   }
 }
 ```
 
-Here `~/skills-public` is the optional local checkout of this public repository. If you use a different checkout path, change that rule. `Edit` rules also cover Claude Code's Write tool. They substantially reduce accidental modifications to public skill files, including symlink targets, but do **not** prevent all arbitrary shell scripts, external tools, or manual edits. For strict isolation use file-system access controls or a separate work environment.
+The `.agents/skills` rule covers installations that use that shared skills directory. Here `~/skills-public` is the optional local checkout of this public repository. If you use a different checkout path, change that rule. `Edit` rules also cover Claude Code's Write tool. They substantially reduce accidental modifications to public skill files, including symlink targets, but do **not** prevent all arbitrary shell scripts, external tools, or manual edits. For strict isolation use file-system access controls or a separate work environment.
 
 Do not add deny rules for `~/.claude/skill-overrides/**`; that is where workplace changes belong.
 
