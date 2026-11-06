@@ -1,86 +1,70 @@
-# Reusable Agent Skills
+# Caiqueoak/skills
 
-Public, company-independent skills for compatible coding agents. The canonical source is this repository. **Workplace-specific customizations belong in private, skill-scoped files on the work machine**, never in this repository or an installed public skill.
+Reusable, company-independent Agent Skills. **Public workflows stay upstream; workplace customizations stay private and are loaded only with their matching skill.**
 
-## Layout
+## Skills in this repository
 
-```text
-skills/
-  customize-skill/SKILL.md    # Private customization workflow
-templates/
-  skill/SKILL.md              # Starting point for any new public skill
-AGENTS.md                     # Rules for agents maintaining this repository
-```
+| Skill | Purpose |
+| --- | --- |
+| `/create-skill` | Create a new, well-scoped Agent Skill in its appropriate repository or directory |
+| `/modify-skill` | Change existing skills according to verified ownership; route this repository's local adaptations to private files |
 
-## Install
+Read [AGENTS.md](AGENTS.md) for authoring and maintenance rules and [templates/skill/SKILL.md](templates/skill/SKILL.md) when creating a public skill.
 
-```sh
-npx skills add Caiqueoak/skills -g
-```
+## Ownership-based modifications
 
-To create another public skill, copy `templates/skill/SKILL.md` to `skills/<skill-name>/SKILL.md`, replace `{{SKILL_NAME}}` and `{{DESCRIPTION}}`, then write its reusable workflow. Use kebab-case for names.
+| Origin | Where to edit | Protection |
+| --- | --- | --- |
+| `Caiqueoak/skills` | `~/.claude/skill-overrides/<skill-name>.md` for local/workplace changes | Explicit edit denies for verified installed skills |
+| Company-owned | Company's canonical `SKILL.md` (subject to authorization) | **Not blocked** by this repo's rules |
+| Other/unknown | Check provenance and applicable rules first | No assumptions by name alone |
 
-## How per-skill private customizations work
-
-Every published skill uses this convention (replace `<skill-name>` with the skill's name):
-
-```text
-Public:  skills/<skill-name>/SKILL.md
-Private: ~/.claude/skill-overrides/<skill-name>.md
-```
-
-The public skill includes an optional Claude Code dynamic-context command:
+The public skill contains the optional Claude Code dynamic injection:
 
 ```markdown
-## Optional private instructions
+## Optional private instructions (Claude Code only)
 
 !`cat "$HOME/.claude/skill-overrides/<skill-name>.md" 2>/dev/null || true`
 ```
 
-Claude Code expands the private file **only when that skill is invoked**. A missing file adds no context. Each skill loads only its own private file; no global `CLAUDE.md` or global rules are needed. The public workflow remains reusable on machines where no private file exists.
+This loads only the matching private file when the skill runs. The file is not a global rule, and isn't part of GitHub or installed skill content. Missing private files contribute no additional text.
 
-**Important:** The injection syntax is a Claude Code extension, not a portable Agent Skills feature. It requires shell execution to be enabled and permitted by local/company policy, and the example expects a Bash-compatible shell. Some managed Claude Code setups can disable it. Do not bypass your employer's restrictions. Other agents can use the public skill but may ignore the private injection.
+> Dynamic injection is a **Claude Code-specific** extension that depends on permitted shell execution. It is not guaranteed by the portable Agent Skills standard. Check employer policies before including internal information in any model context.
 
-## Customize privately at work
+## Work-machine setup
 
-Run `/customize-skill <skill-name>` and describe the change, or invoke the target skill and request a local-only customization. The agent must edit only `~/.claude/skill-overrides/<skill-name>.md`, not the installed/public skill. Keep this directory outside every public repository.
+Install the public skills:
 
-Example private file, **created on your work machine, not committed here**:
-
-```markdown
-# Local additions for flow-core
-
-- Follow internal documentation conventions.
-- Use the organization's approved tooling.
-- Do not publish internal code or details.
+```sh
+npx skills add Caiqueoak/skills -g -a claude-code
+mkdir -p ~/.claude/skill-overrides
 ```
 
-The public skill and private file are separate, so updating the public skill cannot overwrite the private customization or cause a Git merge conflict. However, conflicting *instructions* may need to be reconciled.
+If you installed the old `/customize-skill` from the previous version, remove that obsolete command with `npx skills remove customize-skill -g -a claude-code`; `/modify-skill` replaces it.
 
-## Prevent accidental edits to public skills
+Optionally set up ownership-scoped file edit protection:
 
-On the work machine, consider adding these rules to **your existing** `~/.claude/settings.json` (merge with existing settings; do not overwrite them):
-
-```json
-{
-  "permissions": {
-    "deny": [
-      "Edit(~/.claude/skills/**)",
-      "Edit(~/.agents/skills/**)",
-      "Edit(~/skills-public/**)"
-    ]
-  }
-}
+```sh
+git clone https://github.com/Caiqueoak/skills.git ~/caiqueoak-skills
+python3 ~/caiqueoak-skills/scripts/protect-installed-skills.py
+python3 ~/caiqueoak-skills/scripts/protect-installed-skills.py --apply
 ```
 
-The `.agents/skills` rule covers installations that use that shared skills directory. Here `~/skills-public` is the optional local checkout of this public repository. If you use a different checkout path, change that rule. `Edit` rules also cover Claude Code's Write tool. They substantially reduce accidental modifications to public skill files, including symlink targets, but do **not** prevent all arbitrary shell scripts, external tools, or manual edits. For strict isolation use file-system access controls or a separate work environment.
+- First command previews rules; `--apply` updates `~/.claude/settings.json` while retaining existing unrelated settings.
+- The script inspects installed skills under `~/.claude/skills/` and `~/.agents/skills/`. It protects only installed skills carrying this repository's source marker and the public checkout's `skills/` directory. **Company skills without that ownership marker remain editable**, even when they share a name.
+- It tracks its own generated rules in `~/.claude/skill-overrides/.managed-edit-denies.json`, so re-running it after skill updates can remove stale managed rules.
+- If you previously installed broad denies such as `Edit(~/.claude/skills/**)`, remove them manually first. The installer refuses to proceed while they exist.
+- Re-run `npx skills add ...` / your update command and then the protection script after adding or updating public skills. Verify installed paths and rules in Claude Code's `/permissions` dialog.
+- `Edit` deny rules cover Claude Code's built-in file-editing tools and some recognized shell operations. They **do not block every indirect write by arbitrary programs**. For strong isolation use filesystem permissions or a sandbox.
 
-Do not add deny rules for `~/.claude/skill-overrides/**`; that is where workplace changes belong.
+Do not install company-owned skills on top of identically named public skills. Name collisions should be resolved explicitly instead of relying on path matching.
 
-## Publishing and security
+## Create a public skill
 
-- Only reusable, non-confidential instructions may enter this repository.
-- The explicit request must be to improve the public behavior before a public skill is changed.
-- Work-only changes are private by default; do not add private content to commits, PRs, logs, or public issues.
-- Follow your employer's policies before storing internal rules locally or sending them to an external model.
-- Review public skill updates before installation, as with any executable skill content.
+Run `/create-skill`, or copy `templates/skill/SKILL.md` to `skills/<skill-name>/SKILL.md` and fill in the template. Keep the source marker and per-skill private loader. Use a short description that says when the skill should be invoked. Never publish internal examples or instructions.
+
+## Customize a skill at work
+
+Use `/modify-skill flow` (replace `flow` with the target skill). For a skill owned by this repository, the agent updates only `~/.claude/skill-overrides/flow.md`; for an authorized company-owned skill, it can edit the company skill directly.
+
+Public and private files do not have Git merge conflicts, but their instructions can still contradict one another. Resolve contradictions deliberately.
