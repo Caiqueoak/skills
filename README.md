@@ -2,7 +2,15 @@
 
 Globally reusable Agent Skills, with optional **private instructions per skill**. The public workflows can be updated independently of workplace customizations.
 
-## Install — one command
+## Recommended workflow: ChatGPT authors, Claude Code executes
+
+Create and update **public skills in ChatGPT**, using the connected GitHub repository. ChatGPT reads [AGENTS.md](AGENTS.md) and the [bundled skill template](skills/create-skill/references/public-skill-template.md), creates a pull request, validates it, and publishes the public skill.
+
+See [Creating skills with ChatGPT](docs/chatgpt-authoring.md) for the complete authoring workflow. **You do not need to use Claude Code's `/create-skill` to author public skills.** It remains available as an optional alternative.
+
+Use Claude Code on your work machine to run those skills and apply private modifications via `/modify-skill`. ChatGPT should never publish company-specific instructions to this public repository.
+
+## Install in Claude Code — one command
 
 ```sh
 npx skills add Caiqueoak/skills -g
@@ -14,7 +22,7 @@ Skills included:
 
 | Skill | When to use |
 | --- | --- |
-| `/create-skill` | Create a new public, company-owned, or private skill; includes the public/private instructions convention |
+| `/create-skill` | Optional Claude Code authoring workflow; public skills are normally created through ChatGPT + GitHub |
 | `/modify-skill` | Adapt an existing skill using ownership-aware routing; public skills from this repo receive private overrides |
 
 ## Public and private parts of every new skill
@@ -56,15 +64,15 @@ allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/example.md" 2>/dev/null |
 
 The command injection and `allowed-tools` field are Claude Code features. A managed policy that disallows skill shell execution or disallows user-skill tool grants can prevent private loading; this repository cannot bypass organizational security settings. Claude Code skills loaded from cloud-synced accounts may have different execution rules. A skill's description is available for discovery, but the body and private instructions load only when invoked.
 
-## Creating skills from anywhere
+## Creating skills in ChatGPT
 
-The public template is **bundled with the installed `/create-skill`** at:
+Public skill creation happens through ChatGPT and the connected GitHub repository. Read [the authoring guide](docs/chatgpt-authoring.md). The **same canonical template** is also bundled with the installed `/create-skill` at:
 
 ```text
 skills/create-skill/references/public-skill-template.md
 ```
 
-It can be read from that skill's installed directory using `${CLAUDE_SKILL_DIR}`. You do not need a local clone of `Caiqueoak/skills` to read the template or follow the creation workflow. When actually publishing a new public skill, you still need the normal permission/access to change its GitHub repository.
+It can be read from that skill's installed directory using `${CLAUDE_SKILL_DIR}`. ChatGPT reads this file directly through its GitHub connection; Claude Code can read its installed copy. No separate clone is needed for either authoring guidance. Publishing changes still requires authorized GitHub write access.
 
 The template requires a per-skill public/private section, optional private loader, narrow permission grant, and `<!-- skill-source: Caiqueoak/skills -->` source marker. **Company-owned skills are not required to use this convention**: they follow their employer's format and remain directly editable when authorized.
 
