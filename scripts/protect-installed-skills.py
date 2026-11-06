@@ -3,6 +3,8 @@
 
 import argparse
 import json
+import os
+import stat
 from pathlib import Path
 
 SOURCE_MARKER = "<!-- skill-source: Caiqueoak/skills -->"
@@ -26,6 +28,8 @@ def write_json(path: Path, data: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + ".tmp")
     temporary.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+    mode = stat.S_IMODE(path.stat().st_mode) if path.exists() else 0o600
+    os.chmod(temporary, mode)
     temporary.replace(path)
 
 
