@@ -14,11 +14,10 @@ The installer provides the public skills. Private instructions are optional and 
 
 ```text
 skills/
-  create-skill/
-    SKILL.md
-    references/
-      public-skill-template.md
   modify-skill/
+    SKILL.md
+templates/
+  skill/
     SKILL.md
 AGENTS.md
 .github/workflows/validate.yml
@@ -26,14 +25,14 @@ AGENTS.md
 
 ## Creating a skill
 
-Follow [AGENTS.md](AGENTS.md) for repository authoring conventions, and start from the [canonical skill template](skills/create-skill/references/public-skill-template.md).
+Follow [AGENTS.md](AGENTS.md) for repository authoring conventions, and start from the [canonical skill template](templates/skill/SKILL.md).
 
 1. Define one clear responsibility, a kebab-case skill name, and a description explaining when it should be used.
 2. Create `skills/<skill-name>/SKILL.md`. Keep the template's source marker, public/private split, and matching optional private loader.
 3. Put all required references and scripts inside that skill's directory so it works after global installation.
 4. Validate before publishing with `python -m unittest discover -s tests -v`. Use a PR for changes and record the validation results.
 
-The `/create-skill` skill provides the same authoring conventions, but the repository files are the source of truth.
+Skill creation is maintained through the repository's authoring standards; only runtime-useful skills are installed.
 
 ## Public/private extension contract
 
