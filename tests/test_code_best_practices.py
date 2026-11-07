@@ -8,6 +8,10 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILL_DIR = ROOT / "skills" / "code-best-practices"
 SKILL = SKILL_DIR / "SKILL.md"
 REFERENCE = SKILL_DIR / "references" / "principles.md"
+ARCHITECTURE = SKILL_DIR / "references" / "architecture-oop.md"
+SECURITY = SKILL_DIR / "references" / "security.md"
+TESTING = SKILL_DIR / "references" / "testing-validation.md"
+REVIEW = SKILL_DIR / "references" / "review-audit.md"
 
 
 class CodeBestPracticesTests(unittest.TestCase):
@@ -46,8 +50,37 @@ class CodeBestPracticesTests(unittest.TestCase):
         self.assertIn("For **review**", skill)
         self.assertIn("For **refactoring**", skill)
 
+    def test_expanded_modes_and_installable_references(self):
+        skill = SKILL.read_text(encoding="utf-8")
+        for mode in (
+            "Architecture design or review", "Repository audit",
+            "Commit / pull-request review", "Test suite audit and improvement",
+            "Focused code review",
+        ):
+            self.assertIn(mode.lower(), skill.lower())
+        for file in (ARCHITECTURE, SECURITY, TESTING, REVIEW):
+            self.assertTrue(file.is_file())
+            self.assertIn("references/" + file.name, skill)
+
+    def test_oop_security_and_test_quality_are_covered(self):
+        a = ARCHITECTURE.read_text(encoding="utf-8").lower()
+        s = SECURITY.read_text(encoding="utf-8").lower()
+        t = TESTING.read_text(encoding="utf-8").lower()
+        r = REVIEW.read_text(encoding="utf-8").lower()
+        for topic in ("encapsulation", "abstraction", "polymorphism", "inheritance", "composition", "substitutability", "invariants", "architecture", "dependency direction"):
+            self.assertIn(topic, a)
+        for topic in ("authentication", "authorization", "least privilege", "untrusted input", "secrets", "dependency", "supply chain", "ci", "threat"):
+            self.assertIn(topic, s)
+        for topic in ("red → green → refactor", "unit", "integration", "contract", "end-to-end", "assertion", "flaky", "mutation", "coverage", "regression", "negative"):
+            self.assertIn(topic, t)
+        for topic in ("repository audit", "commit review", "pull-request review", "architecture review", "path and line", "confidence", "not run"):
+            self.assertIn(topic, r)
+
     def test_no_cross_skill_references_or_concrete_examples(self):
-        joined = (SKILL.read_text(encoding="utf-8") + REFERENCE.read_text(encoding="utf-8")).lower()
+        joined = "\\n".join(
+            file.read_text(encoding="utf-8")
+            for file in (SKILL, REFERENCE, ARCHITECTURE, SECURITY, TESTING, REVIEW)
+        ).lower()
         for disallowed in (
             "skills/flow", "skills/discovery", "flow skill", "discovery skill",
             "diet app", "nutrition", "food log", "_flow/", "e.g.",
