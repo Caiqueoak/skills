@@ -69,7 +69,7 @@ class CodeBestPracticesTests(unittest.TestCase):
         r = REVIEW.read_text(encoding="utf-8").lower()
         for topic in ("encapsulation", "abstraction", "polymorphism", "inheritance", "composition", "substitutability", "invariants", "architecture", "dependency direction"):
             self.assertIn(topic, a)
-        for topic in ("authentication", "authorization", "least privilege", "untrusted input", "secrets", "dependency", "supply chain", "ci", "threat"):
+        for topic in ("authentication", "authorization", "least privilege", "untrusted input", "secrets", "dependencies", "supply-chain", "ci", "threat"):
             self.assertIn(topic, s)
         for topic in ("red → green → refactor", "unit", "integration", "contract", "end-to-end", "assertion", "flaky", "mutation", "coverage", "regression", "negative"):
             self.assertIn(topic, t)
