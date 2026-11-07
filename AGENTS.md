@@ -9,6 +9,9 @@ These rules apply to public skills maintained in this repository, independent of
 - Define a narrow responsibility. Keep steps, necessary inputs, constraints, and completion checks concise. Prefer readable and maintainable instructions.
 - Place only required resources inside `skills/<name>/references/` or `skills/<name>/scripts/`, and use paths that work from the installed skill directory.
 - Do not require global configuration or unrelated local repository files for basic skill use.
+- **Keep every public skill domain-agnostic and reusable.** Do not embed worked product ideas, real-world use cases, named application examples, personas, companies, industry-specific requirements, or assumed technologies, countries, markets, or user preferences in skill instructions, bundled references, or templates. Use abstract decision criteria, generic scenario categories, and clearly marked placeholders instead.
+- Scope platform-specific instructions only where intrinsic to the repository's installation or private-extension contract; never treat an illustrative project or environment as a default.
+- Review all new or modified skill resources for concrete examples and leaked contextual assumptions before publishing.
 
 ## Required public/private pattern
 

@@ -48,6 +48,11 @@ class SkillContractTests(unittest.TestCase):
         modifier = (SKILLS_DIR / "modify-skill/SKILL.md").read_text(encoding="utf-8")
         self.assertIn("Edit the **authorized company skill itself**", modifier)
 
+    def test_all_public_skills_must_be_domain_agnostic(self):
+        instructions = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        self.assertIn("Keep every public skill domain-agnostic", instructions)
+        self.assertIn("Do not embed worked product ideas", instructions)
+
     def test_private_files_are_never_committed_as_skills(self):
         self.assertFalse(list(SKILLS_DIR.rglob("skill-overrides/*.md")))
 

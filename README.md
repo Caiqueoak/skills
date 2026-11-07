@@ -70,3 +70,7 @@ The `/modify-skill` skill implements these routing rules.
 Skill instructions help avoid accidental edits to the public source. Strict Claude Code edit-deny settings are separate from the Skills CLI and cannot be installed automatically by `npx skills add`.
 
 An optional script, `scripts/protect-installed-skills.py`, generates scoped denies for verified installations from this repository. It deliberately does not block all `~/.claude/skills/**`, because unrelated skills may be editable. Permission rules are not a full filesystem security boundary.
+
+## Discovery: interrogate ideas before committing scope
+
+The installable `discovery` skill systematically challenges assumptions across users, product, market, business viability, engineering, infrastructure, security, privacy, compliance, operations, and edge cases. It manages unanswered questions, evidence, scenarios, risks, and decision readiness in a project-local `_flow/docs/discovery.md` research record. It does **not** silently decide scope, choose technologies, or implement features, and it works independently of any planning skill.
