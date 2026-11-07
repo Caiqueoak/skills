@@ -14,6 +14,13 @@ The installer provides the public skills. Private instructions are optional and 
 
 ```text
 skills/
+  flow/
+    SKILL.md
+    references/
+      granularity.md
+      templates/
+        prd.md, technical.md, progress.md
+        requirements.md, design.md, tasks.md
   modify-skill/
     SKILL.md
 templates/
@@ -22,6 +29,10 @@ templates/
 AGENTS.md
 .github/workflows/validate.yml
 ```
+
+## Flow: spec-driven project planning
+
+The installed /flow skill turns a product idea into a project-local _flow/ baseline with a PRD, technical architecture, progress tracker, and numbered specs containing requirements.md, design.md, and tasks.md. Extra spec documents belong in that spec's docs/ subdirectory. Each W###-T### task is implemented with TDD and one verified, traceable commit. The skill ships templates and a short diet-app decomposition example; it does not add a _flow/ directory to this skills repository.
 
 ## Creating a skill
 
