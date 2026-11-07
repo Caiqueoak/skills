@@ -13,11 +13,11 @@ class DiscoverySkillTests(unittest.TestCase):
     def test_installable_and_independent(self):
         content = SKILL.read_text(encoding="utf-8")
         self.assertIn("name: discovery", content)
-        self.assertIn("_flow/docs/discovery.md", content)
-        self.assertIn("the Flow skill is not required", content)
+        self.assertIn("user-chosen or project-canonical location", content)
+        self.assertNotIn("_flow/", content)
         self.assertIn("references/coverage.md", content)
         self.assertIn("references/discovery-template.md", content)
-        self.assertIn("No other skill is a runtime prerequisite", content)
+        self.assertNotIn("Coordination with other skills", content)
 
     def test_covers_challenge_risks_and_scope_handoff(self):
         content = SKILL.read_text(encoding="utf-8")
@@ -30,7 +30,13 @@ class DiscoverySkillTests(unittest.TestCase):
             "sources of truth",
         ):
             self.assertIn(required.lower(), content.lower())
-        self.assertIn("discovery records evidence", content.lower())
+        self.assertIn("discovery owns its evidence", content.lower())
+        self.assertIn("batch of 3–6", content)
+        self.assertIn("provisional recommendation", content.lower())
+        self.assertIn("options", content.lower())
+        self.assertIn("follow-up questions", content.lower())
+        self.assertIn("no unacknowledged material gaps", content.lower())
+        self.assertIn("explicitly confirm", content.lower())
 
     def test_comprehensive_domain_neutral_coverage(self):
         content = COVERAGE.read_text(encoding="utf-8")
@@ -61,6 +67,9 @@ class DiscoverySkillTests(unittest.TestCase):
         ):
             self.assertIn(section, content)
         self.assertIn("not_applicable", content)
+        self.assertIn("## Current question batch and readiness", content)
+        self.assertIn("Provisional recommendation and rationale", content)
+        self.assertIn("Answer / evidence", content)
         self.assertIn("candidate / accepted / rejected / deferred / unknown", content)
 
     def test_no_concrete_product_example(self):

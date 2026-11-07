@@ -54,4 +54,4 @@ For each applicable scenario, capture: actor/context, trigger or precondition, e
 - Which decision must be researched rather than answered through intuition?
 - What would cause us to stop, pivot, reduce scope, or retire the solution?
 
-Maintain explicit `unknown` and `not_applicable` outcomes. Discovery is complete only to the depth required for a decision; absence of additional questions is never proof of exhaustive certainty.
+Turn new gaps into prioritized, independently answerable question batches. Offer alternative choices only if the problem genuinely admits meaningful options; qualify recommendations by evidence, tradeoffs, and assumptions. Incorporate answers, uncover their consequences, and create follow-up batches until no material gaps remain unacknowledged. Maintain explicit `unknown` and `not_applicable` outcomes; absence of additional questions is never proof of exhaustive certainty.

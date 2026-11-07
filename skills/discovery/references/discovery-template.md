@@ -1,6 +1,6 @@
 # {{INITIATIVE}} — Discovery record
 
-> Supporting evidence and unresolved questions. Do not duplicate any adopted product or technical scope held in canonical project documents.
+> Canonical record for discovery evidence, hypotheses, question history, scenarios, and unresolved issues. Link to any separately maintained accepted decisions rather than duplicating them.
 > Status: {{in_discovery|blocked|decision_ready|confirmed}} | Last reviewed: {{DATE_OR_TBD}} | Decision owner: {{OWNER_OR_UNKNOWN}}
 
 ## Problem framing
@@ -73,16 +73,19 @@ When a decision becomes canonical in another document, link to it rather than ma
 
 ## Risks, contradictions, and open questions
 
-| ID | Question / risk | Impact and uncertainty | Owner | Validation or resolution path | Status |
-| --- | --- | --- | --- | --- | --- |
-| Q-001 | {{QUESTION}} | {{SEVERITY_AND_UNKNOWN}} | {{OWNER}} | {{EVIDENCE_OR_DECISION_NEEDED}} | open / investigating / closed / deferred |
+| ID | Decision question / risk | Impact and uncertainty | Meaningful options, if any | Provisional recommendation and rationale, if justified | Answer / evidence | Owner and validation path | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Q-001 | {{SINGLE_DECISION_OR_UNCERTAINTY}} | {{RISK_AND_UNCERTAINTY}} | {{OPTIONS_OR_OPEN_ENDED}} | {{RECOMMENDATION_RATIONALE_OR_NOT_YET_JUSTIFIED}} | {{RESPONSE_OR_UNANSWERED}} | {{OWNER_AND_NEXT_STEP}} | open / investigating / resolved / deferred |
 
-## Readiness and next discovery wave
+## Current question batch and readiness
 
 - **Decision-readiness status:** {{STATUS_WITH_REASON}}
 - **Most consequential unresolved issues:** {{BLOCKERS}}
-- **Next 3–5 non-overlapping questions:** {{PRIORITIZED_QUESTIONS}}
-- **Next research or experiments:** {{VALIDATION_ACTIONS}}
-- **Confirmed by decision owner:** {{YES_NO_AND_DATE}}
+- **Current batch (3–6 independent question IDs; fewer only when gated):** {{QUESTION_IDS_FROM_REGISTER}}
+- **Answers incorporated and new questions derived from:** {{LAST_USER_RESPONSE_OR_UNANSWERED}}
+- **Next validation or experiments:** {{VALIDATION_ACTIONS}}
+- **Gap audit:** {{RELEVANT_DIMENSIONS_AND_SCENARIOS_STILL_UNRESOLVED_OR_ACCEPTED_RISK}}
+- **Consensus proposal and outstanding objections:** {{SCOPE_BOUNDARIES_AND_CONTRADICTIONS}}
+- **Explicitly confirmed by decision owner:** {{YES_NO_AND_DATE}}
 
 Discovery is not a guarantee of full knowledge. Keep uncertainty explicit and reopen assessments when evidence or scope changes.

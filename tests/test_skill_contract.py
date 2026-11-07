@@ -53,6 +53,24 @@ class SkillContractTests(unittest.TestCase):
         self.assertIn("Keep every public skill domain-agnostic", instructions)
         self.assertIn("Do not embed worked product ideas", instructions)
 
+    def test_skill_resources_do_not_reference_neighbor_skills(self):
+        skill_names = {path.parent.name for path in SKILLS_DIR.glob("*/SKILL.md")}
+        for skill_file in SKILLS_DIR.glob("*/SKILL.md"):
+            own_name = skill_file.parent.name
+            resources = [skill_file, *skill_file.parent.rglob("*.md")]
+            for resource in set(resources):
+                content = resource.read_text(encoding="utf-8").lower()
+                for other_name in skill_names - {own_name}:
+                    with self.subTest(resource=resource, other=other_name):
+                        self.assertNotIn(f"skills/{other_name}/", content)
+                        self.assertNotIn(f"/{other_name} skill", content)
+                        self.assertNotIn(f"{other_name} skill", content)
+
+    def test_composition_is_owned_by_caller(self):
+        instructions = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        self.assertIn("Every skill is self-contained and independent", instructions)
+        self.assertIn("Composition belongs to the caller/developer", instructions)
+
     def test_private_files_are_never_committed_as_skills(self):
         self.assertFalse(list(SKILLS_DIR.rglob("skill-overrides/*.md")))
 
