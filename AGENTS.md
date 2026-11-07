@@ -9,6 +9,13 @@ These rules apply to public skills maintained in this repository, independent of
 - Define a narrow responsibility. Keep steps, necessary inputs, constraints, and completion checks concise. Prefer readable and maintainable instructions.
 - Place only required resources inside `skills/<name>/references/` or `skills/<name>/scripts/`, and use paths that work from the installed skill directory.
 - Do not require global configuration or unrelated local repository files for basic skill use.
+- **Keep every public skill domain-agnostic and reusable.** Do not embed worked product ideas, real-world use cases, named application examples, personas, companies, industry-specific requirements, or assumed technologies, countries, markets, or user preferences in skill instructions, bundled references, or templates. Use abstract decision criteria, generic scenario categories, and clearly marked placeholders instead.
+- Scope platform-specific instructions only where intrinsic to the repository's installation or private-extension contract; never treat an illustrative project or environment as a default.
+- Review all new or modified skill resources for concrete examples and leaked contextual assumptions before publishing.
+- **Every skill is self-contained and independent.** Its instructions, templates, and references must not name, invoke, load, require, anticipate, or hardcode paths owned by another skill. Do not prescribe a skill chain, default combination, dependency, or order.
+- **Composition belongs to the caller/developer.** A developer may explicitly choose any combination of skills; an agent may independently invoke a relevant skill based on the user request and that skill's trigger description. Each selected skill must work correctly alone, without presuming the others were selected.
+- Use abstract decision criteria and placeholders instead of sample projects or representative answers that could bias a model. Operational repository identifiers and the skill's own installation paths are permitted only where required for provenance and safety.
+- Test self-containment and neutral wording when adding or modifying an installable skill; do not depend on currently installed neighbor skills.
 
 ## Required public/private pattern
 
