@@ -37,6 +37,9 @@ class FlowSkillTests(unittest.TestCase):
         self.assertIn("one atomic commit", content)
         self.assertIn("specs/NNN-*/docs/*", content)
         self.assertIn("references/granularity.md", content)
+        self.assertNotIn("_flow/docs/discovery.md", content)
+        self.assertNotIn("discovery skill", content.lower())
+        self.assertIn("Do not assume other workflows", content)
 
     def test_spec_templates_link_to_canonical_global_artifacts(self):
         requirements = (TEMPLATES / "requirements.md").read_text(encoding="utf-8")

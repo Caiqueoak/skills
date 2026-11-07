@@ -35,7 +35,7 @@ Keep spec directories numbered with stable, ascending three-digit prefixes: 001,
 
 ## Start from an idea
 
-1. Inspect the target repository and existing _flow/ first. If _flow/docs/discovery.md exists, use its evidence, confirmed decisions, and unresolved questions as inputs; it is optional and not an alternative authority for adopted scope. Preserve established choices, files, and IDs. Never replace populated documents with blank templates.
+1. Inspect the target repository, existing _flow/, and any project-provided source material first. Treat supplied claims according to their evidence and confirmation status. Preserve established choices, files, and IDs; never replace populated documents with blank templates. Do not assume other workflows, documents, or installed capabilities exist.
 2. Capture the product goal, intended users, critical workflows, constraints, and explicit unknowns. Ask focused questions only for decisions that genuinely block a useful baseline; otherwise label reasonable assumptions as assumptions. Never turn an assumption into an asserted fact.
 3. Bootstrap _flow/prd.md, _flow/technical.md, and _flow/progress.md using the templates in references/templates/. Fill them with project-specific information; omit irrelevant headings only with a clear reason. Use TBD / open decisions where architecture or requirements cannot yet be responsibly decided.
 4. Decompose the product into a small, prioritized set of vertically sliced, user-valuable specs using references/granularity.md. Create all three required spec files for every proposed spec, not merely folders or a single giant spec. Draft concise requirements, a scoped design, and actionable tasks; flag unresolved choices instead of inventing them.
