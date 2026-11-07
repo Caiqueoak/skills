@@ -1,6 +1,6 @@
 ---
 name: flow
-description: Plan and deliver a software product using a lightweight Kiro-style spec workflow. Use for new app ideas, feature decomposition, PRD and architecture baselines, numbered requirements/design/tasks specs, or tracking TDD implementation progress.
+description: Plan and deliver a software product using a portable spec workflow. Use for new app ideas, feature decomposition, PRD and architecture baselines, numbered requirements/design/tasks specs, or tracking TDD implementation progress.
 allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/flow.md" 2>/dev/null || true)
 ---
 
@@ -8,7 +8,7 @@ allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/flow.md" 2>/dev/null || t
 
 # Flow — spec-driven product engineering
 
-Use this skill to create or maintain a project's _flow/ documentation and, when asked, implement its tracked tasks. It is a portable workflow, not a dependency on Kiro or a specific runtime.
+Use this skill to create or maintain a project's _flow/ documentation and, when asked, implement its tracked tasks. It is a portable workflow, not a dependency on a specific product, domain, or runtime.
 
 ## Directory contract
 
@@ -35,7 +35,7 @@ Keep spec directories numbered with stable, ascending three-digit prefixes: 001,
 
 ## Start from an idea
 
-1. Inspect the target repository and existing _flow/ first. Preserve established choices, files, and IDs. Never replace populated documents with blank templates.
+1. Inspect the target repository and existing _flow/ first. If _flow/docs/discovery.md exists, use its evidence, confirmed decisions, and unresolved questions as inputs; it is optional and not an alternative authority for adopted scope. Preserve established choices, files, and IDs. Never replace populated documents with blank templates.
 2. Capture the product goal, intended users, critical workflows, constraints, and explicit unknowns. Ask focused questions only for decisions that genuinely block a useful baseline; otherwise label reasonable assumptions as assumptions. Never turn an assumption into an asserted fact.
 3. Bootstrap _flow/prd.md, _flow/technical.md, and _flow/progress.md using the templates in references/templates/. Fill them with project-specific information; omit irrelevant headings only with a clear reason. Use TBD / open decisions where architecture or requirements cannot yet be responsibly decided.
 4. Decompose the product into a small, prioritized set of vertically sliced, user-valuable specs using references/granularity.md. Create all three required spec files for every proposed spec, not merely folders or a single giant spec. Draft concise requirements, a scoped design, and actionable tasks; flag unresolved choices instead of inventing them.
@@ -51,7 +51,7 @@ Templates shipped with the installed skill:
 - references/templates/design.md
 - references/templates/tasks.md
 
-Treat templates as **scaffolds**, not literal outputs. Replace placeholders; remove instructions/examples that are not facts about the project.
+Treat templates as **scaffolds**, not literal outputs. Replace placeholders; remove instructions that are not facts about the project. Keep the skill itself domain-neutral and free of worked product examples.
 
 ## Single source of truth
 
@@ -72,7 +72,7 @@ Global documents describe the whole project; spec documents describe only their 
 ## Spec boundaries and lifecycle
 
 - Prefer complete capabilities or observable user outcomes, not generic layers such as "database", "API", and "UI". Each spec has one coherent outcome and can be accepted independently, with clear dependencies when unavoidable.
-- Size specs so requirements and design remain readable and tasks are independently verifiable. Split an oversized spec; merge tiny, tightly coupled specs. See references/granularity.md for heuristics and a diet-app example.
+- Size specs so requirements and design remain readable and tasks are independently verifiable. Split an oversized spec; merge tiny, tightly coupled specs. See references/granularity.md for portable heuristics.
 - Plan tasks as small, sequential, testable changes. Each task maps to explicit acceptance criteria, has a verifiable completion condition, and should fit **one atomic commit**. Use the smallest meaningful vertical slice, not arbitrary file-by-file work.
 - Initial statuses in progress.md: planned, ready, in_progress, blocked, done. Only one canonical spec status exists there. Task completion exists only in tasks.md.
 - Work in dependency order. A spec is done only when all required tasks, acceptance criteria, relevant validations, and documentation are complete.
@@ -88,7 +88,7 @@ For each W###-T### task:
 3. **Green:** implement the simplest production change that passes the test.
 4. **Refactor:** improve readability and structure while tests stay green; run relevant regression checks.
 5. Check acceptance criteria and task completion conditions. Update its checkbox in tasks.md, then the high-level state in progress.md when appropriate.
-6. Commit the coherent code, tests, and directly related documentation **once**, after validation: e.g. feat(food-log): record meal totals [W003-T002]. Do not combine unrelated task IDs or create separate red/green commits. Record validation and any blockers in the PR.
+6. Commit the coherent code, tests, and directly related documentation **once**, after validation, following `feat(<scope>): <action> [W###-T###]` (with the actual task ID). Do not combine unrelated task IDs or create separate red/green commits. Record validation and any blockers in the PR.
 
 If validation is unavailable or failing, do not mark the task done or claim success; document the blocker and stop that task. Never rewrite unrelated user changes. Parallel agents may work only on genuinely independent specs/branches with explicit file ownership; do not have them concurrently edit global _flow documents.
 
@@ -98,7 +98,7 @@ Before calling planning complete, confirm the exact directory structure, all six
 
 ## Public and private responsibilities
 
-- **Public:** This reusable workflow, file contract, templates, and examples belong in this skill and may be improved upstream when explicitly requested.
+- **Public:** This reusable workflow, file contract, and templates belong in this skill and may be improved upstream when explicitly requested.
 - **Private:** Workstation-, personal-, or workplace-specific conventions belong only in ~/.claude/skill-overrides/flow.md on that machine, never in this public repository.
 - For local customization, change only the matching private file. Do not modify this public skill, installed copies, or symlink targets.
 - Create the private file only when customization is requested; never commit, push, quote, or publish its contents. If instructions conflict, report the conflict and follow applicable company/security policies.

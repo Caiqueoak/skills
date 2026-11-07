@@ -48,11 +48,13 @@ class FlowSkillTests(unittest.TestCase):
         self.assertIn("{{SPEC_ID}}-T001", tasks)
         self.assertIn("{{SPEC_ID}}-AC01", requirements)
 
-    def test_example_is_vertical_and_not_framework_specific(self):
+    def test_granularity_rules_are_vertical_and_domain_neutral(self):
         content = (FLOW / "references" / "granularity.md").read_text(encoding="utf-8")
-        self.assertIn("001-nutrition-goals", content)
-        self.assertIn("003-daily-food-log", content)
+        self.assertIn("## Decomposition procedure", content)
+        self.assertIn("no mandatory task count".lower(), content.lower())
         self.assertIn("user-observable capability", content)
+        for forbidden in ("diet", "nutrition", "food-log", "tracking app"):
+            self.assertNotIn(forbidden, content.lower())
 
 
 if __name__ == "__main__":
