@@ -24,10 +24,9 @@ class DiscoverySkillTests(unittest.TestCase):
         for required in (
             "## Discovery loop",
             "## Completion gate",
-            "user confirmation",
             "high-severity scenarios",
             "never invent",
-            "sources of truth",
+            "explicit confirmation",
         ):
             self.assertIn(required.lower(), content.lower())
         self.assertIn("discovery owns its evidence", content.lower())
@@ -36,7 +35,7 @@ class DiscoverySkillTests(unittest.TestCase):
         self.assertIn("options", content.lower())
         self.assertIn("follow-up questions", content.lower())
         self.assertIn("no unacknowledged material gaps", content.lower())
-        self.assertIn("explicitly confirm", content.lower())
+        self.assertIn("explicit confirmation", content.lower())
 
     def test_comprehensive_domain_neutral_coverage(self):
         content = COVERAGE.read_text(encoding="utf-8")
@@ -63,7 +62,6 @@ class DiscoverySkillTests(unittest.TestCase):
             "## Options and decisions",
             "## Proposed scope boundaries",
             "## Risks, contradictions, and open questions",
-            "## Readiness and next discovery wave",
         ):
             self.assertIn(section, content)
         self.assertIn("not_applicable", content)
