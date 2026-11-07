@@ -1,0 +1,60 @@
+"""Validate the standalone, domain-neutral code best practices skill."""
+
+import unittest
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SKILL_DIR = ROOT / "skills" / "code-best-practices"
+SKILL = SKILL_DIR / "SKILL.md"
+REFERENCE = SKILL_DIR / "references" / "principles.md"
+
+
+class CodeBestPracticesTests(unittest.TestCase):
+    def test_installable_and_self_contained(self):
+        skill = SKILL.read_text(encoding="utf-8")
+        self.assertIn("name: code-best-practices", skill)
+        self.assertIn("references/principles.md", skill)
+        self.assertTrue(REFERENCE.is_file())
+        self.assertIn("<!-- skill-source: Caiqueoak/skills -->", skill)
+        self.assertIn(
+            'cat "$HOME/.claude/skill-overrides/code-best-practices.md" 2>/dev/null || true',
+            skill,
+        )
+
+    def test_principles_are_explicit_and_not_absolutist(self):
+        skill = SKILL.read_text(encoding="utf-8")
+        reference = REFERENCE.read_text(encoding="utf-8")
+        for expected in (
+            "SOLID", "KISS", "YAGNI", "DRY", "SSOT", "SRP",
+            "High cohesion", "low coupling", "locality",
+            "Composition over inheritance", "Tell Don't Ask",
+            "Law of Demeter", "Complexity ROI", "pure functions",
+            "immutability", "explicit contracts", "red", "green", "refactor",
+        ):
+            with self.subTest(principle=expected):
+                self.assertIn(expected.lower(), (skill + reference).lower())
+        self.assertIn("not unconditional laws", skill)
+        self.assertIn("What simpler alternative exists?", reference)
+        self.assertIn("Understand what before how", reference)
+
+    def test_scope_and_review_criteria(self):
+        skill = SKILL.read_text(encoding="utf-8")
+        self.assertIn("Do not initiate unrelated rewrites", skill)
+        self.assertIn("report what passed, failed, or could not run", skill)
+        self.assertIn("Distinguish correctness or safety defects from preferences", skill)
+        self.assertIn("For **review**", skill)
+        self.assertIn("For **refactoring**", skill)
+
+    def test_no_cross_skill_references_or_concrete_examples(self):
+        joined = (SKILL.read_text(encoding="utf-8") + REFERENCE.read_text(encoding="utf-8")).lower()
+        for disallowed in (
+            "skills/flow", "skills/discovery", "flow skill", "discovery skill",
+            "diet app", "nutrition", "food log", "_flow/", "e.g.",
+        ):
+            with self.subTest(text=disallowed):
+                self.assertNotIn(disallowed, joined)
+
+
+if __name__ == "__main__":
+    unittest.main()
