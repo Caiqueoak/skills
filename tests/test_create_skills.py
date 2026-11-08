@@ -41,7 +41,7 @@ class CreateSkillsTests(unittest.TestCase):
             "No private material",
             "publicly readable",
             "symlink targets",
-            "no unnecessary",
+            "unnecessary configuration",
             "false triggers",
             "least privilege",
         ):
