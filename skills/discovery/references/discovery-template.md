@@ -19,13 +19,17 @@
 
 Use research URLs or existing canonical document links where available. Never promote hypotheses to confirmed facts without evidence or user confirmation.
 
-## Dimension coverage
+## Discovery depth and dimension coverage
 
-| Dimension | Status | Main unresolved issue or justification | Priority |
-| --- | --- | --- | --- |
-| {{AXIS_FROM_COVERAGE}} | unexamined / investigating / resolved / deferred / not_applicable | {{QUESTION_OR_REASON}} | high / medium / low |
+- **Overall depth:** {{FOCUSED_STANDARD_COMPREHENSIVE_AND_WHY}}
+- **Escalation triggers:** {{EXPOSURE_DATA_SAFETY_COMPLEXITY_DEPENDENCIES_OR_NONE}}
+- **Principle:** Screen all axes internally; investigate and question only those that materially affect this decision. Escalate individual dimensions independently of overall depth.
 
-Cover all axes in references/coverage.md or link to an existing authoritative coverage inventory; do not silently omit axes.
+| Dimension | Applicability | Depth | Readiness | Evidence / exclusion rationale / remaining decision | Priority |
+| --- | --- | --- | --- | --- | --- |
+| {{AXIS_FROM_COVERAGE}} | essential / conditional / not_applicable | brief / targeted / deep / none | unexamined / investigating / resolved / deferred / not_applicable | {{JUSTIFICATION_AND_NEXT_STEP}} | high / medium / low / none |
+
+Screen all axes in references/coverage.md or link to an existing authoritative coverage inventory. `not_applicable` must have a concise reason; `deferred` on material axes requires ownership, risk acceptance, and a validation path. Avoid turning every axis into a user-facing question or a mandatory requirement.
 
 ## Stakeholder needs and user journeys
 
@@ -81,10 +85,10 @@ When a decision becomes canonical in another document, link to it rather than ma
 
 - **Decision-readiness status:** {{STATUS_WITH_REASON}}
 - **Most consequential unresolved issues:** {{BLOCKERS}}
-- **Current batch (3–6 independent question IDs; fewer only when gated):** {{QUESTION_IDS_FROM_REGISTER}}
+- **Current batch (up to 3–6 independent question IDs, or fewer when sufficient):** {{QUESTION_IDS_FROM_REGISTER}}
 - **Answers incorporated and new questions derived from:** {{LAST_USER_RESPONSE_OR_UNANSWERED}}
 - **Next validation or experiments:** {{VALIDATION_ACTIONS}}
-- **Gap audit:** {{RELEVANT_DIMENSIONS_AND_SCENARIOS_STILL_UNRESOLVED_OR_ACCEPTED_RISK}}
+- **Gap audit:** {{ALL_AXES_SCREENED_APPLICABLE_HIGH_IMPACT_GAPS_RESOLVED_OR_ACCEPTED_AND_EXCLUSIONS_JUSTIFIED}}
 - **Consensus proposal and outstanding objections:** {{SCOPE_BOUNDARIES_AND_CONTRADICTIONS}}
 - **Explicitly confirmed by decision owner:** {{YES_NO_AND_DATE}}
 
