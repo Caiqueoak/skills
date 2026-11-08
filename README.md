@@ -14,6 +14,15 @@ The installer provides the public skills. Private instructions are optional and 
 
 ```text
 skills/
+  code-best-practices/
+    SKILL.md
+    references/
+      principles.md, architecture-oop.md
+      security.md, testing-validation.md, review-audit.md
+  discovery/
+    SKILL.md
+    references/
+      coverage.md, discovery-template.md
   flow/
     SKILL.md
     references/
@@ -33,6 +42,10 @@ AGENTS.md
 ## Flow: spec-driven project planning
 
 The installed /flow skill turns a product idea into a project-local _flow/ baseline with a PRD, technical architecture, progress tracker, and numbered specs containing requirements.md, design.md, and tasks.md. Extra spec documents belong in that spec's docs/ subdirectory. Each W###-T### task is implemented with TDD and one verified, traceable commit. The skill ships templates and an abstract spec-decomposition guide; it does not add a _flow/ directory to this skills repository. It is independent of other installed skills and accepts only project-provided inputs.
+
+## Code Best Practices
+
+The installable `code-best-practices` skill independently supports architecture design, OOP and functional design, security reviews, repository and commit/PR audits, test-quality assessment, and evidence-based validation. It applies principles pragmatically rather than enforcing a fixed stack or architecture.
 
 ## Creating a skill
 
