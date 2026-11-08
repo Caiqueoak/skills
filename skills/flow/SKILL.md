@@ -16,6 +16,7 @@ Create these files in the **target project's root**, not in the skill installati
 
 ~~~text
 _flow/
+  discovery.md             # living discovery draft; provisional until reconciled
   prd.md
   technical.md
   progress.md
@@ -36,14 +37,16 @@ Keep spec directories numbered with stable, ascending three-digit prefixes: 001,
 ## Start from an idea
 
 1. Inspect the target repository, existing _flow/, and any project-provided source material first. Treat supplied claims according to their evidence and confirmation status. Preserve established choices, files, and IDs; never replace populated documents with blank templates. Do not assume other workflows, documents, or installed capabilities exist.
-2. Capture the product goal, intended users, critical workflows, constraints, and explicit unknowns. Ask focused questions only for decisions that genuinely block a useful baseline; otherwise label reasonable assumptions as assumptions. Never turn an assumption into an asserted fact.
-3. Bootstrap _flow/prd.md, _flow/technical.md, and _flow/progress.md using the templates in references/templates/. Fill them with project-specific information; omit irrelevant headings only with a clear reason. Use TBD / open decisions where architecture or requirements cannot yet be responsibly decided.
-4. Decompose the product into a small, prioritized set of vertically sliced, user-valuable specs using references/granularity.md. Create all three required spec files for every proposed spec, not merely folders or a single giant spec. Draft concise requirements, a scoped design, and actionable tasks; flag unresolved choices instead of inventing them.
-5. Register every spec in progress.md with status and link. Identify the next actionable spec/task and material blockers. Produce an overview of the created documents and the rationale for the spec boundaries.
-6. If the user asked only for planning, stop before coding. If implementation is requested, follow the TDD execution rules below.
+2. Start or resume `_flow/discovery.md` as a living draft **before** committing to the formal baseline. Record the goal, intended users, workflows, constraints, alternatives, evidence, assumptions, open questions, and decisions as discovery unfolds. Preserve prior entries across sessions and update them after each meaningful decision; never overwrite the draft with a fresh template or silently treat proposals as agreements. Use `references/templates/discovery.md` as the scaffold.
+3. Ask focused questions only for decisions that genuinely block a useful baseline; otherwise label reasonable assumptions as assumptions. Never turn an assumption into an asserted fact. Confirm material choices with the user rather than deciding silently.
+4. Bootstrap _flow/prd.md, _flow/technical.md, and _flow/progress.md using the templates in references/templates/. Fill them with project-specific information; omit irrelevant headings only with a clear reason. Use TBD / open decisions where architecture or requirements cannot yet be responsibly decided.
+5. Decompose the product into a small, prioritized set of vertically sliced, user-valuable specs using references/granularity.md. Create all three required spec files for every proposed spec, not merely folders or a single giant spec. Draft concise requirements, a scoped design, and actionable tasks; flag unresolved choices instead of inventing them.
+6. Register every spec in progress.md with status and link. Identify the next actionable spec/task and material blockers. Produce an overview of the created documents and the rationale for the spec boundaries.
+7. If the user asked only for planning, stop before coding. If implementation is requested, follow the TDD execution rules below.
 
 Templates shipped with the installed skill:
 
+- references/templates/discovery.md
 - references/templates/prd.md
 - references/templates/technical.md
 - references/templates/progress.md
@@ -53,12 +56,21 @@ Templates shipped with the installed skill:
 
 Treat templates as **scaffolds**, not literal outputs. Replace placeholders; remove instructions that are not facts about the project. Keep the skill itself domain-neutral and free of worked product examples.
 
+## Discovery draft lifecycle
+
+- Discovery may span multiple sessions. On every continuation, read the existing draft first and record newly confirmed or revised decisions with a date or sequence, rationale, and relevant trade-offs; retain superseded choices with a brief explanation so decisions are not lost.
+- Explicitly distinguish **confirmed**, **proposed**, **assumed**, **open**, and **superseded**. Cite project-supplied evidence or links when available. Do not invent stakeholder agreement, validation, dates, or requirements.
+- The draft is a **temporary staging area**, not a competing permanent source of truth. During active discovery, it owns tentative options and decision history. As decisions stabilize, promote current authoritative product facts to `prd.md`, cross-cutting technical facts to `technical.md`, and spec-local rules/designs to their owning spec. Link to those destinations from the draft; do not maintain two independent copies of finalized requirements.
+- Keep the draft for traceability after promotion, marking each resolved item with its canonical destination. Reopen a decision explicitly when new information changes it and reconcile affected baselines/specs before execution. Do not treat an unresolved question as an implementation-ready requirement.
+- If discovery is the only requested stage, update the draft and summarize agreed decisions, unresolved questions, and next steps; do not bootstrap specs or implement code unless requested.
+
 ## Single source of truth
 
 A fact has **one canonical home**. Link to that home elsewhere; do not copy tables, requirements, acceptance criteria, contracts, or status into several documents.
 
 | Canonical file | Owns |
 | --- | --- |
+| _flow/discovery.md | Provisional discovery notes, decision rationale and history, unresolved options, and links to promoted canonical decisions |
 | _flow/prd.md | Product intent, users, outcomes, scope, exclusions, product-level constraints |
 | _flow/technical.md | Cross-spec architecture, stack, system boundaries, standards, cross-cutting engineering decisions |
 | _flow/progress.md | Project phase, spec-level status, blockers, next step, lightweight history |
@@ -94,7 +106,7 @@ If validation is unavailable or failing, do not mark the task done or claim succ
 
 ## Quality checks
 
-Before calling planning complete, confirm the exact directory structure, all six document templates used, no unreplaced placeholders, stable IDs and links, no duplicated authoritative facts, clear spec boundaries, and real next actions. Before calling implementation complete, verify TDD evidence, a passing relevant test suite, one traceable commit per completed task, and reconciled progress.
+Before calling planning complete, confirm the exact directory structure, the discovery draft and all six baseline/spec templates used where relevant, no unreplaced placeholders, stable IDs and links, no duplicated authoritative facts, clear spec boundaries, and real next actions. Before calling implementation complete, verify TDD evidence, a passing relevant test suite, one traceable commit per completed task, and reconciled progress.
 
 ## Public and private responsibilities
 
