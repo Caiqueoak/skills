@@ -2,28 +2,69 @@
 
 This is an **interrogation map**, not a list of mandatory features or assumed facts. Examine applicability for every axis; mark `not_applicable` only with a reason. Ask follow-up questions and extend the map when the idea reveals new actors, risks, or incentives. No domain, platform, geography, vendor, or technology is assumed.
 
+## Adaptive depth selection
+
+Screen every axis, but **do not ask every question**. Select depth based on user intent, uncertainty, exposure, impact, reversibility, dependencies, and existing evidence—not request length or arbitrary feature counts.
+
+| Mode | Typical signals | Expected work |
+| --- | --- | --- |
+| Focused | Localized, reversible change; known users and behavior; little new data or external exposure | Confirm outcome, boundaries, relevant behaviors, acceptance signals, and one or two consequential risks; mark unrelated axes not applicable |
+| Standard | Multiple workflows or actors, integrations, meaningful data, nontrivial adoption or operational decisions | Probe applicable product, user, data, technical, cost, quality, and delivery axes; examine key alternatives and failures |
+| Comprehensive | Unclear product strategy, novel business model, multi-party system, sensitive or regulated data, high exposure, scale, difficult rollback, material financial or safety consequences | Deeply assess all applicable axes, dependencies, evidence, threats, lifecycle, governance, and adverse scenarios; validate material unknowns |
+
+Escalate individual axes independently: a small-scope request with sensitive data may need deep privacy/security work while market analysis remains not applicable. De-escalate when facts already establish decisions. Never assume an axis applies just because it exists in the map.
+
+For each axis record:
+- **Applicability:** `essential` (can change the decision), `conditional` (check trigger or dependency), or `not_applicable` (explain why).
+- **Depth:** `brief`, `targeted`, or `deep` for applicable axes.
+- **Readiness:** `unexamined`, `investigating`, `resolved`, or `deferred`; for an excluded axis, use `not_applicable`.
+- **Evidence and next step:** What is known, what would change the decision, and the owner/validation plan for material uncertainty.
+
+Only surface a concise prioritized subset to the user. Keep the complete coverage map in the record when persistence is appropriate. Increase depth if new users, dependencies, risks, or contradictions emerge.
+
 ## Dimensions to interrogate
 
-| Axis | Explore and challenge |
-| --- | --- |
-| Problem and opportunity | Root cause, current alternatives, severity, frequency, consequence of inaction, necessity of a software solution |
-| Outcomes and measurement | Who benefits, desired change, success/failure metrics, leading signals, counter-metrics, instrumentation |
-| Users, actors, and stakeholders | Distinct needs, authority, incentives, skill levels, access, underserved groups, indirect or conflicting stakeholders |
-| Personas and research | Behavioral differences, context, evidence quality, recruitment bias, proxy users, validation gaps |
-| Jobs, journeys, and scope | Entry/exit conditions, goals, dependencies, role permissions, critical paths, exclusions, life cycle, feature interactions |
-| Experience and accessibility | Discoverability, comprehension, error prevention, assistive access, language and localization, trust and transparency |
-| Market and positioning | Alternatives, substitutes, competitive differentiation, urgency, demand evidence, distribution, defensibility |
-| Business model and adoption | Pricing hypotheses, willingness to pay, onboarding, conversion, retention, switching, channel viability |
-| Economics and ROI | Build/buy cost, recurring costs, operating burden, support, cost of acquisition, value realized, break-even, sensitivities, opportunity cost |
-| Data and information | Sources, quality, lineage, classification, ownership, correctness, import/export, retention, portability, deletion |
-| Security and trust | Threats, trust boundaries, identity, authorization, misuse, fraud, secrets, auditing, incident handling |
-| Privacy, legal, and ethics | Applicable jurisdiction and contracts, lawful basis, notices/consent as applicable, sensitive handling, rights, accountability, fairness, harm |
-| Technical feasibility | Architectural options, integration contracts, data models, constraints, interoperability, maintenance, testability, reversibility |
-| Infrastructure and operations | Environment, deployment, capacity, cost, availability, observability, recovery, support ownership, vendor dependencies |
-| Reliability and performance | Latency, throughput, limits, degradation, resilience, consistency, retry behavior, backup and restoration |
-| Delivery and governance | Skills, team capacity, dependencies, procurement, milestones, rollout, approvals, decision rights, change control |
-| Measurement and learning | Experiment design, monitoring of assumptions, feedback, quality gates, stop/pivot/scale criteria |
-| Long-term lifecycle | Updates, migrations, compatibility, ownership transfer, deprecation, end-of-life, data exit and vendor lock-in |
+These are **candidate decision areas**, not mandatory product requirements. Screen each cluster; activate and deepen its dimensions only when the initiative warrants them.
+
+| Cluster | Dimension | Decision probes |
+| --- | --- | --- |
+| Framing | Problem and root cause | Pain, baseline, frequency, severity, urgency, constraints, why intervention is needed |
+| Framing | Desired outcomes and success | Beneficiaries, observable changes, success and stop signals, trade-offs, unintended impacts |
+| Framing | Scope and boundaries | Minimal useful outcome, non-goals, dependencies, exclusions, reversible sequencing |
+| People | Users, buyers, operators, stakeholders | Roles, authority, payer vs beneficiary, incentives, conflicts, underserved actors |
+| People | Context and research | Behavior, environments, access, evidence strength, sampling bias, validation needs |
+| People | Adoption and change management | Motivation, onboarding, migration, training, communications, switching and resistance |
+| Experience | Journeys and business rules | Entry/exit states, permissions, exceptional paths, approval rules, interactions |
+| Experience | UX and interaction | Comprehension, discoverability, error prevention, trust, feedback, undo, support |
+| Experience | Accessibility and inclusion | Assistive technology, cognitive and physical constraints, language, localization, device constraints |
+| Product | Prioritization and differentiation | Alternatives, must-have vs optional, distribution of value, feature dependencies |
+| Product | Market and competitors | Substitutes, demand evidence, positioning, segments, advantage, market evolution—only if relevant |
+| Business | Model and viability | Funding, pricing, buyer willingness, value capture, distribution, retention—only where applicable |
+| Business | Costs and returns | Build/buy, operating and support costs, expected benefit, sensitivities, opportunity cost, budgets |
+| Business | Contracts and procurement | Commercial obligations, approval processes, vendors, terms, licensing, exit costs |
+| Information | Data sources and semantics | Inputs, quality, correctness, provenance, vocabulary, ownership, lineage, transformations |
+| Information | Data lifecycle and governance | Storage, classification, integrity, retention, deletion, export, portability, migration |
+| Information | Reporting and analytics | Decisions supported, metrics, collection method, bias, quality, privacy, auditability |
+| Engineering | Technical alternatives | Build/buy/integrate, feasibility, existing constraints, complexity, maintenance, reversibility |
+| Engineering | Architecture and boundaries | Components, interfaces, coupling, contracts, integration ownership, versioning |
+| Engineering | External dependencies | APIs, quotas, vendor changes, availability, licensing, fallback, interoperability |
+| Engineering | Quality and testing | Functional/nonfunctional acceptance, testability, automation, compatibility, regression evidence |
+| Engineering | AI or automated decisions | Applicability, data provenance, model fitness, evaluation, hallucinations, bias, human oversight, cost, drift—only if relevant |
+| Infrastructure | Hosting and environments | Deployment targets, environments, configuration, secrets, provisioning, sovereignty, capacity |
+| Infrastructure | Performance and scalability | Latency, throughput, growth, resource budgets, hotspots, caching, cost under load |
+| Infrastructure | Reliability and recovery | SLOs where needed, failure modes, consistency, queues, idempotency, backups, recovery objectives |
+| Infrastructure | Observability and support | Logging, tracing, alerts, diagnostics, on-call ownership, maintenance, incident response |
+| Trust | Security and abuse | Threat actors, authentication, authorization, boundaries, secret management, abuse/fraud, audit trails |
+| Trust | Privacy and sensitive data | Data minimization, access, sharing, retention, rights, user expectations, consent where applicable |
+| Trust | Safety, harm, and ethics | Consequential errors, manipulation, vulnerable groups, fairness, explainability, escalation |
+| Trust | Legal, regulatory, and policy | Jurisdiction, sector-specific obligations, intellectual property, contractual restrictions, required reviews |
+| Delivery | Team and ownership | Skills, responsibility, decision rights, maintenance ownership, capacity, dependencies |
+| Delivery | Schedule and rollout | Phases, milestones, release strategy, experiments, migration, rollback, approvals |
+| Delivery | Validation and learning | Evidence gaps, prototypes, usability studies, experiments, instrumentation, go/no-go criteria |
+| Lifecycle | Evolution and retirement | Updates, compatibility, technical debt, handoff, deprecation, vendor exit, data disposition |
+| Ecosystem | Cross-system and societal effects | Secondary stakeholders, incentives, interoperability, environmental or community effects where material |
+
+**Trigger rules:** Public or third-party users make adoption, accessibility, support, and trust more likely relevant. New persistent data activates information lifecycle, privacy, backup, and ownership checks. External systems activate integration reliability, contracts, and vendor exits. Automated or consequential decisions activate evaluation, monitoring, safety, and override checks. Commercialization activates demand, pricing, economics, and acquisition. Shared production infrastructure activates operability, access controls, capacity, and recovery. A change confined to an established, well-understood internal workflow may need only its affected dimensions.
 
 ## Scenario expansion
 
