@@ -14,6 +14,8 @@ The installer provides the public skills. Private instructions are optional and 
 
 ```text
 skills/
+  create-skills/
+    SKILL.md
   code-best-practices/
     SKILL.md
     references/
@@ -46,6 +48,10 @@ The installed /flow skill turns a product idea into a project-local _flow/ basel
 ## Code Best Practices
 
 The installable `code-best-practices` skill independently supports architecture design, OOP and functional design, security reviews, repository and commit/PR audits, test-quality assessment, and evidence-based validation. It applies principles pragmatically rather than enforcing a fixed stack or architecture.
+
+## Create Skills
+
+The installable `create-skills` skill authors **new, reusable skills** against this repository's current authoring standards, validates the resulting public content, and—when explicitly authorized—pushes a topic branch and opens a reviewable PR. Publication to the default branch is verified separately after successful checks and any required review. It does not depend on other installed skills.
 
 ## Creating a skill
 
