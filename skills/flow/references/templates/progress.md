@@ -12,6 +12,7 @@
 - [Blockers and dependencies](#blockers-and-dependencies)
 - [Recent meaningful changes](#recent-meaningful-changes)
 - [Related documents](#related-documents)
+
 ## Current state
 
 - **Phase:** {{DISCOVERY_PLANNING_IMPLEMENTATION_OR_RELEASE}}
