@@ -81,6 +81,14 @@ A fact has **one canonical home**. Link to that home elsewhere; do not copy tabl
 
 Global documents describe the whole project; spec documents describe only their slice. The progress summary must never maintain an independent copy of task checkboxes or acceptance criteria. Link by relative path. If a decision belongs in technical.md, don't re-decide it in every design.md. Keep unrelated application documentation outside _flow/ according to the target project's conventions.
 
+## Requirements: EARS
+
+- Write every normative behavioral requirement in `specs/NNN-*/requirements.md` using **EARS (Easy Approach to Requirements Syntax)**. Keep one observable, verifiable behavior per requirement, with stable `W###-R##` IDs and explicit system/actor terminology.
+- Choose the **simplest applicable** EARS pattern: ubiquitous (`The <system> shall <response>.`), event-driven (`When <trigger>, the <system> shall <response>.`), state-driven (`While <state>, the <system> shall <response>.`), optional feature (`Where <feature is enabled>, the <system> shall <response>.`), or unwanted behavior (`If <undesired condition>, then the <system> shall <response>.`). Combine clauses only when essential to express the same atomic requirement.
+- Specify measurable conditions, boundaries, failures, and observable results without implying unwarranted implementations. Avoid ambiguous language such as "fast", "appropriate", "user-friendly", or "should"; use `shall` for normative requirements.
+- Use Given/When/Then for acceptance tests **when useful**, not as a substitute for EARS requirements. Link each acceptance criterion to its owning requirement ID; ensure normal, edge, and failure paths are covered where applicable.
+- Discovery notes, scope statements, and open questions need not be forced into EARS, but must not be treated as implementation-ready requirements.
+
 ## Spec boundaries and lifecycle
 
 - Prefer complete capabilities or observable user outcomes, not generic layers such as "database", "API", and "UI". Each spec has one coherent outcome and can be accepted independently, with clear dependencies when unavoidable.
@@ -106,7 +114,7 @@ If validation is unavailable or failing, do not mark the task done or claim succ
 
 ## Quality checks
 
-Before calling planning complete, confirm the exact directory structure, the discovery draft and all six baseline/spec templates used where relevant, no unreplaced placeholders, stable IDs and links, no duplicated authoritative facts, clear spec boundaries, and real next actions. Before calling implementation complete, verify TDD evidence, a passing relevant test suite, one traceable commit per completed task, and reconciled progress.
+Before calling planning complete, confirm the exact directory structure, the discovery draft and all six baseline/spec templates used where relevant, no unreplaced placeholders, stable IDs and links, no duplicated authoritative facts, EARS-formatted atomic requirements with traceable acceptance criteria, clear spec boundaries, and real next actions. Before calling implementation complete, verify TDD evidence, a passing relevant test suite, one traceable commit per completed task, and reconciled progress.
 
 ## Public and private responsibilities
 
