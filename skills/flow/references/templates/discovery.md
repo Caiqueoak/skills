@@ -19,6 +19,7 @@
   - [Q001 — Open question / risk](#q001) — 🆕 **NEW**
 - [Session handoff](#session-handoff)
 - [Related documents](#related-documents)
+
 ## Intent and context
 
 - <a id="i001"></a>**I001 — Problem / opportunity** 🆕 **NEW**: {{CURRENT_UNDERSTANDING_OR_UNKNOWN}}
