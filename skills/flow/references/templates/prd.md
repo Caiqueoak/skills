@@ -24,6 +24,7 @@
 - [Open product decisions](#open-product-decisions) — 🆕 **NEW**
   - [P011 — Open decision](#p011) — 🆕 **NEW**
 - [Related documents](#related-documents)
+
 ## Problem and intended users
 
 - <a id="p001"></a>**P001 — Problem** 🆕 **NEW**: {{PROBLEM}}
