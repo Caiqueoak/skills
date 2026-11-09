@@ -27,6 +27,7 @@
 - [Open technical decisions](#open-technical-decisions) — 🆕 **NEW**
   - [A013 — Open decision](#a013) — 🆕 **NEW**
 - [Related documents](#related-documents)
+
 ## System overview
 
 - <a id="a001"></a>**A001 — System context / boundaries** 🆕 **NEW**: {{BRIEF_CONTEXT_AND_BOUNDARIES}}
