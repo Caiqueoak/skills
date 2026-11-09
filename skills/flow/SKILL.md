@@ -99,6 +99,15 @@ Global documents describe the whole project; spec documents describe only their 
 - Changes to product scope go to prd.md; cross-cutting decisions to technical.md; new behavior to its spec requirements; implementation changes to its design; tracking to progress.md/tasks.md. Reconcile downstream artifacts and note changed assumptions without copying content.
 - Never renumber existing specs/tasks or reuse removed IDs. New work gets new IDs. Respect user decisions and inspect the code before revising a baseline.
 
+## Chat change summaries after the first artifact version
+
+- For the first version of an artifact, write its complete Markdown content and follow the initial overview rules above. For **every subsequent revision**, first reconcile the full details in the owning `_flow/` Markdown files, then summarize **each individual item actually changed** in chat.
+- Group the chat summary by affected artifact path. Give **one short line per changed item**, not one line per file or per user request. Include changes propagated to related artifacts; omit untouched items and artifacts.
+- Prefix **every item** with exactly one explicit tag: `[NEW]` for added content, `[MODIFIED]` for revised content, or `[REMOVED]` for deleted content. Retain the item's stable ID where one exists; never reuse removed IDs.
+- Each line identifies the item and briefly states the change. Do not paste complete requirements, EARS clauses, acceptance criteria, design explanations, before/after text, or task detail unless requested; those belong in the Markdown files.
+- Show only changes from **the current revision**, not unchanged or previously reported items. A short total by tag may follow the grouped lines. If no items changed, say so without inventing a change log.
+- Preserve the item's actual decision/approval status in the canonical artifact. A chat summary is a navigational change log, **not** a second source of truth or evidence of approval.
+
 ## Implementation: TDD and atomic commits
 
 For each W###-T### task:
