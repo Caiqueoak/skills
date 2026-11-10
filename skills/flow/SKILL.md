@@ -41,7 +41,7 @@ Keep spec directories numbered with stable, ascending three-digit prefixes: 001,
 3. Ask focused questions only for decisions that genuinely block a useful baseline; otherwise label reasonable assumptions as assumptions. Never turn an assumption into an asserted fact. Confirm material choices with the user rather than deciding silently.
 4. Bootstrap _flow/prd.md, _flow/technical.md, and _flow/progress.md using the templates in references/templates/. Fill them with project-specific information; omit irrelevant headings only with a clear reason. Use TBD / open decisions where architecture or requirements cannot yet be responsibly decided.
 5. Decompose the product into a small, prioritized set of vertically sliced, user-valuable specs using references/granularity.md. Create all three required spec files for every proposed spec, not merely folders or a single giant spec. Draft concise requirements, a scoped design, and actionable tasks; flag unresolved choices instead of inventing them.
-6. Register every spec in progress.md with status and link. Identify the next actionable spec/task and material blockers. Produce an overview of the created documents and the rationale for the spec boundaries.
+6. Register every spec in progress.md with status and link. Apply the review-first layout to **every artifact**: a navigable section/item index, stable item anchors, and individual `🆕 **NEW**` markers for content awaiting explicit approval (see `references/review-layout.md`). Identify the next actionable spec/task and material blockers. Produce an overview of the created documents and the rationale for the spec boundaries.
 7. If the user asked only for planning, stop before coding. If implementation is requested, follow the TDD execution rules below.
 
 Templates shipped with the installed skill:
@@ -53,8 +53,20 @@ Templates shipped with the installed skill:
 - references/templates/requirements.md
 - references/templates/design.md
 - references/templates/tasks.md
+- references/review-layout.md (mandatory formatting, navigation, and review-state contract)
 
 Treat templates as **scaffolds**, not literal outputs. Replace placeholders; remove instructions that are not facts about the project. Keep the skill itself domain-neutral and free of worked product examples.
+
+## Artifact layout and approvals
+
+Follow `references/review-layout.md` whenever creating or editing any `_flow/` Markdown document, including optional spec-local notes. It defines the canonical review-first layout:
+
+- A concise document purpose followed by **`## Index`** containing links to sections **and individual items**, in document order.
+- Stable, explicit per-item anchors/IDs; coherent modular sections and subsections instead of long undifferentiated blocks.
+- The prominent literal marker **`🆕 **NEW**`** on each not-yet-approved or materially revised item **and its matching index entry**. Mark a section entry NEW when it contains pending items; do not use a section-only badge in place of item-level markers.
+- Keep already-approved items unmarked and unchanged when adding unrelated material. Remove an item's marker only following the user's explicit approval. Reopen only materially changed approved items.
+- Keep review approval distinct from discovery statuses and delivery/task completion. Never interpret merges, passing tests, or implementation progress as approval.
+- On every edit, reconcile the index links and markers with the body, preserving established IDs, prior decisions, and the single source of truth. Present pending IDs in review summaries so previously approved content need not be reread.
 
 ## Discovery draft lifecycle
 
@@ -123,7 +135,7 @@ If validation is unavailable or failing, do not mark the task done or claim succ
 
 ## Quality checks
 
-Before calling planning complete, confirm the exact directory structure, the discovery draft and all six baseline/spec templates used where relevant, no unreplaced placeholders, stable IDs and links, no duplicated authoritative facts, EARS-formatted atomic requirements with traceable acceptance criteria, clear spec boundaries, and real next actions. Before calling implementation complete, verify TDD evidence, a passing relevant test suite, one traceable commit per completed task, and reconciled progress.
+Before calling planning complete, confirm every Markdown artifact's section-and-item index, valid stable anchors, identical individual NEW markers in index and body, and no unnecessary re-review of approved items; then confirm the exact directory structure, the discovery draft and all six baseline/spec templates used where relevant, no unreplaced placeholders, stable IDs and links, no duplicated authoritative facts, EARS-formatted atomic requirements with traceable acceptance criteria, clear spec boundaries, and real next actions. Before calling implementation complete, verify TDD evidence, a passing relevant test suite, one traceable commit per completed task, and reconciled progress.
 
 ## Public and private responsibilities
 
