@@ -15,7 +15,7 @@
 
 - **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
 - **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
-- **Review needed:** {{ASSUMPTIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
+- **Review needed:** {{OPEN_DECISIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
 
 
 > Purpose: canonical source for product intent and boundaries; do not duplicate individual spec acceptance criteria here.
@@ -48,7 +48,7 @@
 ## Product constraints and assumptions
 
 - **Constraints:** {{PRODUCT_CONSTRAINTS_OR_NONE_KNOWN}}
-- **Assumptions to validate:** {{MARKED_ASSUMPTIONS_WITH_RATIONALE_OR_NONE}}
+- **Assumptions to validate:** {{ASSUMPTIONS_OR_NONE}}
 
 ## Open product decisions
 
