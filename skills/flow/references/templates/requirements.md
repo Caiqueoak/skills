@@ -1,5 +1,24 @@
 # {{SPEC_ID}} — {{SPEC_TITLE}} — Requirements
 
+## Quick navigation
+
+- [At a glance](#at-a-glance)
+## At a glance
+
+- **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
+- **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
+- **Review needed:** {{ASSUMPTIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
+
+- [User outcome](#user-outcome)
+- [In scope](#in-scope)
+- [Out of scope](#out-of-scope)
+- [Functional requirements (EARS)](#functional-requirements-ears)
+- [Acceptance criteria](#acceptance-criteria)
+- [Dependencies and constraints](#dependencies-and-constraints)
+- [Open questions](#open-questions)
+- [Related documents](#related-documents)
+
+
 > Spec: {{SPEC_ID}} | Folder: {{NUMBER}}-{{SLUG}} | Status is tracked in ../../progress.md.
 
 ## User outcome
@@ -35,7 +54,7 @@ Reference the corresponding requirement ID. Use Given/When/Then when it makes an
 ## Dependencies and constraints
 
 - **Depends on:** {{SPEC_IDS_OR_NONE}}
-- **Constraints / assumptions:** {{LOCAL_CONSTRAINTS_OR_NONE}}
+- **Constraints / assumptions:** {{CONSTRAINTS_AND_MARKED_ASSUMPTIONS_OR_NONE}}
 
 ## Open questions
 
