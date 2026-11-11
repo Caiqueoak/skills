@@ -1,5 +1,23 @@
 # {{PROJECT_NAME}} — Product requirements
 
+## Quick navigation
+
+- [At a glance](#at-a-glance)
+## At a glance
+
+- **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
+- **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
+- **Review needed:** {{ASSUMPTIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
+
+- [Problem and intended users](#problem-and-intended-users)
+- [Desired outcomes](#desired-outcomes)
+- [Scope](#scope)
+- [Core user journeys](#core-user-journeys)
+- [Product constraints and assumptions](#product-constraints-and-assumptions)
+- [Open product decisions](#open-product-decisions)
+- [Related documents](#related-documents)
+
+
 > Purpose: canonical source for product intent and boundaries; do not duplicate individual spec acceptance criteria here.
 
 ## Problem and intended users
@@ -30,7 +48,7 @@
 ## Product constraints and assumptions
 
 - **Constraints:** {{PRODUCT_CONSTRAINTS_OR_NONE_KNOWN}}
-- **Assumptions to validate:** {{ASSUMPTIONS_OR_NONE}}
+- **Assumptions to validate:** {{MARKED_ASSUMPTIONS_WITH_RATIONALE_OR_NONE}}
 
 ## Open product decisions
 
