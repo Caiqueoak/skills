@@ -38,9 +38,9 @@ Keep spec directories numbered with stable, ascending three-digit prefixes: 001,
 
 1. Inspect the target repository, existing _flow/, and any project-provided source material first. Treat supplied claims according to their evidence and confirmation status. Preserve established choices, files, and IDs; never replace populated documents with blank templates. Do not assume other workflows, documents, or installed capabilities exist.
 2. Start or resume `_flow/discovery.md` as a living draft **before** committing to the formal baseline. Record the goal, intended users, workflows, constraints, alternatives, evidence, assumptions, open questions, and decisions as discovery unfolds. Preserve prior entries across sessions and update them after each meaningful decision; never overwrite the draft with a fresh template or silently treat proposals as agreements. Use `references/templates/discovery.md` as the scaffold.
-3. Ask focused questions only for decisions that genuinely block a useful baseline; otherwise label reasonable assumptions as assumptions. Never turn an assumption into an asserted fact. Confirm material choices with the user rather than deciding silently.
-4. Bootstrap _flow/prd.md, _flow/technical.md, and _flow/progress.md using the templates in references/templates/. Fill them with project-specific information; omit irrelevant headings only with a clear reason. Use TBD / open decisions where architecture or requirements cannot yet be responsibly decided.
-5. Decompose the product into a small, prioritized set of vertically sliced, user-valuable specs using references/granularity.md. Create all three required spec files for every proposed spec, not merely folders or a single giant spec. Draft concise requirements, a scoped design, and actionable tasks; flag unresolved choices instead of inventing them.
+3. **Infer by default.** Derive missing noncritical details from the request, inspected repository, existing conventions, evidence, and least-complex compatible choices. Record inferred choices as `[ASSUMED]` with a concise rationale and a clear validation path. Draft usable artifacts without waiting for every detail to be confirmed. Ask only when a missing decision would block a coherent baseline, create significant security/privacy/compliance risk, conflict with an explicit requirement, or incur costly/irreversible consequences. Preserve user decisions over inferences. Never present an inference as confirmed or invent evidence, stakeholder approval, metrics, or validation.
+4. Bootstrap _flow/prd.md, _flow/technical.md, and _flow/progress.md using the templates in references/templates/. Fill them with project-specific information; omit irrelevant headings only with a clear reason. Prefer a clearly marked, reversible assumption over TBD for low-risk decisions; reserve TBD/open for genuine blockers.
+5. Decompose the product into a small, prioritized set of vertically sliced, user-valuable specs using references/granularity.md. Create all three required spec files for every proposed spec, not merely folders or a single giant spec. Draft concise requirements, a scoped design, and actionable tasks; mark defensible inferred choices `[ASSUMED]` and isolate genuinely blocking unknowns.
 6. Register every spec in progress.md with status and link. Identify the next actionable spec/task and material blockers. Produce an overview of the created documents and the rationale for the spec boundaries.
 7. If the user asked only for planning, stop before coding. If implementation is requested, follow the TDD execution rules below.
 
@@ -56,13 +56,24 @@ Templates shipped with the installed skill:
 
 Treat templates as **scaffolds**, not literal outputs. Replace placeholders; remove instructions that are not facts about the project. Keep the skill itself domain-neutral and free of worked product examples.
 
+## Cognitive-load and scanability contract
+
+- Optimize for **developer comprehension and expectation alignment**, not exhaustive questioning or document length. Make defensible assumptions first, then invite correction through artifacts.
+- Distinguish `[CONFIRMED]` from `[ASSUMED]` and `[OPEN]` at the owning item; `[ASSUMED]` is **not** an approval. Give each assumption a short reason, confidence when material, and what would validate or overturn it. Do not tag every trivial sentence.
+- Prefer existing code, interfaces, constraints, and conventions over inventing alternatives. Select the simplest reversible, consistent option when evidence is incomplete. Do not invent specific facts, external data, authorization, user choices, or passing checks.
+- Ask a focused question only for consequential ambiguity: incompatible intent, irreversible external action, substantial cost, or safety/security/privacy/compliance exposure. When blocked, still produce the unaffected parts and identify the exact decision needed.
+- Each artifact starts with a concise **Quick navigation** index linking to its major sections, and a brief **At a glance** summary of its purpose, key decisions/outcome, and review-needed assumptions or blockers. Include only relevant sections; do not pad with empty headings.
+- Organize related items under short, descriptive **outcome-first headings** that explain what the section accomplishes. Prefer one coherent idea per bullet, stable identifiers, short paragraphs, and linked details over prose walls or generic labels. Use subheadings for logical groups, not arbitrary depth.
+- Keep detailed reasoning and implementation nuance inside the owning section or linked supporting docs. The overview/index is navigation, not a second source of truth. In subsequent revisions keep the existing `[NEW]`/`[MODIFIED]`/`[REMOVED]` change markers and add them to index entries for changed items until reviewed; preserve approval status separately from change type.
+- Show concise change summaries in chat so the developer can review exceptions rather than reread all artifacts. Do not treat silence as confirmation.
+
 ## Discovery draft lifecycle
 
 - Discovery may span multiple sessions. On every continuation, read the existing draft first and record newly confirmed or revised decisions with a date or sequence, rationale, and relevant trade-offs; retain superseded choices with a brief explanation so decisions are not lost.
-- Explicitly distinguish **confirmed**, **proposed**, **assumed**, **open**, and **superseded**. Cite project-supplied evidence or links when available. Do not invent stakeholder agreement, validation, dates, or requirements.
+- Explicitly distinguish **confirmed**, **proposed**, **assumed**, **open**, and **superseded**. Mark reviewable inferences `[ASSUMED]`, separating them from approval and from truly blocking questions. Cite project-supplied evidence or links when available. Do not invent stakeholder agreement, validation, dates, or requirements.
 - The draft is a **temporary staging area**, not a competing permanent source of truth. During active discovery, it owns tentative options and decision history. As decisions stabilize, promote current authoritative product facts to `prd.md`, cross-cutting technical facts to `technical.md`, and spec-local rules/designs to their owning spec. Link to those destinations from the draft; do not maintain two independent copies of finalized requirements.
 - Keep the draft for traceability after promotion, marking each resolved item with its canonical destination. Reopen a decision explicitly when new information changes it and reconcile affected baselines/specs before execution. Do not treat an unresolved question as an implementation-ready requirement.
-- If discovery is the only requested stage, update the draft and summarize agreed decisions, unresolved questions, and next steps; do not bootstrap specs or implement code unless requested.
+- If discovery is the only requested stage, update the draft and summarize confirmed decisions, inferred decisions requiring review, genuine blockers, and next steps; do not bootstrap specs or implement code unless requested.
 
 ## Single source of truth
 
@@ -123,7 +134,7 @@ If validation is unavailable or failing, do not mark the task done or claim succ
 
 ## Quality checks
 
-Before calling planning complete, confirm the exact directory structure, the discovery draft and all six baseline/spec templates used where relevant, no unreplaced placeholders, stable IDs and links, no duplicated authoritative facts, EARS-formatted atomic requirements with traceable acceptance criteria, clear spec boundaries, and real next actions. Before calling implementation complete, verify TDD evidence, a passing relevant test suite, one traceable commit per completed task, and reconciled progress.
+Before calling planning complete, confirm the exact directory structure, the discovery draft and all six baseline/spec templates used where relevant, no unreplaced placeholders, stable IDs and links, no duplicated authoritative facts, EARS-formatted atomic requirements with traceable acceptance criteria, clear spec boundaries, readable outcome-first headings, navigable indexes, at-a-glance summaries, visible reviewable assumptions, and real next actions. Before calling implementation complete, verify TDD evidence, a passing relevant test suite, one traceable commit per completed task, and reconciled progress.
 
 ## Public and private responsibilities
 
