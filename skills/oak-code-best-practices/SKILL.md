@@ -42,8 +42,8 @@ Apply SOLID, SRP, DRY, SSOT, explicit contracts and types, OOP encapsulation and
 
 ## Mode-specific constraints
 
-- **For **refactoring**:** preserve observable behavior and public contracts unless change is explicitly authorized.
-- **For **review**:** **Distinguish correctness or safety defects from preferences**; rank findings by severity and confidence, cite path/location and observed evidence, explain impact, smallest justified fix, and how to verify it.
+- For **refactoring**: preserve observable behavior and public contracts unless change is explicitly authorized.
+- For **review**: **Distinguish correctness or safety defects from preferences**; rank findings by severity and confidence, cite path/location and observed evidence, explain impact, smallest justified fix, and how to verify it.
 - **For architecture:** compare simple and complex options from actual requirements, state, data ownership, operational exposure, and reversibility; do not impose a paradigm.
 - **For security:** trace assets, trust boundaries, authentication, authorization, untrusted inputs, secrets, dependencies, supply chain, and failure exposure; label suspected versus verified issues.
 - **For tests:** judge whether checks would detect a meaningful regression; green CI and coverage percentages do not establish test quality.
