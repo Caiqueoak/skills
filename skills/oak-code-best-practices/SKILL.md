@@ -8,94 +8,55 @@ allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/oak-code-best-practices.m
 
 # Code best practices
 
-Improve code by reasoning from **required behavior and constraints** toward the simplest understandable, testable implementation. Principles are decision aids, not unconditional laws. Do not select a paradigm, framework, architecture, or abstraction without a demonstrated need.
+Reason from required behavior toward the simplest safe, readable, maintainable, and testable solution. Principles are **not unconditional laws**; optimize for clear intent and demonstrated constraints rather than patterns or speculative extensibility.
 
-## Task selection
+## Select only the requested mode
 
-Use only the mode(s) implied by the request; each is independently usable. Accept requirements, designs, or code supplied by the user or project without assuming any other workflow or skill.
+- **Architecture design or review:** evaluate alternatives, quality attributes, contracts, boundaries, dependency direction, ownership, operations, and verification.
+- **Repository audit:** assess important code paths, architecture, dependencies, tests, CI, security, and maintainability; disclose uninspected areas.
+- **Commit / pull-request review:** inspect actual diff, base, callers, contracts, test changes, security risk, and evidence.
+- **Test suite audit and improvement:** evaluate assertions, regression detection, isolation, flaky tests, missing cases, and maintainability.
+- **Implementation and refactoring:** deliver the smallest scoped change with verified behavior.
+- **Focused code review:** provide prioritized evidence-backed findings rather than editing without permission.
 
-- **Architecture design or review:** evaluate quality attributes, responsibility and dependency boundaries, OOP models, alternatives, contracts, operations, security, and verification. Produce a reasoned design or findings, not a predetermined pattern.
-- **Repository audit:** assess architecture, important flows, maintainability, security, dependency health, tests, CI, and operations. Identify inspected scope and uninspected areas.
-- **Commit / pull-request review:** inspect the actual diff, base and callers, contracts, regression risk, security impact, test changes, and validation evidence; assess atomicity and relevance.
-- **Test suite audit and improvement:** inspect tests and assertions, identify weak or missing protections, over-mocking, flaky or slow tests, and prioritise verifiable improvements.
-- **Implementation and refactoring:** make the smallest scoped, tested change compatible with established contracts.
-- **Focused code review:** return prioritized, substantiated findings rather than silently editing code.
+Read only relevant references: `references/principles.md`, `references/architecture-oop.md`, `references/security.md`, `references/testing-validation.md`, `references/review-audit.md`.
 
-See `references/architecture-oop.md`, `references/security.md`, `references/testing-validation.md`, and `references/review-audit.md` when their subjects are relevant.
+## Priorities and principles
 
-## When invoked
+1. Correctness, safety, data integrity, contracts, and observable behavior.
+2. Readability, explicit intent, semantic naming, high cohesion, low coupling, and locality.
+3. Maintainability, testability, clear responsibility, and a single source of truth.
+4. KISS and YAGNI: smallest current solution, not speculative infrastructure.
+5. Evidence-based performance and scale; avoid guesswork.
 
-- For **new implementation**, identify the required outcome, contract, invariants, boundaries, failure behavior, and existing conventions before writing code.
-- For **refactoring**, preserve observable behavior and public contracts unless the user authorizes a change; identify the specific readability, cohesion, coupling, or change-cost problem to solve.
-- For **review**, report concrete, prioritized findings with location, impact, evidence, and the smallest justified improvement. Distinguish correctness or safety defects from preferences; avoid cosmetic churn.
-- For **questions**, explain the relevant tradeoffs directly. Recommend an approach only when constraints support it; ask for missing material context rather than assuming it.
-- Do not initiate unrelated rewrites or introduce extra components, dependencies, or speculative extensibility.
-
-## Priority order
-
-1. **Correctness, safety, and explicit contracts:** preserve requirements, invariants, data integrity, security, and observable behavior.
-2. **Readability and clear intent:** understand **what** behavior is required before **how** it is implemented; choose code that makes its purpose evident.
-3. **Maintainability and testability:** optimize for safe, local, understandable future change and fast verification.
-4. **Simplicity:** use the least complex solution meeting current, known requirements.
-5. **Performance and scale:** optimize against measured constraints and relevant evidence, not guesses.
-
-When priorities conflict, explain the tradeoff rather than pretending every principle can always be maximized.
-
-## Principles to apply
-
-Use `references/principles.md` for definitions, limitations, and decision tests. Apply only relevant principles:
-
-- **KISS and YAGNI:** prefer direct designs; avoid hypothetical requirements, premature generalization, and optional infrastructure.
-- **DRY and SSOT:** avoid duplicated *knowledge* or business rules, but tolerate harmless local repetition when abstraction would obscure intent or couple unrelated behavior.
-- **SOLID with judgment:** cohesive responsibility, extension where change pressure exists, substitutable contracts, narrow interfaces, and dependency direction without gratuitous indirection.
-- **Object-oriented programming (OOP):** encapsulation, abstraction, polymorphism, inheritance versus composition, identity/value, state lifecycle, behavioral invariants, and ownership; do not create classes by reflex.
-- **High cohesion, low coupling, and locality:** keep closely related logic and data near their ownership; hide unrelated concerns behind small, meaningful boundaries.
-- **SRP, clear intent, semantic naming:** use responsibility-oriented structure, obvious control flow, small understandable units, and names that communicate outcomes.
-- **Functional/declarative thinking:** express **what** a computation does before its mechanism; favor pure functions, explicit inputs/outputs, immutability, and isolated side effects where they reduce uncertainty.
-- **Composition over inheritance, delegation, Tell Don't Ask, Law of Demeter:** favor purposeful behavior ownership and direct dependencies over navigation chains or rigid hierarchies.
-- **Explicit contracts and types:** define preconditions, postconditions, invariants, errors, and data ownership; avoid implicit states and invalid combinations.
-- **Separation of concerns with vertical cohesion:** organize around changes and observable behavior rather than forcing fragmented layers or patterns.
-- **Complexity return on investment:** adopt added indirection only if proven benefits in correctness, change isolation, testability, resilience, or measured performance outweigh maintenance and operational costs.
-- **Test-first and behavior-focused verification:** default to a failing test, minimal passing code, and safe refactoring for behavior changes; exercise boundaries, meaningful failure modes, and regressions. Audit assertion strength, missing tests, false positives, flaky behavior, mutation resistance, and coverage meaning.
-- **Reliable and secure behavior:** threat modeling, authentication, authorization, trust boundaries, injection defenses, secrets and sensitive data, dependency and build security, safe failure and recovery proportional to risk.
-- **Sustainable engineering:** keep canonical documentation current, make reviewable changes, protect backwards compatibility when required, and verify rather than assume success.
-
-## Architecture, security, and test-quality decisions
-
-- **Architecture:** start with required behavior, quality attributes and constraints, then compare simpler and more complex options. Identify module/component responsibility, dependency direction, data ownership, contracts, state and lifecycle, operational boundaries, and fitness tests. Record decisions in the project's established authoritative location without creating competing documentation.
-- **OOP:** prefer encapsulated invariants and cohesive responsibilities; require real substitutability for polymorphism or inheritance. Composition, straightforward functions, or functional transformations may be better than extra objects.
-- **Security:** map assets, entry points, identity, permission and data flows; examine untrusted inputs, safe defaults, secrets, dependencies, build/release permissions, and failure exposure. Mark suspected weaknesses separately from verified vulnerabilities and never reproduce credentials.
-- **Testing:** evaluate what behaviors each test would detect if broken. Inspect unit, integration, contract and end-to-end evidence as appropriate; improve assertions, reliability, isolation and meaningful edge cases. No green build or coverage percentage alone proves quality.
-- **Audit/review:** inspect source and diff context, rank observed risks by severity and confidence, and recommend the smallest justified fix with a way to verify it. A repository-wide conclusion requires sufficiently broad evidence.
+Apply SOLID, SRP, DRY, SSOT, explicit contracts and types, OOP encapsulation and substitutability, Composition over inheritance, Tell Don't Ask, Law of Demeter, and functional design only when they improve outcomes. Prefer pure functions, immutability, and isolated side effects when useful; tolerate local duplication when abstraction increases coupling. Evaluate **Complexity ROI** for every layer, dependency, or shared state: measurable benefit must outweigh cognitive and operating cost.
 
 ## Working method
 
-1. **Read before changing:** establish request mode and scope; inspect relevant code, repository and commit context, tests, contracts, constraints, and established style. Understand the behavior and the reason behind the existing design.
-2. **State the intended result:** describe input/output behavior and constraints; identify the simplest viable approach. Assess the cost of change and avoid speculative capabilities.
-3. **Choose boundaries deliberately:** optimize locality and cohesion, explicit dependency direction, minimal interfaces, and a clear owner for each rule/state.
-4. **Implement and verify:** use the project's conventions. For a behavior change, prefer red → green → refactor; validate observable behavior and important edge cases. Refactor only while behavior remains verifiable.
-5. **Review complexity ROI:** inspect every new abstraction, dependency, configuration layer, branch, and shared state for a concrete benefit. Prefer removal or simplification when the benefit is uncertain.
-6. **Finish with evidence:** run applicable checks (tests, lint, typing, build, relevant security/performance checks when available), inspect the diff, and report what passed, failed, or could not run. Assess whether tests actually protect relevant behavior. Do not claim unexecuted validation or a complete audit of unseen code.
+1. **Inspect first:** read relevant source, tests, docs, existing conventions, public interfaces, and affected callers. For refactoring, identify the actual cohesion or change-cost problem and preserve behavior.
+2. **Define the contract:** state inputs, outputs, invariants, failure modes, constraints, and acceptance evidence; identify the least complex viable approach.
+3. **Choose clear ownership:** organize around cohesive behavior or vertical slices; use explicit dependencies and narrow interfaces only when needed.
+4. **Implement and test:** prefer red → green → refactor for behavior changes. Test meaningful nominal, boundary, failure, and regression cases; validate relevant security and operational risks.
+5. **Review complexity:** challenge new indirection, configuration, classes, shared state, or layers; avoid accidental unrelated changes.
+6. **Validate and finish:** run appropriate tests, build, lint, typing, or security checks when possible, inspect the diff, and **report what passed, failed, or could not run**. Do not claim coverage of unseen source or checks not executed.
 
-## Decision rules
+## Mode-specific constraints
 
-- Do **not** force a pattern, paradigm, abstraction, or architectural style because it appears on a checklist.
-- Keep a small local duplication when the alternative creates an unnecessary shared dependency. Extract only stable, genuinely shared behavior or knowledge.
-- Do not fragment code solely to minimize function length or file size. Split when responsibilities, reasoning, testability, or change ownership improve.
-- Prefer one coherent path over layers of wrappers; expose failure and state rather than relying on implicit magic.
-- When two reasonable designs remain, articulate the least-complex viable default and when a more complex alternative would be justified.
-- Respect existing interfaces, repository policies, and authorized scope; do not reformat or restructure unrelated code.
+- **For **refactoring**:** preserve observable behavior and public contracts unless change is explicitly authorized.
+- **For **review**:** **Distinguish correctness or safety defects from preferences**; rank findings by severity and confidence, cite path/location and observed evidence, explain impact, smallest justified fix, and how to verify it.
+- **For architecture:** compare simple and complex options from actual requirements, state, data ownership, operational exposure, and reversibility; do not impose a paradigm.
+- **For security:** trace assets, trust boundaries, authentication, authorization, untrusted inputs, secrets, dependencies, supply chain, and failure exposure; label suspected versus verified issues.
+- **For tests:** judge whether checks would detect a meaningful regression; green CI and coverage percentages do not establish test quality.
+- **Do not initiate unrelated rewrites** or changes outside authorized scope. Explain unresolved tradeoffs and uncertainty instead of fabricating results.
 
 ## Review output
 
-For findings, give **priority, location, evidence, impact, confidence, recommended change, and verification**. State the audit baseline, inspected and omitted areas, tests and checks actually performed, and residual uncertainty. Separate required corrections from optional improvements. If no meaningful problems are evidenced, say so for the inspected scope without inventing concerns. Read references/review-audit.md for commit, PR, repository, and architecture-review procedure.
+Include priority, location, evidence, impact, confidence, recommended change, and verification; state scope examined, baselines, tests actually run, omitted areas, and residual risks. Prefer concrete findings over style-only churn.
 
 ## Public and private responsibilities
 
-- **Public:** This self-contained, reusable, language-, industry-, and platform-agnostic workflow and its references.
-- **Private:** Any local, personal, or workplace conventions belong only in `~/.claude/skill-overrides/oak-code-best-practices.md`.
-- For local customization, edit only the matching private file; do not modify the public source, installed copies, or symlink targets.
-- Create the optional private file only upon request. Never commit, push, quote, or expose its contents. If instructions conflict, follow applicable security and organizational policies and surface the conflict.
+- **Public:** Reusable, independent guidance and any references belonging to this skill, without domain or organization assumptions.
+- **Private:** Local and workplace conventions belong only in `~/.claude/skill-overrides/oak-code-best-practices.md`. Create this file only when requested; for customization edit it, not public source, installed copies, or symlink targets. Never quote, commit, or publish private instructions.
 
 ## Private instructions (Claude Code only, loaded on invocation)
 
