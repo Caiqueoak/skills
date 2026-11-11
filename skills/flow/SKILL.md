@@ -59,7 +59,7 @@ Treat templates as **scaffolds**, not literal outputs. Replace placeholders; rem
 ## Scanability and review contract
 
 - Optimize for **developer comprehension and expectation alignment**, not exhaustive questioning or document length.
-- Each artifact starts with a concise **Quick navigation** index linking to its major sections, and a brief **At a glance** summary of its purpose, key decisions/outcome, and review-needed decisions or blockers. Include only relevant sections; do not pad with empty headings.
+- Each artifact starts with **Quick navigation** and an **At a glance** section with exactly four fields in this order: **Outcome**, **Decisions**, **Pending review**, **Next action**. Keep each field to one concise line; link to canonical details by ID/path, label unconfirmed decisions accurately, and use `None` when applicable. The overview is a navigation aid, not a second source of truth. Include only relevant body sections; do not pad with empty headings.
 - Organize related items under short, descriptive **outcome-first headings** that explain what the section accomplishes. Prefer one coherent idea per bullet, stable identifiers, short paragraphs, and linked details over prose walls or generic labels. Use subheadings for logical groups, not arbitrary depth.
 - Keep detailed reasoning and implementation nuance inside the owning section or linked supporting docs. The overview/index is navigation, not a second source of truth. In subsequent revisions keep the existing `[NEW]`/`[MODIFIED]`/`[REMOVED]` change markers and add them to index entries for changed items until reviewed; preserve approval status separately from change type.
 - Show concise change summaries in chat so the developer can review exceptions rather than reread all artifacts. Do not treat silence as confirmation.
@@ -102,6 +102,7 @@ Global documents describe the whole project; spec documents describe only their 
 - Prefer complete capabilities or observable user outcomes, not generic layers such as "database", "API", and "UI". Each spec has one coherent outcome and can be accepted independently, with clear dependencies when unavoidable.
 - Size specs so requirements and design remain readable and tasks are independently verifiable. Split an oversized spec; merge tiny, tightly coupled specs. See references/granularity.md for portable heuristics.
 - Plan tasks as small, sequential, testable changes. Each task maps to explicit acceptance criteria, has a verifiable completion condition, and should fit **one atomic commit**. Use the smallest meaningful vertical slice, not arbitrary file-by-file work.
+- **Every task entry in tasks.md must include its own numbered execution steps** in this order: **Prepare → Red → Green → Refactor → Validate → Commit → Confirm**. Spell out the task-specific actions, tests, checks, and commit command; never rely on the shared completion gate or this skill text as the only TDD/commit reminder. Preserve these steps when revising tasks.
 - Initial statuses in progress.md: planned, ready, in_progress, blocked, done. Only one canonical spec status exists there. Task completion exists only in tasks.md.
 - Work in dependency order. A spec is done only when all required tasks, acceptance criteria, relevant validations, and documentation are complete.
 - Changes to product scope go to prd.md; cross-cutting decisions to technical.md; new behavior to its spec requirements; implementation changes to its design; tracking to progress.md/tasks.md. Reconcile downstream artifacts and note changed assumptions without copying content.
@@ -118,20 +119,21 @@ Global documents describe the whole project; spec documents describe only their 
 
 ## Implementation: TDD and atomic commits
 
-For each W###-T### task:
+Execute the numbered steps **inside each W###-T### entry in tasks.md**, in order:
 
-1. Read its requirements and design, inspect relevant existing code, and confirm the task's scope/dependencies.
-2. **Red:** add or adjust a meaningful failing automated test for the intended behavior. Confirm failure is due to missing behavior, not a broken test environment.
-3. **Green:** implement the simplest production change that passes the test.
-4. **Refactor:** improve readability and structure while tests stay green; run relevant regression checks.
-5. Check acceptance criteria and task completion conditions. Update its checkbox in tasks.md, then the high-level state in progress.md when appropriate.
-6. Commit the coherent code, tests, and directly related documentation **once**, after validation, following `feat(<scope>): <action> [W###-T###]` (with the actual task ID). Do not combine unrelated task IDs or create separate red/green commits. Record validation and any blockers in the PR.
+1. **Prepare:** read that task's requirements and design, inspect existing code, and confirm dependencies.
+2. **Red:** add or adjust a meaningful automated test; run it and confirm it fails because the intended behavior is missing, not because of a broken environment.
+3. **Green:** implement the smallest production change that makes the test pass.
+4. **Refactor:** improve clarity and cohesion while keeping the tests green.
+5. **Validate:** run relevant regression checks and verify linked acceptance criteria, including applicable failure paths. If validation fails or is unavailable, stop and record the blocker; do not complete the task.
+6. **Commit:** after validation, include the task checkbox update, code, tests, and directly related documentation in **one atomic commit**: `feat(<scope>): <action> [W###-T###]`. Do not create separate Red/Green commits or combine unrelated task IDs.
+7. **Confirm:** verify that the commit exists and covers the completed task. Only then report it done. If the commit fails, leave or restore the task checkbox to unchecked and document the blocker.
 
-If validation is unavailable or failing, do not mark the task done or claim success; document the blocker and stop that task. Never rewrite unrelated user changes. Parallel agents may work only on genuinely independent specs/branches with explicit file ownership; do not have them concurrently edit global _flow documents.
+Each task **must reproduce all seven steps**, tailored to its deliverable, instead of relying on this general description. Preserve unrelated user changes. Record validation and blockers in the PR. Parallel agents may work only on independent specs/branches with explicit file ownership; do not have them concurrently edit global _flow documents.
 
 ## Quality checks
 
-Before calling planning complete, confirm the exact directory structure, the discovery draft and all six baseline/spec templates used where relevant, no unreplaced placeholders, stable IDs and links, no duplicated authoritative facts, EARS-formatted atomic requirements with traceable acceptance criteria, clear spec boundaries, readable outcome-first headings, navigable indexes, at-a-glance summaries, and real next actions. Before calling implementation complete, verify TDD evidence, a passing relevant test suite, one traceable commit per completed task, and reconciled progress.
+Before calling planning complete, confirm the exact directory structure, the discovery draft and all six baseline/spec templates used where relevant, no unreplaced placeholders, stable IDs and links, no duplicated authoritative facts, EARS-formatted atomic requirements with traceable acceptance criteria, clear spec boundaries, readable outcome-first headings, navigable indexes, at-a-glance summaries, and real next actions. Check the four standardized At a glance fields in every artifact and all seven explicit steps in every task entry. Before calling implementation complete, verify TDD evidence, a passing relevant test suite, one traceable commit per completed task, and reconciled progress.
 
 ## Public and private responsibilities
 
