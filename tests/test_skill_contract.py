@@ -45,9 +45,16 @@ class SkillContractTests(unittest.TestCase):
         self.assertIn('!\x60cat "$HOME/.claude/skill-overrides/{{SKILL_NAME}}.md"', template)
         self.assertFalse((SKILLS_DIR / "create-skill/SKILL.md").exists())
 
-    def test_company_skill_edits_are_not_redirected(self):
+    def test_skill_customization_is_override_only(self):
         modifier = (SKILLS_DIR / "oak-modify-skill/SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("Edit the **authorized company skill itself**", modifier)
+        self.assertIn("single source of truth (SSOT)", modifier)
+        self.assertIn("never edit a skill definition to customize it", modifier)
+        self.assertIn("only through an external, per-skill override", modifier)
+        self.assertIn("Leave its contents, metadata, references, and installed files unchanged", modifier)
+        self.assertIn("whether publicly or organization owned", modifier)
+        self.assertIn("stop and report the limitation", modifier)
+        self.assertIn("separate upstream development task", modifier)
+        self.assertNotIn("Edit the **authorized company skill itself**", modifier)
 
     def test_all_public_skills_must_be_domain_agnostic(self):
         instructions = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
