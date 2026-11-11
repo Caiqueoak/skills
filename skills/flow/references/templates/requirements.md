@@ -3,12 +3,6 @@
 ## Quick navigation
 
 - [At a glance](#at-a-glance)
-## At a glance
-
-- **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
-- **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
-- **Review needed:** {{ASSUMPTIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
-
 - [User outcome](#user-outcome)
 - [In scope](#in-scope)
 - [Out of scope](#out-of-scope)
@@ -17,6 +11,12 @@
 - [Dependencies and constraints](#dependencies-and-constraints)
 - [Open questions](#open-questions)
 - [Related documents](#related-documents)
+
+## At a glance
+
+- **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
+- **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
+- **Review needed:** {{ASSUMPTIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
 
 
 > Spec: {{SPEC_ID}} | Folder: {{NUMBER}}-{{SLUG}} | Status is tracked in ../../progress.md.
