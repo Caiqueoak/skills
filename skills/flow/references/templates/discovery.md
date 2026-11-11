@@ -3,17 +3,17 @@
 ## Quick navigation
 
 - [At a glance](#at-a-glance)
-## At a glance
-
-- **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
-- **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
-- **Review needed:** {{ASSUMPTIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
-
 - [Intent and context](#intent-and-context)
 - [Candidate scope and workflows](#candidate-scope-and-workflows)
 - [Decision log](#decision-log)
 - [Open questions and risks](#open-questions-and-risks)
 - [Session handoff](#session-handoff)
+
+## At a glance
+
+- **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
+- **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
+- **Review needed:** {{ASSUMPTIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
 
 
 > Living, provisional record. Resume and update this file during discovery. Confirmed decisions become authoritative only in their linked canonical document.
