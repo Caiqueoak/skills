@@ -4,7 +4,7 @@ These rules apply to public skills maintained in this repository, independent of
 
 ## Creating skills
 
-- Use `skills/<kebab-case-name>/SKILL.md`, with valid `name` and a trigger-oriented `description`.
+- Use `skills/oak-<kebab-case-name>/SKILL.md` for public skills maintained here, with a matching `name: oak-<kebab-case-name>` and a trigger-oriented `description`. Prefix all new names with `oak-` exactly once; do not impose this namespace on other repositories.
 - Base public skills on the canonical `templates/skill/SKILL.md`. The template is maintained in this repository and is not installed as an executable skill.
 - Define a narrow responsibility. Keep steps, necessary inputs, constraints, and completion checks concise. Prefer readable and maintainable instructions.
 - Place only required resources inside `skills/<name>/references/` or `skills/<name>/scripts/`, and use paths that work from the installed skill directory.
@@ -35,7 +35,7 @@ The private file is created only when a local customization is requested. A miss
 - For skills from this repository, environment-specific changes go to the matching local private file. Do not modify public source or installed copies for those changes.
 - Public-source improvements must be generally reusable, explicitly intended for publication, and free of private or proprietary details.
 - For organization-owned skills, follow the owner's rules and edit the canonical source directly when authorized. Do not impose this repository's edit denies on unrelated skills.
-- Preserve the skill name, owner marker, loader, and private-path contract when changing a public skill.
+- Preserve the skill name, owner marker, loader, and private-path contract when changing a public skill, except during an explicitly requested coordinated rename with updated installation and private-extension migration guidance.
 
 ## Review and publishing
 

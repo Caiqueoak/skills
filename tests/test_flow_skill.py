@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-FLOW = ROOT / "skills" / "flow"
+FLOW = ROOT / "skills" / "oak-flow"
 TEMPLATES = FLOW / "references" / "templates"
 REQUIRED = {
     "discovery.md": ("## Intent and context", "## Decision log", "## Session handoff"),
@@ -49,7 +49,7 @@ class FlowSkillTests(unittest.TestCase):
 
     def test_flow_contract_and_stable_ids(self):
         content = (FLOW / "SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("name: flow", content)
+        self.assertIn("name: oak-flow", content)
         self.assertIn("_flow/", content)
         self.assertIn("W001-T001", content)
         self.assertIn("red", content.lower())

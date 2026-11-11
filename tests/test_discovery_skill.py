@@ -4,15 +4,15 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / "skills/discovery/SKILL.md"
-COVERAGE = ROOT / "skills/discovery/references/coverage.md"
-TEMPLATE = ROOT / "skills/discovery/references/discovery-template.md"
+SKILL = ROOT / "skills/oak-discovery/SKILL.md"
+COVERAGE = ROOT / "skills/oak-discovery/references/coverage.md"
+TEMPLATE = ROOT / "skills/oak-discovery/references/discovery-template.md"
 
 
 class DiscoverySkillTests(unittest.TestCase):
     def test_installable_and_independent(self):
         content = SKILL.read_text(encoding="utf-8")
-        self.assertIn("name: discovery", content)
+        self.assertIn("name: oak-discovery", content)
         self.assertIn("user-chosen or project-canonical location", content)
         self.assertNotIn("_flow/", content)
         self.assertIn("references/coverage.md", content)

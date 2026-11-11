@@ -26,6 +26,7 @@ class SkillContractTests(unittest.TestCase):
                     f'cat "$HOME/.claude/skill-overrides/{name}.md" '
                     "2>/dev/null || true"
                 )
+                self.assertTrue(name.startswith("oak-"), name)
                 self.assertIn(f"name: {name}", frontmatter)
                 self.assertRegex(frontmatter, r"(?m)^description: \S")
                 self.assertIn(f"allowed-tools: Bash({command})", frontmatter)
@@ -45,7 +46,7 @@ class SkillContractTests(unittest.TestCase):
         self.assertFalse((SKILLS_DIR / "create-skill/SKILL.md").exists())
 
     def test_company_skill_edits_are_not_redirected(self):
-        modifier = (SKILLS_DIR / "modify-skill/SKILL.md").read_text(encoding="utf-8")
+        modifier = (SKILLS_DIR / "oak-modify-skill/SKILL.md").read_text(encoding="utf-8")
         self.assertIn("Edit the **authorized company skill itself**", modifier)
 
     def test_all_public_skills_must_be_domain_agnostic(self):

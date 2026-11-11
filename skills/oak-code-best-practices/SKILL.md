@@ -1,7 +1,7 @@
 ---
-name: code-best-practices
+name: oak-code-best-practices
 description: Design and assess architecture, OOP code, security, and testing; implement or refactor software and validate repositories, commits, and pull requests using pragmatic, language-agnostic engineering principles.
-allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/code-best-practices.md" 2>/dev/null || true)
+allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/oak-code-best-practices.md" 2>/dev/null || true)
 ---
 
 <!-- skill-source: Caiqueoak/skills -->
@@ -93,10 +93,10 @@ For findings, give **priority, location, evidence, impact, confidence, recommend
 ## Public and private responsibilities
 
 - **Public:** This self-contained, reusable, language-, industry-, and platform-agnostic workflow and its references.
-- **Private:** Any local, personal, or workplace conventions belong only in `~/.claude/skill-overrides/code-best-practices.md`.
+- **Private:** Any local, personal, or workplace conventions belong only in `~/.claude/skill-overrides/oak-code-best-practices.md`.
 - For local customization, edit only the matching private file; do not modify the public source, installed copies, or symlink targets.
 - Create the optional private file only upon request. Never commit, push, quote, or expose its contents. If instructions conflict, follow applicable security and organizational policies and surface the conflict.
 
 ## Private instructions (Claude Code only, loaded on invocation)
 
-!`cat "$HOME/.claude/skill-overrides/code-best-practices.md" 2>/dev/null || true`
+!`cat "$HOME/.claude/skill-overrides/oak-code-best-practices.md" 2>/dev/null || true`

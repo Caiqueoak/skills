@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL_FILE = ROOT / "skills" / "create-skills" / "SKILL.md"
+SKILL_FILE = ROOT / "skills" / "oak-create-skills" / "SKILL.md"
 
 
 class CreateSkillsTests(unittest.TestCase):
@@ -14,10 +14,10 @@ class CreateSkillsTests(unittest.TestCase):
 
     def test_trigger_metadata_and_private_extension(self):
         self.assertTrue(self.content.startswith("---\n"))
-        self.assertIn("name: create-skills", self.content)
+        self.assertIn("name: oak-create-skills", self.content)
         self.assertIn("description: Create, validate, and publish", self.content)
         self.assertIn("<!-- skill-source: Caiqueoak/skills -->", self.content)
-        loader = 'cat "$HOME/.claude/skill-overrides/create-skills.md" 2>/dev/null || true'
+        loader = 'cat "$HOME/.claude/skill-overrides/oak-create-skills.md" 2>/dev/null || true'
         self.assertIn(f"allowed-tools: Bash({loader})", self.content)
         self.assertIn(f"!\x60{loader}\x60", self.content)
         self.assertIn("## Public and private responsibilities", self.content)
@@ -66,10 +66,10 @@ class CreateSkillsTests(unittest.TestCase):
     def test_does_not_reference_other_named_skills_or_concrete_examples(self):
         text = self.content.lower()
         for forbidden in (
-            "skills/discovery/",
-            "skills/flow/",
-            "skills/modify-skill/",
-            "skills/code-best-practices/",
+            "skills/oak-discovery/",
+            "skills/oak-flow/",
+            "skills/oak-modify-skill/",
+            "skills/oak-code-best-practices/",
             "diet app",
             "food log",
             "for example:",

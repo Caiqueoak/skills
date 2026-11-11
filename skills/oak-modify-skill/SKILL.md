@@ -1,7 +1,7 @@
 ---
-name: modify-skill
+name: oak-modify-skill
 description: Modify existing Agent Skills. Route local changes to Caiqueoak/skills skills into private per-skill files while allowing authorized direct edits to company-owned skills.
-allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/modify-skill.md" 2>/dev/null || true)
+allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/oak-modify-skill.md" 2>/dev/null || true)
 ---
 
 <!-- skill-source: Caiqueoak/skills -->
@@ -38,4 +38,4 @@ Summarize the target, the verified ownership, which file was changed, and how th
 
 ## Optional private instructions (Claude Code only, loaded on invocation)
 
-!`cat "$HOME/.claude/skill-overrides/modify-skill.md" 2>/dev/null || true`
+!`cat "$HOME/.claude/skill-overrides/oak-modify-skill.md" 2>/dev/null || true`

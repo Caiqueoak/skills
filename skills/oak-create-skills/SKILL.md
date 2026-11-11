@@ -1,7 +1,7 @@
 ---
-name: create-skills
+name: oak-create-skills
 description: Create, validate, and publish new reusable Agent Skills in a public skills repository. Use when asked to author a new skill, package reusable agent instructions, or publish a skill through Git and a pull request, following the destination repository's authoring standards.
-allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/create-skills.md" 2>/dev/null || true)
+allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/oak-create-skills.md" 2>/dev/null || true)
 ---
 
 <!-- skill-source: Caiqueoak/skills -->
@@ -20,7 +20,7 @@ Create a narrow, useful Agent Skill from a requested capability, validate it aga
 
 ## Creation workflow
 
-1. **Define the contract.** Extract the requested behavior, when the skill should trigger, expected output, boundaries, evidence requirements, and non-goals. Choose an unambiguous kebab-case name and a trigger-oriented description. Ask for a missing decision only if it materially changes the skill's purpose or safety; avoid speculative questions and invented project requirements.
+1. **Define the contract.** Extract the requested behavior, when the skill should trigger, expected output, boundaries, evidence requirements, and non-goals. Choose an unambiguous kebab-case name and a trigger-oriented description. When publishing to `Caiqueoak/skills`, prefix each public skill name with `oak-` exactly once; elsewhere follow the destination's conventions. Ask for a missing decision only if it materially changes the skill's purpose or safety; avoid speculative questions and invented project requirements.
 2. **Check ownership and duplicates.** Inspect the destination's existing names, skill descriptions, canonical template, authoring policy, and tests. If a skill with equivalent responsibility already exists, report the overlap and recommend a scoped addition or improvement. Do not overwrite it as a new skill.
 3. **Build from the canonical template.** Create `skills/<skill-name>/SKILL.md` at the destination's canonical source, replacing template placeholders. Preserve the repository's source marker, required frontmatter, public/private responsibility rules, and its **matching optional private-extension loader**, including correctly scoped tool permissions. Load only that skill's optional extension when invoked; a missing extension must be harmless.
 4. **Keep the public skill abstract.** Use clear, domain-neutral procedures, criteria, constraints, and completion gates; avoid worked product examples, concrete personas, stack preferences, vendor choices, organization internals, and model-biasing defaults. Never mention or assume other installed skills. Prefer concise instructions over long catalogs or unnecessary abstractions.
@@ -42,10 +42,10 @@ Create a narrow, useful Agent Skill from a requested capability, validate it aga
 ## Public and private responsibilities
 
 - **Public:** This portable skill-authoring and publishing process, using the destination repository's canonical policies at execution time.
-- **Private:** Workstation-, personal-, and workplace-specific instructions belong only in `~/.claude/skill-overrides/create-skills.md` on the machine where they are needed.
+- **Private:** Workstation-, personal-, and workplace-specific instructions belong only in `~/.claude/skill-overrides/oak-create-skills.md` on the machine where they are needed.
 - For local customization, edit only the matching private file; do not change this public source, an installed copy, or a symlink target.
 - Create the private file only when requested. Never commit, push, quote, or reproduce its contents in public source, reviews, or logs. If instructions conflict, surface the conflict and follow applicable organization and security policies.
 
 ## Private instructions (Claude Code only, loaded on invocation)
 
-!`cat "$HOME/.claude/skill-overrides/create-skills.md" 2>/dev/null || true`
+!`cat "$HOME/.claude/skill-overrides/oak-create-skills.md" 2>/dev/null || true`
