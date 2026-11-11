@@ -1,5 +1,24 @@
 # {{PROJECT_NAME}} — Technical baseline
 
+## Quick navigation
+
+- [At a glance](#at-a-glance)
+## At a glance
+
+- **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
+- **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
+- **Review needed:** {{ASSUMPTIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
+
+- [System overview](#system-overview)
+- [Architecture and components](#architecture-and-components)
+- [Technology and delivery](#technology-and-delivery)
+- [Cross-cutting quality requirements](#cross-cutting-quality-requirements)
+- [Engineering conventions](#engineering-conventions)
+- [Global technical decisions](#global-technical-decisions)
+- [Open technical decisions](#open-technical-decisions)
+- [Related documents](#related-documents)
+
+
 > Purpose: canonical cross-spec technical decisions. Spec-local mechanics belong in each spec's design.md.
 
 ## System overview
