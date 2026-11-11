@@ -1,5 +1,19 @@
 # {{SPEC_ID}} — {{SPEC_TITLE}} — Tasks
 
+## Quick navigation
+
+- [At a glance](#at-a-glance)
+## At a glance
+
+- **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
+- **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
+- **Review needed:** {{ASSUMPTIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
+
+- [Work order](#work-order)
+- [Completion gate](#completion-gate)
+- [Related documents](#related-documents)
+
+
 > Task checkboxes are authoritative here; spec-level status is authoritative in ../../progress.md.
 
 ## Work order
