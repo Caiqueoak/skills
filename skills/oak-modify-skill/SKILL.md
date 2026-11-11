@@ -8,31 +8,29 @@ allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/oak-modify-skill.md" 2>/d
 
 # Modify a skill
 
-**Invariant: never edit a skill definition to customize it.** The owning source repository is the single source of truth (SSOT) for a skill's canonical instructions. Installed skills, copied `SKILL.md` files, bundles, and symlink targets are derived artifacts, not customization surfaces. Apply local or environment-specific changes **only through an external, per-skill override**.
+**Invariant: never edit a skill definition to customize it.** The canonical source repository is the **single source of truth (SSOT)**. Installed copies, bundles, and symlink targets are derived artifacts. Make local changes **only through an external, per-skill override**.
 
-## Identify the skill and override contract
+## Procedure
 
-1. Locate the target skill, inspect its `SKILL.md`, resolved path, and provenance. Identify its canonical repository rather than inferring ownership from its name.
-2. Determine the skill's supported override mechanism and exact path. Follow the owner's policy and organizational security constraints; do not assume every runtime supports Claude Code's dynamic loading.
-3. For skills originating from `Caiqueoak/skills`, use only `~/.claude/skill-overrides/<skill-name>.md` (with the **current full skill name**) for local customization. Verify the skill already loads this file and permits its narrowly scoped read command.
-4. For skills from another owner, use only an external override that the skill/runtime explicitly supports and that the owner permits. Do not impose this repository's path convention on unrelated skills.
-5. If an external override cannot be loaded, **stop and report the limitation**. Do not patch the skill, its loader, an installed copy, a symlink target, or the upstream repository as a workaround.
+1. Identify the target skill, its resolved path, owner, canonical source, and documented override mechanism. Do not infer ownership or permission from a name.
+2. For skills owned by `Caiqueoak/skills`, use `~/.claude/skill-overrides/<skill-name>.md` with the full current name, and verify that the matching loader is supported. For other owners, follow only their approved external mechanism; do not impose this path on them.
+3. If no usable, authorized external override exists, **stop and report the limitation**. Never patch a public skill, its loader, an installed copy, or a symlink target as a workaround.
+4. Read the skill for reference. **Leave its contents, metadata, references, and installed files unchanged**, whether publicly or organization owned. Create or edit only the corresponding private override; preserve unrelated instructions.
+5. Keep all personal, internal, and confidential instructions private. Do not commit, publish, paste, or log override contents. Do not share one extension across different skills.
+6. Check the override path and loader, verify effective behavior when possible, and confirm no canonical or installed files changed. Report what was verified and what remains untested.
 
-## Customize through the override
+## Upstream changes are different
 
-1. Read the canonical skill only as reference. Leave its contents, metadata, references, and installed files unchanged, whether publicly or organization owned.
-2. Create or update **only** the matching external override file. Preserve unrelated existing instructions. Do not share one override across multiple skills or load unrelated context.
-3. Keep personal, organizational, and confidential instructions in their authorized private location. Never commit, push, copy into public artifacts, or disclose private override contents.
-4. Confirm the override path is correct, its loader is available in the target runtime, and the resulting instructions are effective where verification is possible. If not verifiable, say so rather than claiming success.
-5. Verify the canonical source, installed copy, and symlink target were **not modified**.
-
-## Separate canonical maintenance from customization
-
-An explicitly requested reusable improvement to the base skill is a **separate upstream development task**, performed in an authorized source-repository checkout through its normal review, test, and publication process. It is **not** a local skill customization or permission to patch an installed copy. For all ordinary modification requests, use an override only. Never silently turn a customization request into a source-repository edit.
+An explicitly authorized, reusable change to a canonical skill is a **separate upstream development task** with source-repository review, tests, and publication. Never silently substitute an upstream edit for a local customization.
 
 ## Finish
 
-Report the skill and provenance, the override path updated (not its private contents), and what was verified or blocked. Never claim the canonical skill was updated when only an override changed.
+State the skill's provenance, which override path was edited, and the actual validation or blocker. Updating an override is not updating the canonical skill.
+
+## Public and private responsibilities
+
+- **Public:** This portable modification policy and override decision procedure.
+- **Private:** Local conventions belong only in `~/.claude/skill-overrides/oak-modify-skill.md`; do not disclose or commit private instructions.
 
 ## Optional private instructions (Claude Code only, loaded on invocation)
 

@@ -71,6 +71,28 @@ class DiscoverySkillTests(unittest.TestCase):
         self.assertIn("Answer / evidence", content)
         self.assertIn("candidate / accepted / rejected / deferred / unknown", content)
 
+    def test_reads_existing_code_and_prioritizes_dependency_blockers(self):
+        skill = SKILL.read_text(encoding="utf-8").lower()
+        template = TEMPLATE.read_text(encoding="utf-8").lower()
+        for expected in (
+            "before proposing scope or asking questions",
+            "existing code and documentation",
+            "inspect the existing system first",
+            "dependency tree",
+            "blockers first",
+            "upstream",
+            "downstream",
+            "unblocked",
+        ):
+            self.assertIn(expected, skill)
+        for expected in (
+            "## existing system and source review",
+            "## decision dependencies and blockers",
+            "depends on",
+            "blocked / ready / resolved",
+        ):
+            self.assertIn(expected, template)
+
     def test_no_concrete_product_example(self):
         joined = "\n".join(
             file.read_text(encoding="utf-8")

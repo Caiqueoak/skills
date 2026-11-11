@@ -6,66 +6,58 @@ allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/oak-discovery.md" 2>/dev/
 
 <!-- skill-source: Caiqueoak/skills -->
 
-# Discovery — rigorous scope interrogation
+# Discovery — evidence-led scope decisions
 
-Use this skill when an idea is still ambiguous, assumptions have not been tested, or important product, business, technical, operational, or regulatory questions remain. Challenge the proposal until the consequential uncertainties have either been resolved, explicitly excluded, or assigned a validation path.
-
-Discovery is **not** implementation, architecture-by-default, automatic PRD generation, or an obligation to build every conceivable feature. Enumerate the possibility space broadly; commit only what evidence and user decisions justify.
+Challenge an ambiguous product, service, system, or feature before committing scope. Explore relevant possibilities without treating discovery as implementation, default architecture, or automatic document generation.
 
 ## Inputs and persistence
 
-- Inspect existing project documents and decisions first. Do not overwrite, contradict, or repeat previously established facts without showing why the premise changed.
-- Accept even a one-sentence idea; distinguish user-confirmed facts, sourced evidence, inferred hypotheses, unknowns, and recommendations.
-- Maintain the discovery record in the conversation using `references/discovery-template.md`. When the user requests a persisted artifact or the existing project explicitly uses one, write to the **user-chosen or project-canonical location**; never assume a folder name, repository layout, or companion workflow. If no path is known and persistence is requested, use the existing documentation convention or ask for a destination only when necessary.
-- If tools or write access are unavailable, provide the structured findings in the conversation and state what was not persisted. Update existing findings without dropping decisions, evidence, objections, or unresolved questions.
-- Respect any existing authoritative project documents. Link to adopted decisions rather than maintaining competing definitions; discovery owns its evidence, assumptions, questions, and option analysis.
-- Do not alter implementation, tasks, or technical systems unless explicitly requested. Never assume another capability will consume the result.
+- **Before proposing scope or asking questions, read existing code and documentation** when the project is accessible: architecture and decision records, current requirements, implementation, contracts, configuration, tests, and repository conventions. Trace relevant behavior; distinguish observed facts from intent and hypotheses. Reference paths and versions, reconcile contradictions, and do not repeat settled questions.
+- If access is missing, disclose what could not be inspected and request only material evidence. Never imply a repository review occurred without it.
+- Distinguish confirmed decisions, sourced facts, inferred hypotheses, unknowns, and recommendations. Respect authoritative project documents: discovery owns its evidence, open questions, options, and assumptions; link to adopted decisions instead of duplicating them.
+- Track the discovery in conversation with `references/discovery-template.md`. When persistence is requested, use the **user-chosen or project-canonical location**; do not assume a repository layout. Preserve earlier findings and report any write limitation.
+- Do not change implementation, tasks, or technical systems unless explicitly requested.
 
 ## Discovery loop
 
-1. **Frame:** State the core problem, intended outcome, actors, users, context, proposed boundaries, success signals, and explicit assumptions. Identify whose decision it is and the intended decision horizon. Do not select a stack or business model merely because one is familiar.
-2. **Classify scope and calibrate depth:** Assess actors, affected data, system boundaries, external dependencies, reversibility, operational exposure, scale, uncertainty, and potential harm. Choose **focused**, **standard**, or **comprehensive** depth using `references/coverage.md`. This is a provisional per-dimension depth, not a permanent project label: a seemingly small request can require deep assessment of a high-risk dimension. Explain the selected depth briefly; reconsider as facts emerge.
-3. **Map applicability:** Internally scan the entire dimension map in `references/coverage.md`; mark each axis `essential`, `conditional`, or `not_applicable` and assign depth `brief`, `targeted`, or `deep` based on consequence, uncertainty, and dependencies. Record concise reasons for exclusions and proportionality. For applicable axes, track `unexamined`, `investigating`, `resolved`, or `deferred`. The map is a prompt to detect blind spots, not a requirement to ask about every axis or create irrelevant artifacts. Add missing dimensions revealed by the idea.
-4. **Interrogate in batches:** From the question backlog, ask a **batch of up to 3–6 independently answerable, high-leverage questions** at a time, grouped into a coherent topic where useful. Use one or two questions when that is sufficient or a prior decision gates the rest; do not inflate a small discovery to fill a batch. For each question, explain the decision briefly, offer realistic options **only when they clarify genuine choices**, and provide a **provisional recommendation with a concise rationale** when enough context supports one. Always allow an alternative or free-form answer; never force a false set of choices. Without sufficient evidence, explicitly say why a recommendation cannot yet be justified.
-5. **Incorporate answers:** After each response, record the user's answers (including partial answers), update confidence, decisions and coverage, test for contradictions and second-order effects, then generate **the next batch** from newly exposed dependencies, scenarios and gaps. Do not repeat answered questions unless changed facts materially reopen them. Continue until the decision owner confirms consensus with no unacknowledged material gaps.
-6. **Enumerate scenarios:** Map actors, journeys, state transitions, system boundaries, incentives, misuse, dependencies, and failures. Systematically apply the scenario lenses in `references/coverage.md`; add branches for invalid inputs, boundaries, concurrency, interruptions, external failures, recovery, abuse, accessibility, privacy, deletion, and lifecycle change wherever relevant. Capture expected outcome, detection, handling, test or validation, and severity. Record genuine exclusions instead of silently dropping categories.
-7. **Investigate independently:** When the decision depends on current facts, research credible sources for market alternatives, user behavior, regulation, vendor constraints, prices, technology compatibility, operating costs, and risks. Cite source, date, geography, confidence, and applicability. Separate firsthand evidence, verified sources, estimates, and conjecture. If tools or data are unavailable, label `research_needed`; never invent competitors, statistics, legal conclusions, ROI, or user research.
-8. **Stress-test options:** For material choices, compare doing nothing, a smaller scope, build/buy/integrate, delivery approaches, cost/risk tradeoffs, reversibility, and opportunity cost. Test optimistic, baseline, and adverse assumptions without fabricating numerical precision. Challenge desirability, viability, feasibility, usability, and responsible operation independently.
-9. **Converge:** Distinguish `candidate`, `accepted`, `rejected`, `deferred`, and `unknown`. Propose explicit in-scope, later, and out-of-scope boundaries. Link each important decision to its supporting evidence, owner, rationale, and risks. Surface contradictions and dependencies for the user to resolve; never silently decide a consequential tradeoff.
-10. **Re-audit and confirm:** Revisit all relevant dimensions and high-severity scenarios after each material decision. Summarize agreements, exclusions, unresolved blockers, validation plans, and remaining risks. Present the proposed consensus and ask the decision owner to confirm it before treating the scope as agreed. Do not presume any next-stage workflow.
+1. **Inspect the existing system first:** Ground the discussion in accessible code, tests, documents, decisions, and real behavior before proposing scope or questioning assumptions.
+2. **Frame:** Identify the problem, actors, current baseline, outcome, constraints, decision owner, success signals, and assumptions. Do not presume a stack or business model.
+3. **Calibrate:** Select focused, standard, or comprehensive depth using `references/coverage.md` based on uncertainty, impact, exposure, reversibility, and consequences; deepen individual high-risk dimensions even for small requests.
+4. **Screen dimensions:** Mark each relevant axis essential, conditional, or not_applicable (with a reason); assign brief, targeted, or deep coverage and track readiness. Screen all axes internally without turning them all into questions.
+5. **Build a dependency tree:** Map material decisions, prerequisites, risks, and owners. Address **blockers first** and resolve upstream dependencies before downstream choices. Detect cycles, record blocked questions, and avoid speculative answers while prerequisites are unknown.
+6. **Ask ready questions:** Select a batch of up to **3–6 independently answerable** high-impact questions from the unblocked backlog (fewer if enough). Explain what each decision unlocks; offer meaningful options and a **provisional recommendation** with rationale only when evidence supports it. Always allow free-form answers.
+7. **Incorporate and reorder:** Record partial answers, changes, contradictions, and confidence. Revisit dependency edges and generate follow-up questions only for newly unblocked or materially changed decisions; do not repeat answered questions.
+8. **Expand scenarios:** Examine core journeys, states, users, permissions, boundaries, concurrency, failure, recovery, misuse, accessibility, retention, and evolution where applicable. Record expected outcome, severity, handling, and validation; include high-severity scenarios.
+9. **Research material facts:** Verify current technical, market, cost, vendor, policy, or regulatory constraints when they affect decisions. Identify source, date, applicability, and confidence. Never invent evidence, statistics, user research, legal conclusions, or ROI; mark unsupported claims as research_needed.
+10. **Stress-test:** Compare no-build, smaller scope, build/buy/integrate, delivery alternatives, opportunity costs, reversibility, adverse outcomes, and the assumptions that could invalidate the proposal.
+11. **Converge:** Distinguish candidate, accepted, rejected, deferred, and unknown choices; link each decision to evidence, tradeoffs, owner, and unresolved risks.
+12. **Re-audit and confirm:** Revisit applicable dimensions and serious failure paths after material decisions. Show scope, exclusions, remaining blockers, and risk acceptance; obtain explicit confirmation from the decision owner before claiming consensus.
 
-## How to challenge well
+## Question discipline
 
-- Be rigorous but constructive: question weak premises, not the person proposing them. Ask what must be true, what would make the idea fail, who might be excluded or harmed, and what is genuinely necessary.
-- Explore proactively beyond what the user names, including indirect actors and second-order consequences. Trace each important behavior through normal, unusual, adversarial, and recovery states.
-- Prioritize `severity × uncertainty × irreversibility` and dependency impact over checklist order. Minimize time and cognitive load: ask only what could materially change scope, feasibility, risk, or a decision; infer nothing consequential without marking it as an assumption. Do not overwhelm the user with a dump of every conceivable question; maintain the full backlog in the discovery record.
-- Expose tradeoffs instead of presenting every alternative as simultaneously viable. Separate legally required work from optional safeguards and avoid jurisdiction assumptions; request qualified review where needed.
-- Use **question batches, not serial one-question interviews**. Each question should target one decision. Group compatible questions; avoid dependent questions whose options are impossible to assess until an earlier answer.
-- Where legitimate alternatives exist, present balanced tradeoffs and a **clearly labeled, context-dependent recommendation**; explain its rationale, evidence and major downside without anchoring the answer as a foregone conclusion. If alternatives are not meaningful (a factual unknown, open exploration, or free-form preference), ask directly without artificial options. A recommendation is never a substitute for the user's decision.
-- After **each** answered batch, derive follow-up questions from the answers, stress-test each accepted choice, and check adjacent dimensions and edge cases. Reconcile conflicting answers before moving on.
-- No fixed number of rounds, scenarios, personas, or questions guarantees completeness. Continue when new material risks emerge; stop when remaining uncertainty is explicit, proportionate to the decision, and accepted.
+- Prioritize prerequisite blockers and dependency impact, then severity × uncertainty × irreversibility. Work on independent branches in parallel only when no unresolved shared prerequisite could invalidate them.
+- Challenge premises constructively. Ask what must be true, how the proposal might fail, and who bears the cost or risk; do not manufacture low-value questions or falsely constrained options.
+- Group compatible questions, not dependent ones; recommendations remain provisional until accepted. Explain missing evidence rather than guessing.
+- Keep a concise user-facing batch and a complete internal backlog/record. No arbitrary question, round, scenario, or persona count proves completeness.
 
 ## Completion gate
 
-Do not declare discovery finished solely because every heading has text. A decision-ready baseline requires:
+A decision-ready outcome requires:
 
-- An explicit problem, affected actors, intended outcome, and evidence/assumption distinction.
-- Each dimension screened for applicability and proportional depth; material applicable dimensions assessed, with exclusions and non-applicability justified. No obligation to interrogate low-impact dimensions merely to complete a checklist.
-- Core journeys, alternatives, critical edge cases, abuse/failure/recovery paths, and nonfunctional constraints investigated or assigned a validated follow-up.
-- A scoped proposal with accepted/rejected/deferred boundaries, decision owners, dependencies, major risks, and measurable success or stop signals.
-- Economic, operational, security, privacy, regulatory, and other feasibility dimensions assessed at a depth proportionate to exposure; unknown material facts acknowledged. For trivial or irrelevant exposure, briefly record the reason rather than manufacture requirements.
-- Every high-impact gap either resolved with evidence/decision or explicitly deferred with an owner, risk, validation plan, and user acceptance; no unacknowledged material gaps or contradictory decisions.
-- Question batches iterated on prior answers until there are no decision-blocking unknowns and the scoped outcome is internally consistent.
-- Explicit confirmation of the agreed scope, exclusions, and accepted residual uncertainty by the decision owner. `decision_ready` does not mean certainty or permanent completeness.
+- Problem, affected actors, baseline, outcome, and evidence versus assumptions clearly stated.
+- Existing code and docs inspected when accessible; inspected paths, conflicts, and access gaps recorded.
+- Relevant dimensions screened proportionally, critical behaviors and high-severity scenarios assessed, irrelevant axes excluded with reasons.
+- Dependency tree reviewed: **no unacknowledged material gaps** or silently assumed upstream prerequisites. Material blockers resolved or explicitly deferred with owner, impact, validation plan, and risk acceptance.
+- Feasibility, nonfunctional constraints, costs, security, privacy, operations, and legal exposure assessed to the depth justified by actual risk.
+- Proposed scope, exclusions, options, key decisions, success/stop signals, and remaining uncertainty reconciled.
+- Iterative question batches and an **explicit confirmation** of the scope and residual risks by the decision owner.
 
-If any gate fails, report `in_discovery` or `blocked` with the specific gaps, rather than claiming the scope is closed.
+Otherwise report `in_discovery` or `blocked` with the specific gaps. `decision_ready` does not mean certainty.
 
 ## Public and private responsibilities
 
-- **Public:** Only reusable, domain-, industry-, stack-, jurisdiction-, and organization-neutral process guidance, prompts, and templates belong here. This skill operates on its own without referring to or assuming any other skill.
-- **Private:** Local, personal, or workplace conventions belong only in `~/.claude/skill-overrides/oak-discovery.md` on the relevant machine.
-- For local customization, modify only that private file; do not modify this public skill, installed copies, or symlink targets.
-- Create the private file only when customization is explicitly requested. Never commit, push, quote, or expose its contents. Resolve conflicts under applicable company and security policies.
+- **Public:** This self-contained, domain-neutral workflow and its own references; never require or assume another skill.
+- **Private:** Local and workplace conventions belong only in `~/.claude/skill-overrides/oak-discovery.md`; create the private extension only when requested. For local customization, edit only that file, never public source or installed copies. Never publish, quote, or expose private contents.
 
 ## Private instructions (Claude Code only, loaded on invocation)
 
