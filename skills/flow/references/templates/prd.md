@@ -3,12 +3,6 @@
 ## Quick navigation
 
 - [At a glance](#at-a-glance)
-## At a glance
-
-- **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
-- **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
-- **Review needed:** {{ASSUMPTIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
-
 - [Problem and intended users](#problem-and-intended-users)
 - [Desired outcomes](#desired-outcomes)
 - [Scope](#scope)
@@ -16,6 +10,12 @@
 - [Product constraints and assumptions](#product-constraints-and-assumptions)
 - [Open product decisions](#open-product-decisions)
 - [Related documents](#related-documents)
+
+## At a glance
+
+- **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
+- **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
+- **Review needed:** {{ASSUMPTIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
 
 
 > Purpose: canonical source for product intent and boundaries; do not duplicate individual spec acceptance criteria here.
