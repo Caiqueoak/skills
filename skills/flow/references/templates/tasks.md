@@ -9,9 +9,10 @@
 
 ## At a glance
 
-- **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
-- **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
-- **Review needed:** {{OPEN_DECISIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
+- **Outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
+- **Decisions:** {{DECISION_IDS_WITH_STATUS_AND_LINKS_OR_NONE}}
+- **Pending review:** {{UNAPPROVED_ITEMS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
+- **Next action:** {{ONE_ACTION_OR_LINK_TO_CANONICAL_OWNER_OR_NONE}}
 
 
 > Task checkboxes are authoritative here; spec-level status is authoritative in ../../progress.md.
@@ -20,18 +21,21 @@
 
 - [ ] **{{SPEC_ID}}-T001 — {{SMALL_TESTABLE_DELIVERABLE}}**
   - **Acceptance:** {{SPEC_ID}}-AC01
-  - **Red:** {{FAILING_TEST_TO_ADD}}
-  - **Green:** {{MINIMUM_BEHAVIOR_TO_IMPLEMENT}}
-  - **Refactor / verify:** {{RELEVANT_CHECKS_AND_REGRESSIONS}}
-  - **Commit:** feat({{SCOPE}}): {{SHORT_IMPERATIVE}} [{{SPEC_ID}}-T001]
+  - **Execution steps (required for every task):**
+    1. **Prepare:** {{REQUIREMENTS_DESIGN_DEPENDENCIES_AND_RELEVANT_CODE_TO_REVIEW}}
+    2. **Red:** {{FAILING_AUTOMATED_TEST_TO_ADD_AND_CONFIRM}}
+    3. **Green:** {{MINIMUM_BEHAVIOR_TO_MAKE_TEST_PASS}}
+    4. **Refactor:** {{READABILITY_IMPROVEMENTS_WHILE_TESTS_STAY_GREEN}}
+    5. **Validate:** {{REGRESSION_CHECKS_AND_ACCEPTANCE_CRITERIA_TO_VERIFY}}
+    6. **Commit:** After successful validation, include tests, implementation, related docs, and this task's updated checkbox in one atomic commit: `feat({{SCOPE}}): {{SHORT_IMPERATIVE}} [{{SPEC_ID}}-T001]`
+    7. **Confirm:** {{VERIFY_COMMIT_AND_TASK_COMPLETION_OR_LEAVE_UNCHECKED_IF_FAILED}}
 
 ## Completion gate
 
-- Each task has a meaningful failing test first, passing implementation, and cleanup.
-- Relevant tests pass; verify listed acceptance criteria and any migration or integration behavior.
-- Commit exactly once per completed task with its stable ID (unless a repo policy requires a stricter compatible convention).
-- Mark a checkbox only after successful validation and commit. Update global progress.md only for spec-level changes or the next action.
-- If blocked, leave unchecked and record the blocker in progress.md; do not claim completion.
+- Every task repeats all seven numbered steps; the shared gate cannot replace task-local TDD and commit instructions.
+- A task is complete only when its failing test was confirmed, relevant tests pass, acceptance criteria are verified, and exactly one traceable atomic commit succeeds.
+- Include the checkbox update in that same commit after validation; if the commit fails, restore the unchecked state and record the blocker in progress.md.
+- Update global progress.md only for spec-level changes or the next action. Do not claim completion while blocked.
 
 ## Related documents
 

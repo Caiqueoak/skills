@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FLOW = ROOT / "skills" / "flow"
 TEMPLATES = FLOW / "references" / "templates"
 REQUIRED = {
+    "discovery.md": ("## Intent and context", "## Decision log", "## Session handoff"),
     "prd.md": ("## Problem and intended users", "## Scope", "## Desired outcomes"),
     "technical.md": ("## Architecture and components", "## Engineering conventions"),
     "progress.md": ("## Spec tracker", "## Blockers / open dependencies"),
@@ -25,6 +26,26 @@ class FlowSkillTests(unittest.TestCase):
                 content = (TEMPLATES / filename).read_text(encoding="utf-8")
                 for section in sections:
                     self.assertIn(section, content)
+
+    def test_standard_at_a_glance_in_every_template(self):
+        fields = ("Outcome", "Decisions", "Pending review", "Next action")
+        for filename in REQUIRED:
+            with self.subTest(filename=filename):
+                content = (TEMPLATES / filename).read_text(encoding="utf-8")
+                positions = []
+                for field in fields:
+                    label = f"- **{field}:**"
+                    self.assertEqual(content.count(label), 1)
+                    positions.append(content.index(label))
+                self.assertEqual(positions, sorted(positions))
+
+    def test_every_task_scaffold_repeats_tdd_and_commit_steps(self):
+        content = (TEMPLATES / "tasks.md").read_text(encoding="utf-8")
+        steps = ("Prepare", "Red", "Green", "Refactor", "Validate", "Commit", "Confirm")
+        for index, step in enumerate(steps, start=1):
+            self.assertIn(f"    {index}. **{step}:**", content)
+        self.assertIn("one atomic commit", content)
+        self.assertIn("{{SPEC_ID}}-T001", content)
 
     def test_flow_contract_and_stable_ids(self):
         content = (FLOW / "SKILL.md").read_text(encoding="utf-8")

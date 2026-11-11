@@ -13,9 +13,10 @@
 
 ## At a glance
 
-- **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
-- **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
-- **Review needed:** {{OPEN_DECISIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
+- **Outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
+- **Decisions:** {{DECISION_IDS_WITH_STATUS_AND_LINKS_OR_NONE}}
+- **Pending review:** {{UNAPPROVED_ITEMS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
+- **Next action:** {{ONE_ACTION_OR_LINK_TO_CANONICAL_OWNER_OR_NONE}}
 
 
 > Purpose: canonical source for product intent and boundaries; do not duplicate individual spec acceptance criteria here.
