@@ -112,13 +112,12 @@ Private files must never be committed to this repository, copied into public exa
 
 ## Modifying skills
 
-| Origin | Local modification behavior |
-| --- | --- |
-| This repository | Change the matching private extension; do not edit installed/public files for local customization |
-| Other repositories | Verify ownership and applicable rules before editing |
-| Organization-owned | Edit the authorized original when permitted by the organization |
+The canonical repository is the **single source of truth** for each skill. `/oak-modify-skill` never edits a skill's source, installed copy, or symlink target to customize it; local changes go **only into a supported external per-skill override**.
 
-The `/oak-modify-skill` skill implements these routing rules.
+- Skills from this repository: use `~/.claude/skill-overrides/<skill-name>.md` with the current skill name.
+- Other or organization-owned skills: use their approved external override mechanism, if supported. Otherwise report the limitation; do not patch the original or its loader.
+- Intentionally improving a canonical skill is a separate upstream source-development task, requiring authorization, review, and validation. Never substitute it for an override-only customization.
+
 
 ## Optional edit protection
 

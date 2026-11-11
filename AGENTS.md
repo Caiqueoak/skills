@@ -31,10 +31,11 @@ The private file is created only when a local customization is requested. A miss
 
 ## Modifying existing skills
 
-- Identify ownership from source path and provenance, not from name alone.
-- For skills from this repository, environment-specific changes go to the matching local private file. Do not modify public source or installed copies for those changes.
+- **The canonical source repository is the SSOT.** Never edit a skill definition, installed copy, or symlink target for a local customization; change only a supported external per-skill override.
+- Identify ownership and the supported override contract from provenance, not from the skill name. For skills from this repository, use only the matching local private file.
+- For organization-owned or other third-party skills, use only a supported, authorized external override. If none exists, report the blocker; do not patch the skill or its loader as a workaround. Do not impose this repository's permission-deny rules on unrelated skills.
+- Explicitly requested reusable changes to canonical source are separate upstream development tasks in an authorized checkout with appropriate review and tests; never silently substitute them for local override changes.
 - Public-source improvements must be generally reusable, explicitly intended for publication, and free of private or proprietary details.
-- For organization-owned skills, follow the owner's rules and edit the canonical source directly when authorized. Do not impose this repository's edit denies on unrelated skills.
 - Preserve the skill name, owner marker, loader, and private-path contract when changing a public skill, except during an explicitly requested coordinated rename with updated installation and private-extension migration guidance.
 
 ## Review and publishing
