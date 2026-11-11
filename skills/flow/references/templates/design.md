@@ -15,7 +15,7 @@
 
 - **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
 - **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
-- **Review needed:** {{ASSUMPTIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
+- **Review needed:** {{OPEN_DECISIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
 
 
 > Spec-local technical design only. Refer to the [global technical baseline](../../technical.md) for shared decisions.
