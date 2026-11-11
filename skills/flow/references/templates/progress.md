@@ -1,5 +1,21 @@
 # {{PROJECT_NAME}} — Delivery progress
 
+## Quick navigation
+
+- [At a glance](#at-a-glance)
+## At a glance
+
+- **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
+- **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
+- **Review needed:** {{ASSUMPTIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
+
+- [Current state](#current-state)
+- [Spec tracker](#spec-tracker)
+- [Blockers / open dependencies](#blockers-open-dependencies)
+- [Recent meaningful changes](#recent-meaningful-changes)
+- [Related documents](#related-documents)
+
+
 > Purpose: canonical project/spec status only. Task checkboxes live in each spec's tasks.md.
 
 ## Current state
