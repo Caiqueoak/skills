@@ -3,12 +3,6 @@
 ## Quick navigation
 
 - [At a glance](#at-a-glance)
-## At a glance
-
-- **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
-- **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
-- **Review needed:** {{ASSUMPTIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
-
 - [Design intent](#design-intent)
 - [Flow and boundaries](#flow-and-boundaries)
 - [Data and interface changes](#data-and-interface-changes)
@@ -16,6 +10,12 @@
 - [Testing approach](#testing-approach)
 - [Spec-local decisions and tradeoffs](#spec-local-decisions-and-tradeoffs)
 - [Related documents](#related-documents)
+
+## At a glance
+
+- **Purpose / outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
+- **Key decisions:** {{DECISIONS_OR_LINKS_TO_CANONICAL_ITEMS}}
+- **Review needed:** {{ASSUMPTIONS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
 
 
 > Spec-local technical design only. Refer to the [global technical baseline](../../technical.md) for shared decisions.
