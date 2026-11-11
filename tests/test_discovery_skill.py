@@ -30,7 +30,7 @@ class DiscoverySkillTests(unittest.TestCase):
         ):
             self.assertIn(required.lower(), content.lower())
         self.assertIn("discovery owns its evidence", content.lower())
-        self.assertIn("batch of 3–6", content)
+        self.assertIn("3–6 independently answerable", content)
         self.assertIn("provisional recommendation", content.lower())
         self.assertIn("options", content.lower())
         self.assertIn("follow-up questions", content.lower())
@@ -40,12 +40,13 @@ class DiscoverySkillTests(unittest.TestCase):
     def test_comprehensive_domain_neutral_coverage(self):
         content = COVERAGE.read_text(encoding="utf-8")
         for required in (
-            "Personas and research",
-            "Market and positioning",
-            "Economics and ROI",
-            "Technical feasibility",
-            "Infrastructure and operations",
-            "Privacy, legal, and ethics",
+            "People | Context and research",
+            "Product | Market and competitors",
+            "Business | Costs and returns",
+            "Engineering | Technical alternatives",
+            "Infrastructure | Hosting and environments",
+            "Trust | Privacy and sensitive data",
+            "Trust | Legal, regulatory, and policy",
             "Time and concurrency",
             "Data lifecycle",
             "Deeper probes",
@@ -56,7 +57,7 @@ class DiscoverySkillTests(unittest.TestCase):
         content = TEMPLATE.read_text(encoding="utf-8")
         for section in (
             "## Facts, hypotheses, and evidence",
-            "## Dimension coverage",
+            "## Discovery depth and dimension coverage",
             "## Scenario and edge-case register",
             "## Opportunity, market, and economics",
             "## Options and decisions",
