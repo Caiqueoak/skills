@@ -1,7 +1,7 @@
 ---
-name: flow
+name: oak-flow
 description: Plan and deliver a software product using a portable spec workflow. Use for new app ideas, feature decomposition, PRD and architecture baselines, numbered requirements/design/tasks specs, or tracking TDD implementation progress.
-allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/flow.md" 2>/dev/null || true)
+allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/oak-flow.md" 2>/dev/null || true)
 ---
 
 <!-- skill-source: Caiqueoak/skills -->
@@ -138,10 +138,10 @@ Before calling planning complete, confirm the exact directory structure, the dis
 ## Public and private responsibilities
 
 - **Public:** This reusable workflow, file contract, and templates belong in this skill and may be improved upstream when explicitly requested.
-- **Private:** Workstation-, personal-, or workplace-specific conventions belong only in ~/.claude/skill-overrides/flow.md on that machine, never in this public repository.
+- **Private:** Workstation-, personal-, or workplace-specific conventions belong only in ~/.claude/skill-overrides/oak-flow.md on that machine, never in this public repository.
 - For local customization, change only the matching private file. Do not modify this public skill, installed copies, or symlink targets.
 - Create the private file only when customization is requested; never commit, push, quote, or publish its contents. If instructions conflict, report the conflict and follow applicable company/security policies.
 
 ## Private instructions (Claude Code only, loaded on invocation)
 
-!`cat "$HOME/.claude/skill-overrides/flow.md" 2>/dev/null || true`
+!`cat "$HOME/.claude/skill-overrides/oak-flow.md" 2>/dev/null || true`

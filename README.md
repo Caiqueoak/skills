@@ -10,29 +10,54 @@ npx skills add Caiqueoak/skills -g
 
 The installer provides the public skills. Private instructions are optional and do not need to exist at installation time.
 
+## Migrating existing installations
+
+Renaming changes a skill's installed identity; an ordinary update may leave old names installed. Replace only skills installed from this repository:
+
+```sh
+npx skills ls -g
+npx skills remove Caiqueoak/skills -g -y
+npx skills add Caiqueoak/skills -g -y
+npx skills ls -g
+```
+
+If you have optional Claude Code private extensions, first copy them to their matching new names without overwriting an existing destination:
+
+```sh
+for name in code-best-practices create-skills discovery flow modify-skill; do
+  old="$HOME/.claude/skill-overrides/$name.md"
+  new="$HOME/.claude/skill-overrides/oak-$name.md"
+  if [ -f "$old" ] && [ ! -e "$new" ]; then
+    cp "$old" "$new"
+  fi
+done
+```
+
+Review the new private files before removing the old copies. Keep their contents local. For project-scoped installs, repeat remove/add without `-g` from that project. After reinstalling, rerun the optional edit-protection script to update scoped rules.
+
 ## Repository structure
 
 ```text
 skills/
-  create-skills/
+  oak-create-skills/
     SKILL.md
-  code-best-practices/
+  oak-code-best-practices/
     SKILL.md
     references/
       principles.md, architecture-oop.md
       security.md, testing-validation.md, review-audit.md
-  discovery/
+  oak-discovery/
     SKILL.md
     references/
       coverage.md, discovery-template.md
-  flow/
+  oak-flow/
     SKILL.md
     references/
       granularity.md
       templates/
         prd.md, technical.md, progress.md
         requirements.md, design.md, tasks.md
-  modify-skill/
+  oak-modify-skill/
     SKILL.md
 templates/
   skill/
@@ -43,21 +68,21 @@ AGENTS.md
 
 ## Flow: spec-driven project planning
 
-The installed /flow skill turns a product idea into a project-local _flow/ baseline with a PRD, technical architecture, progress tracker, and numbered specs containing requirements.md, design.md, and tasks.md. Extra spec documents belong in that spec's docs/ subdirectory. Each W###-T### task is implemented with TDD and one verified, traceable commit. The skill ships templates and an abstract spec-decomposition guide; it does not add a _flow/ directory to this skills repository. It is independent of other installed skills and accepts only project-provided inputs.
+The installed /oak-flow skill turns a product idea into a project-local _flow/ baseline with a PRD, technical architecture, progress tracker, and numbered specs containing requirements.md, design.md, and tasks.md. Extra spec documents belong in that spec's docs/ subdirectory. Each W###-T### task is implemented with TDD and one verified, traceable commit. The skill ships templates and an abstract spec-decomposition guide; it does not add a _flow/ directory to this skills repository. It is independent of other installed skills and accepts only project-provided inputs.
 
 ## Code Best Practices
 
-The installable `code-best-practices` skill independently supports architecture design, OOP and functional design, security reviews, repository and commit/PR audits, test-quality assessment, and evidence-based validation. It applies principles pragmatically rather than enforcing a fixed stack or architecture.
+The installable `oak-code-best-practices` skill independently supports architecture design, OOP and functional design, security reviews, repository and commit/PR audits, test-quality assessment, and evidence-based validation. It applies principles pragmatically rather than enforcing a fixed stack or architecture.
 
 ## Create Skills
 
-The installable `create-skills` skill authors **new, reusable skills** against this repository's current authoring standards, validates the resulting public content, and—when explicitly authorized—pushes a topic branch and opens a reviewable PR. Publication to the default branch is verified separately after successful checks and any required review. It does not depend on other installed skills.
+The installable `oak-create-skills` skill authors **new, reusable skills** against this repository's current authoring standards, validates the resulting public content, and—when explicitly authorized—pushes a topic branch and opens a reviewable PR. Publication to the default branch is verified separately after successful checks and any required review. It does not depend on other installed skills.
 
 ## Creating a skill
 
 Follow [AGENTS.md](AGENTS.md) for repository authoring conventions, and start from the [canonical skill template](templates/skill/SKILL.md).
 
-1. Define one clear responsibility, a kebab-case skill name, and a description explaining when it should be used.
+1. Define one clear responsibility, an `oak-`-prefixed kebab-case skill name, and a description explaining when it should be used.
 2. Create `skills/<skill-name>/SKILL.md`. Keep the template's source marker, public/private split, and matching optional private loader.
 3. Put all required references and scripts inside that skill's directory so it works after global installation.
 4. Validate before publishing with `python -m unittest discover -s tests -v`. Use a PR for changes and record the validation results.
@@ -66,11 +91,11 @@ Skill creation is maintained through the repository's authoring standards; only 
 
 ## Public/private extension contract
 
-For a skill named `example`:
+For a skill named `oak-example`:
 
 ```text
-skills/example/SKILL.md                   # Public source
-~/.claude/skill-overrides/example.md      # Optional local extension
+skills/oak-example/SKILL.md                   # Public source
+~/.claude/skill-overrides/oak-example.md      # Optional local extension
 ```
 
 The public skill provides the reusable workflow; the private file contains local or environment-specific additions. Each public skill includes an optional loader for **only its matching private file**, loaded when that skill is invoked.
@@ -78,7 +103,7 @@ The public skill provides the reusable workflow; the private file contains local
 ```markdown
 ## Private instructions (Claude Code only)
 
-!`cat "$HOME/.claude/skill-overrides/example.md" 2>/dev/null || true`
+!`cat "$HOME/.claude/skill-overrides/oak-example.md" 2>/dev/null || true`
 ```
 
 The canonical template also includes the corresponding narrowly scoped `allowed-tools` permission. This mechanism uses Claude Code features, so behavior may vary across agents or managed environments.
@@ -93,7 +118,7 @@ Private files must never be committed to this repository, copied into public exa
 | Other repositories | Verify ownership and applicable rules before editing |
 | Organization-owned | Edit the authorized original when permitted by the organization |
 
-The `/modify-skill` skill implements these routing rules.
+The `/oak-modify-skill` skill implements these routing rules.
 
 ## Optional edit protection
 
@@ -107,4 +132,4 @@ Skills are independent and do not reference or require each other. The developer
 
 ## Discovery: interrogate ideas before committing scope
 
-The installable `discovery` skill systematically challenges assumptions across users, product, market, business viability, engineering, infrastructure, security, privacy, compliance, operations, and edge cases. It uses batches of focused questions, offers meaningful options and qualified recommendations, and iterates on answers until a decision-ready consensus is reached without unacknowledged material gaps. Its record can be kept in the conversation or in a project-selected document. It does not silently decide scope, select technology, or implement features.
+The installable `oak-discovery` skill systematically challenges assumptions across users, product, market, business viability, engineering, infrastructure, security, privacy, compliance, operations, and edge cases. It uses batches of focused questions, offers meaningful options and qualified recommendations, and iterates on answers until a decision-ready consensus is reached without unacknowledged material gaps. Its record can be kept in the conversation or in a project-selected document. It does not silently decide scope, select technology, or implement features.

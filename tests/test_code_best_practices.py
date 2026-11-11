@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL_DIR = ROOT / "skills" / "code-best-practices"
+SKILL_DIR = ROOT / "skills" / "oak-code-best-practices"
 SKILL = SKILL_DIR / "SKILL.md"
 REFERENCE = SKILL_DIR / "references" / "principles.md"
 ARCHITECTURE = SKILL_DIR / "references" / "architecture-oop.md"
@@ -17,12 +17,12 @@ REVIEW = SKILL_DIR / "references" / "review-audit.md"
 class CodeBestPracticesTests(unittest.TestCase):
     def test_installable_and_self_contained(self):
         skill = SKILL.read_text(encoding="utf-8")
-        self.assertIn("name: code-best-practices", skill)
+        self.assertIn("name: oak-code-best-practices", skill)
         self.assertIn("references/principles.md", skill)
         self.assertTrue(REFERENCE.is_file())
         self.assertIn("<!-- skill-source: Caiqueoak/skills -->", skill)
         self.assertIn(
-            'cat "$HOME/.claude/skill-overrides/code-best-practices.md" 2>/dev/null || true',
+            'cat "$HOME/.claude/skill-overrides/oak-code-best-practices.md" 2>/dev/null || true',
             skill,
         )
 

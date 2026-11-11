@@ -1,7 +1,7 @@
 ---
-name: discovery
+name: oak-discovery
 description: Interrogate a product, service, system, or feature idea before planning or implementation. Use to challenge assumptions, research viability, uncover stakeholders and personas, enumerate scenarios and edge cases, assess market and economics, explore engineering and infrastructure tradeoffs, examine privacy and compliance, and converge on an evidence-based scope.
-allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/discovery.md" 2>/dev/null || true)
+allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/oak-discovery.md" 2>/dev/null || true)
 ---
 
 <!-- skill-source: Caiqueoak/skills -->
@@ -63,10 +63,10 @@ If any gate fails, report `in_discovery` or `blocked` with the specific gaps, ra
 ## Public and private responsibilities
 
 - **Public:** Only reusable, domain-, industry-, stack-, jurisdiction-, and organization-neutral process guidance, prompts, and templates belong here. This skill operates on its own without referring to or assuming any other skill.
-- **Private:** Local, personal, or workplace conventions belong only in `~/.claude/skill-overrides/discovery.md` on the relevant machine.
+- **Private:** Local, personal, or workplace conventions belong only in `~/.claude/skill-overrides/oak-discovery.md` on the relevant machine.
 - For local customization, modify only that private file; do not modify this public skill, installed copies, or symlink targets.
 - Create the private file only when customization is explicitly requested. Never commit, push, quote, or expose its contents. Resolve conflicts under applicable company and security policies.
 
 ## Private instructions (Claude Code only, loaded on invocation)
 
-!`cat "$HOME/.claude/skill-overrides/discovery.md" 2>/dev/null || true`
+!`cat "$HOME/.claude/skill-overrides/oak-discovery.md" 2>/dev/null || true`
