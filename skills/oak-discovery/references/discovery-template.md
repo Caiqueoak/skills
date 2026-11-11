@@ -11,6 +11,13 @@
 - **Current alternatives / baseline:** {{BASELINE_OR_UNKNOWN}}
 - **Constraints and intended decision horizon:** {{CONSTRAINTS}}
 
+## Existing system and source review
+
+- **Inspected code, tests, configuration, and documents (paths/versions):** {{SOURCES_OR_ACCESS_GAPS}}
+- **Observed behavior and established decisions:** {{REFERENCES_AND_SUMMARY}}
+- **Documentation/code contradictions and proposed reconciliation:** {{CONFLICTS_OR_NONE}}
+- **Affected integration boundaries and dependencies:** {{EVIDENCE_OR_UNKNOWN}}
+
 ## Facts, hypotheses, and evidence
 
 | ID | Claim | Classification | Source / date / applicability | Confidence | Validation needed |
@@ -81,11 +88,19 @@ When a decision becomes canonical in another document, link to it rather than ma
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Q-001 | {{SINGLE_DECISION_OR_UNCERTAINTY}} | {{RISK_AND_UNCERTAINTY}} | {{OPTIONS_OR_OPEN_ENDED}} | {{RECOMMENDATION_RATIONALE_OR_NOT_YET_JUSTIFIED}} | {{RESPONSE_OR_UNANSWERED}} | {{OWNER_AND_NEXT_STEP}} | open / investigating / resolved / deferred |
 
+## Decision dependencies and blockers
+
+| Decision ID | Depends on | Blocker / impact | Status | Owner or validation action |
+| --- | --- | --- | --- | --- |
+| Q-001 | {{PREREQUISITE_IDS_OR_NONE}} | {{WHY_THIS_GATES_A_DECISION_OR_NONE}} | blocked / ready / resolved / deferred | {{OWNER_AND_NEXT_STEP}} |
+
+Resolve upstream blockers before asking downstream questions. Identify cycles and uncertain prerequisites; ask together only questions with no unresolved shared prerequisite.
+
 ## Current question batch and readiness
 
 - **Decision-readiness status:** {{STATUS_WITH_REASON}}
 - **Most consequential unresolved issues:** {{BLOCKERS}}
-- **Current batch (up to 3–6 independent question IDs, or fewer when sufficient):** {{QUESTION_IDS_FROM_REGISTER}}
+- **Current batch (up to 3–6 unblocked, independently answerable question IDs; fewer when sufficient):** {{QUESTION_IDS_FROM_REGISTER}}
 - **Answers incorporated and new questions derived from:** {{LAST_USER_RESPONSE_OR_UNANSWERED}}
 - **Next validation or experiments:** {{VALIDATION_ACTIONS}}
 - **Gap audit:** {{ALL_AXES_SCREENED_APPLICABLE_HIGH_IMPACT_GAPS_RESOLVED_OR_ACCEPTED_AND_EXCLUSIONS_JUSTIFIED}}
