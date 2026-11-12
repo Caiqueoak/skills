@@ -21,10 +21,10 @@ class CodeBestPracticesTests(unittest.TestCase):
         self.assertIn("references/principles.md", skill)
         self.assertTrue(REFERENCE.is_file())
         self.assertIn("<!-- skill-source: Caiqueoak/skills -->", skill)
-        self.assertIn(
-            'cat "$HOME/.claude/skill-overrides/oak-code-best-practices.md" 2>/dev/null || true',
-            skill,
-        )
+        self.assertIn("## Optional private override (on invocation)", skill)
+        self.assertIn("~/.claude/skill-overrides/oak-code-best-practices.md", skill)
+        self.assertIn("native file-reading tool or API", skill)
+        self.assertNotIn("allowed-tools: Bash(", skill)
 
     def test_principles_are_explicit_and_not_absolutist(self):
         skill = SKILL.read_text(encoding="utf-8")
