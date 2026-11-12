@@ -17,9 +17,11 @@ class CreateSkillsTests(unittest.TestCase):
         self.assertIn("name: oak-create-skills", self.content)
         self.assertIn("description: Create, validate, and publish", self.content)
         self.assertIn("<!-- skill-source: Caiqueoak/skills -->", self.content)
-        loader = 'cat "$HOME/.claude/skill-overrides/oak-create-skills.md" 2>/dev/null || true'
-        self.assertIn(f"allowed-tools: Bash({loader})", self.content)
-        self.assertIn(f"!\x60{loader}\x60", self.content)
+        self.assertIn("## Optional private override (on invocation)", self.content)
+        self.assertIn("~/.claude/skill-overrides/oak-create-skills.md", self.content)
+        self.assertIn("native file-reading tool or API", self.content)
+        self.assertNotIn("allowed-tools: Bash(", self.content)
+        self.assertNotIn("!\x60", self.content)
         self.assertIn("## Public and private responsibilities", self.content)
 
     def test_uses_canonical_policy_and_template_instead_of_bundling_copies(self):
