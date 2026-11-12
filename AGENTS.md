@@ -23,8 +23,8 @@ Every skill originating from this repository must:
 
 1. Preserve `<!-- skill-source: Caiqueoak/skills -->`.
 2. Include the canonical template's public/private responsibilities section and explain what belongs in the public workflow versus a private extension.
-3. Include an optional Claude Code loader for `~/.claude/skill-overrides/<skill-name>.md` and matching narrowly scoped `allowed-tools` permission, using the same skill name.
-4. Load only its matching private extension when invoked; never import unrelated private context globally.
+3. Include a matching optional private-override lookup for `~/.claude/skill-overrides/<skill-name>.md`, resolving `~` to the active user's home directory and using native file-reading capabilities rather than shell commands.
+4. On invocation, attempt to read only its matching private extension; never import unrelated private context globally. Do not depend on Bash, `cat`, dynamic shell injection, or any specific shell. Continue with public instructions when the override cannot be read.
 5. Keep private overrides outside this repository. Never commit, push, quote, or reproduce private contents in public files, issues, PRs, or logs.
 
 The private file is created only when a local customization is requested. A missing private extension must not prevent the public skill from working. Never add internal or confidential context to the public template.
@@ -36,12 +36,12 @@ The private file is created only when a local customization is requested. A miss
 - For organization-owned or other third-party skills, use only a supported, authorized external override. If none exists, report the blocker; do not patch the skill or its loader as a workaround. Do not impose this repository's permission-deny rules on unrelated skills.
 - Explicitly requested reusable changes to canonical source are separate upstream development tasks in an authorized checkout with appropriate review and tests; never silently substitute them for local override changes.
 - Public-source improvements must be generally reusable, explicitly intended for publication, and free of private or proprietary details.
-- Preserve the skill name, owner marker, loader, and private-path contract when changing a public skill, except during an explicitly requested coordinated rename with updated installation and private-extension migration guidance.
+- Preserve the skill name, owner marker, private-override lookup, and private-path contract when changing a public skill, except during an explicitly requested coordinated rename with updated installation and private-extension migration guidance.
 
 ## Review and publishing
 
 - Verify the skill triggers for intended tasks and avoids unrelated triggers.
-- Verify frontmatter, naming, bundled references, source markers, matching loader and private paths.
+- Verify frontmatter, naming, bundled references, source markers, matching private-override lookup and paths.
 - Run `python -m unittest discover -s tests -v`; check GitHub Actions and inspect changes before merging.
 - Use a reviewable branch/PR with purpose, decisions, validation, and any known limitations.
 - Never include internal code, proprietary examples, credentials, internal URLs, or other private information in this public repository.
@@ -52,4 +52,4 @@ The private file is created only when a local customization is requested. A miss
 - The Skills CLI does not apply global Claude Code permission denies or run a post-install setup script.
 - Optional `scripts/protect-installed-skills.py` adds scoped deny rules only for verified copies owned by this repository.
 - Never use broad `Edit(~/.claude/skills/**)` or `Edit(~/.agents/skills/**)` denies, which could block unrelated skills.
-- Treat `allowed-tools` and dynamic injection as Claude Code-specific capabilities subject to managed policies.
+- Optional private-override lookup must remain shell-independent across agents and operating systems; native file access is subject to the runtime's permissions.

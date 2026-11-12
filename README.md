@@ -21,19 +21,7 @@ npx skills add Caiqueoak/skills -g -y
 npx skills ls -g
 ```
 
-If you have optional Claude Code private extensions, first copy them to their matching new names without overwriting an existing destination:
-
-```sh
-for name in code-best-practices create-skills discovery flow modify-skill; do
-  old="$HOME/.claude/skill-overrides/$name.md"
-  new="$HOME/.claude/skill-overrides/oak-$name.md"
-  if [ -f "$old" ] && [ ! -e "$new" ]; then
-    cp "$old" "$new"
-  fi
-done
-```
-
-Review the new private files before removing the old copies. Keep their contents local. For project-scoped installs, repeat remove/add without `-g` from that project. After reinstalling, rerun the optional edit-protection script to update scoped rules.
+If you have optional private extensions, copy each `~/.claude/skill-overrides/<old-name>.md` to its matching `~/.claude/skill-overrides/oak-<old-name>.md` using your operating system's file manager or a native file-management tool. Do not overwrite existing destinations. Review the new private files before removing the old copies. Keep their contents local. For project-scoped installs, repeat remove/add without `-g` from that project. After reinstalling, rerun the optional edit-protection script to update scoped rules.
 
 ## Repository structure
 
@@ -83,7 +71,7 @@ The installable `oak-create-skills` skill authors **new, reusable skills** again
 Follow [AGENTS.md](AGENTS.md) for repository authoring conventions, and start from the [canonical skill template](templates/skill/SKILL.md).
 
 1. Define one clear responsibility, an `oak-`-prefixed kebab-case skill name, and a description explaining when it should be used.
-2. Create `skills/<skill-name>/SKILL.md`. Keep the template's source marker, public/private split, and matching optional private loader.
+2. Create `skills/<skill-name>/SKILL.md`. Keep the template's source marker, public/private split, and matching shell-independent private-override lookup.
 3. Put all required references and scripts inside that skill's directory so it works after global installation.
 4. Validate before publishing with `python -m unittest discover -s tests -v`. Use a PR for changes and record the validation results.
 
@@ -98,15 +86,17 @@ skills/oak-example/SKILL.md                   # Public source
 ~/.claude/skill-overrides/oak-example.md      # Optional local extension
 ```
 
-The public skill provides the reusable workflow; the private file contains local or environment-specific additions. Each public skill includes an optional loader for **only its matching private file**, loaded when that skill is invoked.
+The public skill provides the reusable workflow; the private file contains local or environment-specific additions. Each public skill instructs the agent to attempt to read **only its matching private file** when invoked, using the runtime's native file-reading capability.
 
 ```markdown
-## Private instructions (Claude Code only)
+## Optional private override (on invocation)
 
-!`cat "$HOME/.claude/skill-overrides/oak-example.md" 2>/dev/null || true`
+When invoked, resolve `~` to the active user's home directory and attempt to read
+`~/.claude/skill-overrides/oak-example.md` using an available native file-reading
+tool or API. If unavailable, continue with the public workflow.
 ```
 
-The canonical template also includes the corresponding narrowly scoped `allowed-tools` permission. This mechanism uses Claude Code features, so behavior may vary across agents or managed environments.
+The former Bash-based dynamic injection has been removed. The agent reads the optional file through its available file-access tools rather than executing a shell command. This lookup is shell-independent, but requires the runtime to have filesystem access and appropriate permissions.
 
 Private files must never be committed to this repository, copied into public examples, or included in pull requests. Updating public skills leaves independent private files unchanged; conflicting instructions may still require review.
 
