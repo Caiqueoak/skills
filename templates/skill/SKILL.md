@@ -1,7 +1,6 @@
 ---
 name: {{SKILL_NAME}}
 description: {{DESCRIPTION}}
-allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/{{SKILL_NAME}}.md" 2>/dev/null || true)
 ---
 
 <!-- skill-source: Caiqueoak/skills -->
@@ -20,6 +19,6 @@ allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/{{SKILL_NAME}}.md" 2>/dev
 - Create the private file only when customization is requested; it is never stored in this repository, committed, pushed, or included in public PRs.
 - If private and public instructions conflict, surface the conflict and comply with applicable company and security policies. Do not silently overwrite the public workflow.
 
-## Private instructions (Claude Code, loaded only when invoked)
+## Optional private override (on invocation)
 
-!`cat "$HOME/.claude/skill-overrides/{{SKILL_NAME}}.md" 2>/dev/null || true`
+When invoked, resolve `~` to the active user's home directory and attempt to read `~/.claude/skill-overrides/{{SKILL_NAME}}.md` using an available native file-reading tool or API. Do not require Bash, `cat`, or any specific shell. Apply only this skill's matching private instructions. If the file is absent or inaccessible, continue with the public workflow; report the access limitation only if it affects the requested customization. Do not read unrelated overrides or disclose private contents.
