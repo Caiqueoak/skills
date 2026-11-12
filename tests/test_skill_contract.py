@@ -11,7 +11,7 @@ MARKER = "<!-- skill-source: Caiqueoak/skills -->"
 
 
 class SkillContractTests(unittest.TestCase):
-    def test_every_public_skill_has_a_scoped_private_loader(self):
+    def test_every_public_skill_has_a_shell_independent_private_lookup(self):
         skills = sorted(SKILLS_DIR.glob("*/SKILL.md"))
         self.assertTrue(skills, "Expected at least one installable skill")
 
@@ -22,16 +22,15 @@ class SkillContractTests(unittest.TestCase):
                 frontmatter_match = re.match(r"\A---\n(.*?)\n---\n", content, re.DOTALL)
                 self.assertIsNotNone(frontmatter_match)
                 frontmatter = frontmatter_match.group(1)
-                command = (
-                    f'cat "$HOME/.claude/skill-overrides/{name}.md" '
-                    "2>/dev/null || true"
-                )
                 self.assertTrue(name.startswith("oak-"), name)
                 self.assertIn(f"name: {name}", frontmatter)
                 self.assertRegex(frontmatter, r"(?m)^description: \S")
-                self.assertIn(f"allowed-tools: Bash({command})", frontmatter)
                 self.assertIn(MARKER, content)
-                self.assertIn(f"!\x60{command}\x60", content)
+                self.assertIn("## Optional private override (on invocation)", content)
+                self.assertIn(f"~/.claude/skill-overrides/{name}.md", content)
+                self.assertIn("native file-reading tool or API", content)
+                self.assertNotIn("allowed-tools: Bash(", frontmatter)
+                self.assertNotIn("!\x60", content)
                 self.assertNotIn("{{SKILL_NAME}}", frontmatter)
                 self.assertNotIn("{{DESCRIPTION}}", frontmatter)
 
@@ -41,8 +40,11 @@ class SkillContractTests(unittest.TestCase):
         template = template_file.read_text(encoding="utf-8")
         self.assertIn(MARKER, template)
         self.assertIn("## Public and private responsibilities", template)
-        self.assertIn("allowed-tools: Bash(cat", template)
-        self.assertIn('!\x60cat "$HOME/.claude/skill-overrides/{{SKILL_NAME}}.md"', template)
+        self.assertIn("## Optional private override (on invocation)", template)
+        self.assertIn("~/.claude/skill-overrides/{{SKILL_NAME}}.md", template)
+        self.assertIn("native file-reading tool or API", template)
+        self.assertNotIn("allowed-tools: Bash(", template)
+        self.assertNotIn("!\x60", template)
         self.assertFalse((SKILLS_DIR / "create-skill/SKILL.md").exists())
 
     def test_skill_customization_is_override_only(self):
