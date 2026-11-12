@@ -1,7 +1,6 @@
 ---
 name: oak-create-skills
 description: Create, validate, and publish new reusable Agent Skills in a public skills repository. Use when asked to author a new skill, package reusable agent instructions, or publish a skill through Git and a pull request, following the destination repository's authoring standards.
-allowed-tools: Bash(cat "$HOME/.claude/skill-overrides/oak-create-skills.md" 2>/dev/null || true)
 ---
 
 <!-- skill-source: Caiqueoak/skills -->
@@ -21,7 +20,7 @@ Author a narrow, independently usable Agent Skill in the authorized canonical so
 
 1. **Specify purpose:** identify trigger, expected output, safety boundaries, non-goals, and required evidence. Choose a clear kebab-case name; use the `oak-` prefix exactly once only for this repository.
 2. **Check existing work:** inspect names/descriptions to prevent duplicate responsibilities; expand an existing skill rather than overwriting it as new.
-3. **Start from source:** use the current `templates/skill/SKILL.md` and create `skills/<skill-name>/SKILL.md`. Preserve marker, metadata, public/private division, matching optional private loader, and narrow `allowed-tools` permission.
+3. **Start from source:** use the current `templates/skill/SKILL.md` and create `skills/<skill-name>/SKILL.md`. Preserve marker, metadata, public/private division, matching shell-independent optional private-override lookup.
 4. **Keep instructions reusable:** public content must be **domain-neutral**, self-contained, and portable. **Never mention or assume other installed skills.** Avoid concrete use cases, private context, default technology, duplicated rules, and **unnecessary configuration**; bundle only needed relative references/scripts.
 5. **Audit content:** treat every staged file as **publicly readable**. Remove credentials, private overrides, workplace details, internal URLs, accidental artifacts, or confidential information before any external write. **No private material** may appear in source, reviews, logs, or tests.
 6. **Validate:** inspect metadata, trigger specificity and **false triggers**, templates, linked files, portability, source provenance, security, and **least privilege**. Run relevant tests and public-file guard, review the diff, and disclose what could not run.
@@ -40,6 +39,6 @@ Author a narrow, independently usable Agent Skill in the authorized canonical so
 - **Public:** Reusable, independent guidance and any references belonging to this skill, without domain or organization assumptions.
 - **Private:** Local and workplace conventions belong only in `~/.claude/skill-overrides/oak-create-skills.md`. Create this file only when requested; for customization edit it, not public source, installed copies, or symlink targets. Never quote, commit, or publish private instructions.
 
-## Private instructions (Claude Code only, loaded on invocation)
+## Optional private override (on invocation)
 
-!`cat "$HOME/.claude/skill-overrides/oak-create-skills.md" 2>/dev/null || true`
+When invoked, resolve `~` to the active user's home directory and attempt to read `~/.claude/skill-overrides/oak-create-skills.md` using an available native file-reading tool or API. Do not require Bash, `cat`, or any specific shell. Apply only this skill's matching private instructions. If the file is absent or inaccessible, continue with the public workflow; report the access limitation only if it affects the requested customization. Do not read unrelated overrides or disclose private contents.
