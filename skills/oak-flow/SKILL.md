@@ -40,19 +40,27 @@ Use stable, ascending three-digit spec prefixes, mapped to IDs `W001`, `W002`, a
 
 ## Plan from the existing project
 
-1. Read code, existing `_flow/`, relevant docs, and user inputs. Do not overwrite populated documents or mistake proposals for decisions.
-2. Start/resume `_flow/discovery.md` using `references/templates/discovery.md`. Track confirmed, proposed, assumed, open, and superseded choices with evidence, rationale, and history. Preserve old decisions and unresolved questions. If only discovery was requested, stop here.
-3. Ask only questions that materially affect the baseline. Promote settled product facts to `prd.md`, cross-cutting engineering choices to `technical.md`, and spec-specific rules to their owning spec. Keep discovery history with links; avoid competing definitions.
-4. Create/update `prd.md`, `technical.md`, and `progress.md` from their installed templates. Record unknowns as TBD, not invented requirements or approvals.
-5. Decompose into small, vertically sliced, user-observable specs with `references/granularity.md`. Create each spec's requirements, design, and tasks templates; link acceptance criteria to tasks and identify prerequisites.
-6. Register specs and statuses (`planned`, `ready`, `in_progress`, `blocked`, `done`) in `progress.md`. Task checkboxes live only in `tasks.md`; identify blockers and the next ready task. Stop before coding unless implementation was requested.
+1. **Scope the change:** for a targeted request, update only the canonical owning artifact and directly affected links/status. For a new project, establish the smallest useful baseline; do not generate every spec in advance.
+2. **Inspect once:** read relevant existing code, tests, `_flow/` artifacts, and project docs before writing. Follow imports/dependencies only where needed to resolve a concrete decision. Reuse confirmed context rather than rescanning unchanged files.
+3. **Discover if necessary:** maintain `_flow/discovery.md` using `references/templates/discovery.md` when questions or provisional decisions exist. Ask only questions that block an important decision. If discovery alone was requested, stop there.
+4. **Place facts once:** put agreed product facts in `prd.md`, cross-spec engineering choices in `technical.md`, spec behavior in `requirements.md`, and local implementation choices in `design.md`. Preserve pending decisions as TBD, never invented approvals.
+5. **Decompose only ready work:** use `references/granularity.md` to form small vertical specs with requirements, design, and executable tasks. Identify direct dependencies and acceptance links; avoid speculative future specs.
+6. **Track and stop:** update `progress.md` with spec statuses (`planned`, `ready`, `in_progress`, `blocked`, `done`), blockers, and one next action. Task checkboxes stay in `tasks.md`. Stop before coding unless implementation was requested.
 
-Installed scaffolds: `references/templates/discovery.md`, `references/templates/prd.md`, `references/templates/technical.md`, `references/templates/progress.md`, `references/templates/requirements.md`, `references/templates/design.md`, `references/templates/tasks.md`. Replace placeholders, omit irrelevant sections with a reason, and never treat template prose as project facts.
+Load only the needed files from `references/templates/`. Replace placeholders; never present template instructions as project facts.
+
+## Fast, predictable artifacts
+
+- **One pass, smallest scope:** inspect relevant owners, decide boundaries, then write concise artifacts. Do not repeatedly regenerate the full `_flow/` tree or expand a requested spec into unrelated work.
+- **Fixed layout:** every artifact keeps Quick navigation and At a glance (Outcome, Decisions, Pending review, Next action, in that order). In `design.md`, use exactly the template's four body sections in the given order; write `None` for inapplicable entries instead of inventing content.
+- **Design for implementation:** identify verified touchpoints/responsibilities, execution sequence, changed contracts or state, failure behavior and tests, plus spec-local tradeoffs. Prefer short bullets/tables over prose; do not re-explain requirements, global architecture, or task checklists. Aim for roughly 30–45 lines for a simple spec, expanding only for implementation-critical complexity.
+- **No speculative detail:** inspect code before naming paths or APIs. If unresolved, write a specific TBD with its impact. Put substantial diagrams or rare edge-case analysis in `docs/` only when indispensable, and link them.
+- **Efficient revisions:** edit the owning sections and affected references in place. Read or validate changed material and essential links, not the entire unchanged document set; preserve stable IDs and approvals.
 
 ## Readable artifacts and revisions
 
 - Start every artifact with **Quick navigation** and **At a glance**, containing exactly four concise fields in order: **Outcome**, **Decisions**, **Pending review**, **Next action**. Use `None` where appropriate; link canonical details rather than duplicating them.
-- Use outcome-first headings, short grouped sections, stable IDs, explicit approval status, and relevant links. Do not pad with empty headings or duplicate supporting material.
+- Use outcome-first headings, short grouped sections, stable IDs, explicit approval status, and relevant links. Outside the fixed design layout, omit irrelevant sections; never duplicate supporting material.
 - After an artifact's first version, reconcile changes in its owning file before summarizing them. In chat, give **one short line per changed item**, grouped by file and tagged exactly `[NEW]`, `[MODIFIED]`, or `[REMOVED]`; include stable IDs and propagated changes. Do not paste whole requirement/design text unless asked. Include the same change markers in changed index entries until reviewed. No changed items means no invented log.
 - Do not interpret silence, draft wording, or the change log as user approval. Preserve approval state and prior rationale separately from revision tags.
 

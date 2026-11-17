@@ -3,51 +3,40 @@
 ## Quick navigation
 
 - [At a glance](#at-a-glance)
-- [Design intent](#design-intent)
-- [Flow and boundaries](#flow-and-boundaries)
-- [Data and interface changes](#data-and-interface-changes)
-- [Edge cases and failure behavior](#edge-cases-and-failure-behavior)
-- [Testing approach](#testing-approach)
-- [Spec-local decisions and tradeoffs](#spec-local-decisions-and-tradeoffs)
-- [Related documents](#related-documents)
+- [Implementation map](#implementation-map)
+- [Contracts and state](#contracts-and-state)
+- [Failures and verification](#failures-and-verification)
+- [Decisions and risks](#decisions-and-risks)
 
 ## At a glance
 
-- **Outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
-- **Decisions:** {{DECISION_IDS_WITH_STATUS_AND_LINKS_OR_NONE}}
-- **Pending review:** {{UNAPPROVED_ITEMS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
-- **Next action:** {{ONE_ACTION_OR_LINK_TO_CANONICAL_OWNER_OR_NONE}}
+- **Outcome:** {{ONE_IMPLEMENTATION_OUTCOME}}
+- **Decisions:** {{SPEC_LOCAL_DECISION_IDS_WITH_STATUS_OR_NONE}}
+- **Pending review:** {{BLOCKING_CHOICES_OR_NONE}}
+- **Next action:** {{ONE_CONCRETE_ACTION_OR_LINK}}
 
+> [Requirements](requirements.md) · [Tasks](tasks.md) · [Global technical baseline](../../technical.md). Keep shared architecture and normative behavior in their canonical owners.
 
-> Spec-local technical design only. Refer to the [global technical baseline](../../technical.md) for shared decisions.
+## Implementation map
 
-## Design intent
+| Touchpoint | Change / responsibility |
+| --- | --- |
+| `{{VERIFIED_COMPONENT_OR_PATH}}` | {{SPECIFIC_CHANGE_AND_OWNERSHIP}} |
 
-{{HOW_THIS_SPEC_DELIVERS_ITS_REQUIREMENTS}}
+- **Sequence:** {{INPUT_TO_COMPONENT_TO_OUTPUT_OR_NONE}}
 
-## Flow and boundaries
+## Contracts and state
 
-{{COMPONENT_INTERACTIONS_INPUTS_OUTPUTS}}
+- **Interfaces:** {{CHANGED_INPUT_OUTPUT_VALIDATION_OR_NONE}}
+- **Data / migrations:** {{CHANGED_STATE_STORAGE_MIGRATION_OR_NONE}}
 
-## Data and interface changes
+## Failures and verification
 
-{{SCHEMAS_CONTRACTS_AND_MIGRATIONS_OR_NONE}}
+| Condition / AC | Expected handling | Test boundary |
+| --- | --- | --- |
+| {{ERROR_OR_EDGE_CASE_AND_AC_ID}} | {{EXPECTED_RESPONSE}} | {{TEST_SCOPE_OR_CASE}} |
 
-## Edge cases and failure behavior
+## Decisions and risks
 
-- {{VALIDATION_FAILURE_AUTHORIZATION_OR_RECOVERY_CASE}}
-
-## Testing approach
-
-- **Unit / component:** {{TEST_CASES_LINKED_TO_ACCEPTANCE_CRITERIA}}
-- **Integration / end-to-end:** {{BOUNDARY_TESTS_IF_NEEDED}}
-
-## Spec-local decisions and tradeoffs
-
-- {{DECISION_RATIONALE_OR_NONE}}
-
-## Related documents
-
-- [Requirements](requirements.md)
-- [Executable tasks](tasks.md)
-- [Global architecture](../../technical.md)
+- **Decision:** {{SPEC_LOCAL_CHOICE_STATUS_AND_BRIEF_REASON_OR_NONE}}
+- **Risk / unresolved:** {{BLOCKER_OR_TBD_WITH_IMPACT_OR_NONE}}
