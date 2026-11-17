@@ -24,5 +24,5 @@
     3. **Green:** {{MINIMUM_IMPLEMENTATION}}.
     4. **Refactor:** {{READABILITY_OR_COHESION_IMPROVEMENT}} with tests green.
     5. **Validate:** {{RELEVANT_TESTS_AND_FAILURE_CASES}}; stop if failed or unavailable.
-    6. **Commit:** Code, test, relevant docs, and checked task in one atomic `feat({{SCOPE}}): {{ACTION}} [{{SPEC_ID}}-T001]` commit, only after validation passes.
+    6. **Commit:** Make one atomic commit containing code, test, relevant docs, and the checked task: `feat({{SCOPE}}): {{ACTION}} [{{SPEC_ID}}-T001]`, only after validation passes.
     7. **Confirm:** Verify commit and evidence; otherwise leave task unchecked and record blocker.
