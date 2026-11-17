@@ -47,7 +47,7 @@ Use stable, ascending three-digit spec prefixes, mapped to IDs `W001`, `W002`, a
 5. **Decompose only ready work:** use `references/granularity.md` to form small vertical specs with requirements, design, and executable tasks. Identify direct dependencies and acceptance links; avoid speculative future specs.
 6. **Track and stop:** update `progress.md` with spec statuses (`planned`, `ready`, `in_progress`, `blocked`, `done`), blockers, and one next action. Task checkboxes stay in `tasks.md`. Stop before coding unless implementation was requested.
 
-Load only templates needed for the requested artifacts: `references/templates/{discovery,prd,technical,progress,requirements,design,tasks}.md`. Replace placeholders; never present template instructions as project facts.
+Load only the needed files from `references/templates/`. Replace placeholders; never present template instructions as project facts.
 
 ## Fast, predictable artifacts
 
@@ -60,7 +60,7 @@ Load only templates needed for the requested artifacts: `references/templates/{d
 ## Readable artifacts and revisions
 
 - Start every artifact with **Quick navigation** and **At a glance**, containing exactly four concise fields in order: **Outcome**, **Decisions**, **Pending review**, **Next action**. Use `None` where appropriate; link canonical details rather than duplicating them.
-- Use outcome-first headings, short grouped sections, stable IDs, explicit approval status, and relevant links. Do not pad with empty headings or duplicate supporting material.
+- Use outcome-first headings, short grouped sections, stable IDs, explicit approval status, and relevant links. Outside the fixed design layout, omit irrelevant sections; never duplicate supporting material.
 - After an artifact's first version, reconcile changes in its owning file before summarizing them. In chat, give **one short line per changed item**, grouped by file and tagged exactly `[NEW]`, `[MODIFIED]`, or `[REMOVED]`; include stable IDs and propagated changes. Do not paste whole requirement/design text unless asked. Include the same change markers in changed index entries until reviewed. No changed items means no invented log.
 - Do not interpret silence, draft wording, or the change log as user approval. Preserve approval state and prior rationale separately from revision tags.
 
