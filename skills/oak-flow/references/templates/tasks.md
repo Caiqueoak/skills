@@ -4,41 +4,25 @@
 
 - [At a glance](#at-a-glance)
 - [Work order](#work-order)
-- [Completion gate](#completion-gate)
-- [Related documents](#related-documents)
 
 ## At a glance
 
-- **Outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
-- **Decisions:** {{DECISION_IDS_WITH_STATUS_AND_LINKS_OR_NONE}}
-- **Pending review:** {{UNAPPROVED_ITEMS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
-- **Next action:** {{ONE_ACTION_OR_LINK_TO_CANONICAL_OWNER_OR_NONE}}
+- **Outcome:** {{ONE_DELIVERABLE}}
+- **Decisions:** {{DECISION_IDS_WITH_STATUS_OR_NONE}}
+- **Pending review:** {{OPEN_BLOCKERS_OR_NONE}}
+- **Next action:** {{FIRST_READY_TASK_ID_OR_BLOCKER}}
 
-
-> Task checkboxes are authoritative here; spec-level status is authoritative in ../../progress.md.
+> Checkboxes live here; spec status lives in [progress](../../progress.md). [Requirements](requirements.md) · [Design](design.md).
 
 ## Work order
 
-- [ ] **{{SPEC_ID}}-T001 — {{SMALL_TESTABLE_DELIVERABLE}}**
+- [ ] **{{SPEC_ID}}-T001 — {{ONE_ATOMIC_TESTABLE_CHANGE}}**
   - **Acceptance:** {{SPEC_ID}}-AC01
-  - **Execution steps (required for every task):**
-    1. **Prepare:** {{REQUIREMENTS_DESIGN_DEPENDENCIES_AND_RELEVANT_CODE_TO_REVIEW}}
-    2. **Red:** {{FAILING_AUTOMATED_TEST_TO_ADD_AND_CONFIRM}}
-    3. **Green:** {{MINIMUM_BEHAVIOR_TO_MAKE_TEST_PASS}}
-    4. **Refactor:** {{READABILITY_IMPROVEMENTS_WHILE_TESTS_STAY_GREEN}}
-    5. **Validate:** {{REGRESSION_CHECKS_AND_ACCEPTANCE_CRITERIA_TO_VERIFY}}
-    6. **Commit:** After successful validation, include tests, implementation, related docs, and this task's updated checkbox in one atomic commit: `feat({{SCOPE}}): {{SHORT_IMPERATIVE}} [{{SPEC_ID}}-T001]`
-    7. **Confirm:** {{VERIFY_COMMIT_AND_TASK_COMPLETION_OR_LEAVE_UNCHECKED_IF_FAILED}}
-
-## Completion gate
-
-- Every task repeats all seven numbered steps; the shared gate cannot replace task-local TDD and commit instructions.
-- A task is complete only when its failing test was confirmed, relevant tests pass, acceptance criteria are verified, and exactly one traceable atomic commit succeeds.
-- Include the checkbox update in that same commit after validation; if the commit fails, restore the unchecked state and record the blocker in progress.md.
-- Update global progress.md only for spec-level changes or the next action. Do not claim completion while blocked.
-
-## Related documents
-
-- [Requirements](requirements.md)
-- [Design](design.md)
-- [Project progress](../../progress.md)
+  - **Steps (repeat for every task):**
+    1. **Prepare:** {{CODE_REQUIREMENTS_DESIGN_AND_DEPENDENCIES_TO_CHECK}}.
+    2. **Red:** {{TEST_TO_ADD}}; confirm failure for the intended behavior.
+    3. **Green:** {{MINIMUM_IMPLEMENTATION}}.
+    4. **Refactor:** {{READABILITY_OR_COHESION_IMPROVEMENT}} with tests green.
+    5. **Validate:** {{RELEVANT_TESTS_AND_FAILURE_CASES}}; stop if failed or unavailable.
+    6. **Commit:** Code, test, relevant docs, and checked task in one atomic `feat({{SCOPE}}): {{ACTION}} [{{SPEC_ID}}-T001]` commit, only after validation passes.
+    7. **Confirm:** Verify commit and evidence; otherwise leave task unchecked and record blocker.
