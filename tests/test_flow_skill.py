@@ -13,8 +13,8 @@ REQUIRED = {
     "technical.md": ("## Architecture and components", "## Engineering conventions"),
     "progress.md": ("## Spec tracker", "## Blockers / open dependencies"),
     "requirements.md": ("## Functional requirements", "## Acceptance criteria"),
-    "design.md": ("## Flow and boundaries", "## Testing approach"),
-    "tasks.md": ("## Work order", "## Completion gate"),
+    "design.md": ("## Implementation map", "## Contracts and state", "## Failures and verification", "## Decisions and risks"),
+    "tasks.md": ("## Work order", "Steps (repeat for every task)"),
 }
 
 
@@ -38,6 +38,23 @@ class FlowSkillTests(unittest.TestCase):
                     self.assertEqual(content.count(label), 1)
                     positions.append(content.index(label))
                 self.assertEqual(positions, sorted(positions))
+
+    def test_design_has_predictable_compact_sections(self):
+        content = (TEMPLATES / "design.md").read_text(encoding="utf-8")
+        headings = [line for line in content.splitlines() if line.startswith("## ")]
+        self.assertEqual(
+            headings,
+            [
+                "## Quick navigation",
+                "## At a glance",
+                "## Implementation map",
+                "## Contracts and state",
+                "## Failures and verification",
+                "## Decisions and risks",
+            ],
+        )
+        self.assertIn("{{VERIFIED_COMPONENT_OR_PATH}}", content)
+        self.assertIn("{{ERROR_OR_EDGE_CASE_AND_AC_ID}}", content)
 
     def test_every_task_scaffold_repeats_tdd_and_commit_steps(self):
         content = (TEMPLATES / "tasks.md").read_text(encoding="utf-8")
