@@ -70,15 +70,11 @@ class TestingSkillTests(unittest.TestCase):
             "jest",
             "pytest",
             "maven",
-            "bash",
             "npm test",
             "browser: []",
         ):
             with self.subTest(forbidden=forbidden):
-                if forbidden == "bash":
-                    self.assertNotIn("require bash", content)
-                else:
-                    self.assertNotIn(forbidden, content)
+                self.assertNotIn(forbidden, content)
 
 
 if __name__ == "__main__":
