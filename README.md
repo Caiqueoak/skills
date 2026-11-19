@@ -47,6 +47,10 @@ skills/
         requirements.md, design.md, tasks.md
   oak-modify-skill/
     SKILL.md
+  oak-testing/
+    SKILL.md
+    references/
+      creation.md, execution.md
 templates/
   skill/
     SKILL.md
@@ -61,6 +65,10 @@ The installed /oak-flow skill turns a product idea into a project-local _flow/ b
 ## Code Best Practices
 
 The installable `oak-code-best-practices` skill independently supports architecture design, OOP and functional design, security reviews, repository and commit/PR audits, test-quality assessment, and evidence-based validation. It applies principles pragmatically rather than enforcing a fixed stack or architecture.
+
+## Testing: meaningful tests, minimal latency
+
+The installable `oak-testing` skill is framework-agnostic. Its `SKILL.md` orchestrates two independently loaded references: `references/creation.md` checks contract relevance, regression value, test modularity, and lifecycle cost; `references/execution.md` selects directly impacted and dependent tests, minimizes runner startup and build overhead, and escalates to broader validation only when risk or policy warrants it. Removing accidental functionality does not automatically warrant a test asserting its absence.
 
 ## Create Skills
 
