@@ -40,14 +40,26 @@ Use stable, ascending three-digit spec prefixes, mapped to IDs `W001`, `W002`, a
 
 ## Plan from the existing project
 
-1. **Scope the change:** for a targeted request, update only the canonical owning artifact and directly affected links/status. For a new project, establish the smallest useful baseline; do not generate every spec in advance.
+1. **Scope the change:** for a targeted request, find its existing canonical owner before creating files; update only that owner and directly affected links/status. For a new project, establish the smallest useful baseline; do not generate every spec in advance.
 2. **Inspect once:** read relevant existing code, tests, `_flow/` artifacts, and project docs before writing. Follow imports/dependencies only where needed to resolve a concrete decision. Reuse confirmed context rather than rescanning unchanged files.
 3. **Discover if necessary:** maintain `_flow/discovery.md` using `references/templates/discovery.md` when questions or provisional decisions exist. Ask only questions that block an important decision. If discovery alone was requested, stop there.
 4. **Place facts once:** put agreed product facts in `prd.md`, cross-spec engineering choices in `technical.md`, spec behavior in `requirements.md`, and local implementation choices in `design.md`. Preserve pending decisions as TBD, never invented approvals.
-5. **Decompose only ready work:** use `references/granularity.md` to form small vertical specs with requirements, design, and executable tasks. Identify direct dependencies and acceptance links; avoid speculative future specs.
+5. **Route, then decompose ready work:** first reuse or extend an existing spec when the request belongs to its outcome; create a new spec only when the boundary test in `references/granularity.md` justifies one. Add executable tasks only for ready work, with direct dependencies and acceptance links.
 6. **Track and stop:** update `progress.md` with spec statuses (`planned`, `ready`, `in_progress`, `blocked`, `done`), blockers, and one next action. Task checkboxes stay in `tasks.md`. Stop before coding unless implementation was requested.
 
 Load only the needed files from `references/templates/`. Replace placeholders; never present template instructions as project facts.
+
+## Existing-spec-first routing
+
+Whenever a task, change, or feature is requested, **decide its canonical spec before allocating a new spec ID**:
+
+1. Inspect `_flow/progress.md` and the titles, scopes, requirement IDs, and task lists of potentially relevant `_flow/specs/*`; follow links and read detail only for candidates. Consider completed specs too. If no `_flow/` baseline exists, create only what the request needs.
+2. **Reuse** the best-matching spec if the change refines, fixes, or extends the same cohesive user-observable outcome and shares its acceptance boundary. Add or revise the owning requirements, local design, acceptance criteria, and tasks in place as needed; never create a spec merely because a new task was requested.
+3. **Create** a new spec only for a distinct independently verifiable outcome, materially different rules or release boundary, or scope that would make the existing spec incoherent. Explain the specific boundary reason. Never split solely by file, layer, endpoint, or invocation.
+4. For changes spanning multiple specs, choose one canonical behavior owner; update shared decisions in `prd.md` or `technical.md` when applicable and link affected specs instead of duplicating requirements. Split or reconcile existing scopes only when ownership is genuinely unclear, retaining stable identifiers and traceability.
+5. Append task IDs using the next unused number **within the owning spec**. Do not renumber, recycle, overwrite completed tasks, erase implementation history, or silently change approved behavior. A completed spec may receive a new scoped task and an updated status when further work is justified; record any changed approvals explicitly.
+
+Record the routing outcome concisely in the response (reused `W###`, or new `W###` with its boundary reason). Do not create a separate routing document or regenerate unrelated artifacts.
 
 ## Fast, predictable artifacts
 
@@ -88,7 +100,7 @@ Preserve unrelated changes. Parallel workers need separate file ownership and in
 
 ## Completion checks
 
-For planning, verify paths, seven installed templates as applicable, stable links/IDs, no placeholders or duplicated authorities, EARS requirements, acceptance traceability, focused spec boundaries, readable four-field summaries, explicit task steps, and a real next action. For implementation, verify failed-first tests where applicable, relevant green checks, the traceable commit for every completed task, and reconciled progress. Report checks not executed rather than inventing success.
+For planning, verify existing-spec reuse was evaluated before any new spec, paths, seven installed templates as applicable, stable links/IDs, no placeholders or duplicated authorities, EARS requirements, acceptance traceability, focused spec boundaries, readable four-field summaries, explicit task steps, and a real next action. For implementation, verify failed-first tests where applicable, relevant green checks, the traceable commit for every completed task, and reconciled progress. Report checks not executed rather than inventing success.
 
 ## Public and private responsibilities
 
