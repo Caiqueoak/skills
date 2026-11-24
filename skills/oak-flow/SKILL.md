@@ -30,10 +30,10 @@ _flow/
 - `_flow/discovery.md`: provisional questions, hypotheses, options, decision history, links to promoted facts.
 - `_flow/prd.md`: product intent, users, outcomes, scope, exclusions, product constraints.
 - `_flow/technical.md`: cross-spec architecture, system boundaries, standards, technical decisions.
-- `_flow/progress.md`: phase, spec status, blockers, next action, lightweight history.
+- `_flow/progress.md`: static read-only navigation to distributed progress; no mutable status, spec inventory, or history.
 - `specs/NNN-*/requirements.md`: this spec's behavior, business rules, and acceptance criteria.
 - `specs/NNN-*/design.md`: this spec's local implementation decisions.
-- `specs/NNN-*/tasks.md`: ordered executable tasks and their checkboxes.
+- `specs/NNN-*/tasks.md`: ordered executable tasks, checkboxes, and spec-local delivery state (status, dependencies, blockers, next action).
 - `specs/NNN-*/docs/*`: optional detail linked from the owning spec; do not create empty directories or extra spec peer documents.
 
 Use stable, ascending three-digit spec prefixes, mapped to IDs `W001`, `W002`, and task IDs `W001-T001`, `W001-T002`. Never renumber IDs, even after a rename or removal. Each fact has one canonical owner; link elsewhere instead of copying requirements, task statuses, or decisions.
@@ -45,7 +45,7 @@ Use stable, ascending three-digit spec prefixes, mapped to IDs `W001`, `W002`, a
 3. **Discover if necessary:** maintain `_flow/discovery.md` using `references/templates/discovery.md` when questions or provisional decisions exist. Ask only questions that block an important decision. If discovery alone was requested, stop there.
 4. **Place facts once:** put agreed product facts in `prd.md`, cross-spec engineering choices in `technical.md`, spec behavior in `requirements.md`, and local implementation choices in `design.md`. Preserve pending decisions as TBD, never invented approvals.
 5. **Route, then decompose ready work:** first reuse or extend an existing spec when the request belongs to its outcome; create a new spec only when the boundary test in `references/granularity.md` justifies one. Add executable tasks only for ready work, with direct dependencies and acceptance links.
-6. **Track and stop:** update `progress.md` with spec statuses (`planned`, `ready`, `in_progress`, `blocked`, `done`), blockers, and one next action. Task checkboxes stay in `tasks.md`. Stop before coding unless implementation was requested.
+6. **Track and stop:** update only each affected spec's `tasks.md` with its delivery state and next action. Initialize `progress.md` once as a static guide. Stop before coding unless implementation was requested.
 
 Load only the needed files from `references/templates/`. Replace placeholders; never present template instructions as project facts.
 
@@ -53,7 +53,7 @@ Load only the needed files from `references/templates/`. Replace placeholders; n
 
 Whenever a task, change, or feature is requested, **decide its canonical spec before allocating a new spec ID**:
 
-1. Inspect `_flow/progress.md` and the titles, scopes, requirement IDs, and task lists of potentially relevant `_flow/specs/*`; follow links and read detail only for candidates. Consider completed specs too. If no `_flow/` baseline exists, create only what the request needs.
+1. Inspect the `_flow/specs/` directory inventory and the titles, scopes, requirement IDs, and task lists of potentially relevant `_flow/specs/*`; follow links and read detail only for candidates. Consider completed specs too. If no `_flow/` baseline exists, create only what the request needs.
 2. **Reuse** the best-matching spec if the change refines, fixes, or extends the same cohesive user-observable outcome and shares its acceptance boundary. Add or revise the owning requirements, local design, acceptance criteria, and tasks in place as needed; never create a spec merely because a new task was requested.
 3. **Create** a new spec only for a distinct independently verifiable outcome, materially different rules or release boundary, or scope that would make the existing spec incoherent. Explain the specific boundary reason. Never split solely by file, layer, endpoint, or invocation.
 4. For changes spanning multiple specs, choose one canonical behavior owner; update shared decisions in `prd.md` or `technical.md` when applicable and link affected specs instead of duplicating requirements. Split or reconcile existing scopes only when ownership is genuinely unclear, retaining stable identifiers and traceability.
@@ -73,7 +73,7 @@ Record the routing outcome concisely in the response (reused `W###`, or new `W##
 
 - Start every artifact with **Quick navigation** and **At a glance**, containing exactly four concise fields in order: **Outcome**, **Decisions**, **Pending review**, **Next action**. Use `None` where appropriate; link canonical details rather than duplicating them.
 - Use outcome-first headings, short grouped sections, stable IDs, explicit approval status, and relevant links. Outside the fixed design layout, omit irrelevant sections; never duplicate supporting material.
-- After an artifact's first version, reconcile changes in its owning file before summarizing them. In chat, give **one short line per changed item**, grouped by file and tagged exactly `[NEW]`, `[MODIFIED]`, or `[REMOVED]`; include stable IDs and propagated changes. Do not paste whole requirement/design text unless asked. Include the same change markers in changed index entries until reviewed. No changed items means no invented log.
+- After an artifact's first version, reconcile changes in its owning file before summarizing them. In chat, give **one short line per changed item**, grouped by file and tagged exactly `[NEW]`, `[MODIFIED]`, or `[REMOVED]`; include stable IDs and propagated changes. Do not paste whole requirement/design text unless asked. Include the same change markers in changed index entries until reviewed, except the immutable progress guide. No changed items means no invented log.
 - Do not interpret silence, draft wording, or the change log as user approval. Preserve approval state and prior rationale separately from revision tags.
 
 ## Requirements and spec boundaries
@@ -84,9 +84,16 @@ Record the routing outcome concisely in the response (reused `W###`, or new `W##
 - Each task must map to requirements/acceptance criteria, have an observable completion check, and fit **one atomic commit**. Schedule in dependency order; finish a spec only when all tasks, validation, and docs meet acceptance.
 - Reconcile later scope changes with their canonical owner and affected downstream artifacts. Never mark unresolved choices as implementation-ready requirements.
 
+## Conflict-free progress tracking
+
+- Initialize `_flow/progress.md` once from its template; never edit it for spec creation, completion, task updates, blockers, dependencies, decisions, review tags, history, or routine implementation. Its only links are stable directories and baseline documents. Discover the current spec inventory from `_flow/specs/` at read time.
+- Each spec's `tasks.md` is the sole owner of its delivery status (`planned`, `ready`, `in_progress`, `blocked`, `done`), dependency IDs, unresolved blockers (including owner and unblock condition), next action, and task checkboxes. Mark `done` only after all required tasks and acceptance checks are verified. Derive project-wide status and next actions on demand from these records; do not persist a second summary. Use Git history and task commits for delivery history.
+- Assign one writer per spec's `tasks.md`. Different specs may update their own records in parallel. For independent tasks within one spec, workers may implement in isolated scopes but must not write its shared task record; the lead serially integrates each validated task with its checkbox and state in the same atomic task commit. Serialize spec ID allocation and any shared artifact changes through the lead. No worker may edit `progress.md`.
+- Migrate older trackers once through a single coordinator before parallel implementation: move unique spec state and blockers into owning task records, preserve project-wide decisions and constraints in their existing canonical owners, preserve history through Git or an appropriate existing canonical record, then replace the central tracker with the static template. Preserve IDs, links, approvals, and completed checkboxes. Never regenerate the static guide during subsequent work.
+
 ## One-go implementation
 
-When implementation is requested, execute the entire authorized scope in one continuous run: select ready tasks in dependency order, implement, validate, commit, confirm, update progress, and immediately proceed to the next task until the scope is complete. Do not stop for routine approvals, intermediate summaries, individual task completion, or recoverable failures. Planning-only requests retain their planning boundary.
+When implementation is requested, execute the entire authorized scope in one continuous run: select ready tasks in dependency order, implement, validate, commit, confirm, update spec-local progress, and immediately proceed to the next task until the scope is complete. Do not stop for routine approvals, intermediate summaries, individual task completion, or recoverable failures. Planning-only requests retain their planning boundary.
 
 - Resolve routine, reversible decisions using the approved requirements, existing design, project conventions, and available evidence; record material assumptions in their canonical owner. Diagnose and fix recoverable failures, then retry relevant validation.
 - Pause only when a critical decision requires user authority (material scope or acceptance changes, incompatible architecture choices, irreversible or high-risk actions outside authorization) or an essential external prerequisite cannot be resolved safely. Continue independent authorized work first when possible. Ask one focused question with options, recommendation, and impact; preserve verified progress and the exact resume point. Never bypass validation or mark blocked tasks complete.
@@ -109,7 +116,7 @@ Preserve unrelated changes. Parallel workers need separate write ownership and i
 
 ## Completion checks
 
-For planning, verify existing-spec reuse was evaluated before any new spec, paths, seven installed templates as applicable, stable links/IDs, no placeholders or duplicated authorities, EARS requirements, acceptance traceability, focused spec boundaries, readable four-field summaries, explicit task steps, and a real next action. For implementation, verify failed-first tests where applicable, relevant green checks, the traceable commit for every completed task, and reconciled progress. Report checks not executed rather than inventing success.
+For planning, verify existing-spec reuse was evaluated before any new spec, paths, seven installed templates as applicable, stable links/IDs, no placeholders or duplicated authorities, EARS requirements, acceptance traceability, focused spec boundaries, readable four-field summaries, explicit task steps, and a real next action. For implementation, verify failed-first tests where applicable, relevant green checks, the traceable commit for every completed task, and reconciled spec-local progress; verify the static progress guide was not modified by implementation. Report checks not executed rather than inventing success.
 
 ## Public and private responsibilities
 

@@ -89,6 +89,23 @@ class FlowSkillTests(unittest.TestCase):
         self.assertIn("{{SPEC_ID}}-T001", tasks)
         self.assertIn("{{SPEC_ID}}-AC01", requirements)
 
+    def test_progress_is_static_and_delivery_state_is_spec_local(self):
+        progress = (TEMPLATES / "progress.md").read_text(encoding="utf-8")
+        tasks = (TEMPLATES / "tasks.md").read_text(encoding="utf-8")
+        skill = (FLOW / "SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("[specs directory](specs/)", progress)
+        self.assertNotIn("{{", progress)
+        self.assertNotIn("| Spec |", progress)
+        self.assertNotIn("## Recent meaningful changes", progress)
+        self.assertNotIn("**Status:**", progress)
+        self.assertIn("## Delivery state", tasks)
+        for field in ("Status", "Dependencies", "Blockers"):
+            self.assertIn(f"- **{field}:**", tasks)
+        self.assertIn("one writer per spec", skill)
+        self.assertIn("No worker may edit `progress.md`", skill)
+        self.assertIn("same atomic task commit", skill)
+        self.assertIn("Migrate older trackers once", skill)
+
     def test_granularity_rules_are_vertical_and_domain_neutral(self):
         content = (FLOW / "references" / "granularity.md").read_text(encoding="utf-8")
         self.assertIn("## Decomposition procedure", content)

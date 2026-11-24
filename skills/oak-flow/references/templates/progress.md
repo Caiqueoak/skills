@@ -1,45 +1,28 @@
-# {{PROJECT_NAME}} — Delivery progress
+# Delivery progress
 
 ## Quick navigation
 
 - [At a glance](#at-a-glance)
-- [Current state](#current-state)
 - [Spec tracker](#spec-tracker)
-- [Blockers / open dependencies](#blockers-open-dependencies)
-- [Recent meaningful changes](#recent-meaningful-changes)
+- [Blockers / open dependencies](#blockers--open-dependencies)
 - [Related documents](#related-documents)
 
 ## At a glance
 
-- **Outcome:** {{SHORT_OUTCOME_OR_PURPOSE}}
-- **Decisions:** {{DECISION_IDS_WITH_STATUS_AND_LINKS_OR_NONE}}
-- **Pending review:** {{UNAPPROVED_ITEMS_OR_BLOCKERS_WITH_LINKS_OR_NONE}}
-- **Next action:** {{ONE_ACTION_OR_LINK_TO_CANONICAL_OWNER_OR_NONE}}
+- **Outcome:** Find current delivery state in the owning spec.
+- **Decisions:** See the canonical product, technical, and spec documents.
+- **Pending review:** Read the relevant spec's task record.
+- **Next action:** Inspect the spec task records and select ready work by dependency order.
 
-
-> Purpose: canonical project/spec status only. Task checkboxes live in each spec's tasks.md.
-
-## Current state
-
-- **Phase:** {{DISCOVERY_PLANNING_IMPLEMENTATION_OR_RELEASE}}
-- **Overall outcome:** {{BRIEF_CURRENT_SUMMARY}}
-- **Next actionable step:** {{SPEC_AND_TASK_ID_OR_DECISION}}
+> Static navigation only. Do not update this file during planning or implementation after initialization.
 
 ## Spec tracker
 
-| Spec | Outcome | Status | Depends on |
-| --- | --- | --- | --- |
-| [W001](specs/001-feature-slug/requirements.md) | {{OUTCOME}} | planned | — |
-
-Status vocabulary: planned, ready, in_progress, blocked, done. Use one status per spec here; do not mirror task-level checkboxes or progress percentages.
+Open the [specs directory](specs/) and read each relevant spec's `tasks.md` for current status, next action, dependencies, and task checkboxes. Discover new specs from the directory; do not maintain a central spec list or status table.
 
 ## Blockers / open dependencies
 
-- {{BLOCKER_OWNER_AND_UNBLOCK_CONDITION_OR_NONE}}
-
-## Recent meaningful changes
-
-- {{DATE}} — {{DECISION_COMPLETION_OR_CHANGE_WITH_SPEC_LINK}}
+Read the owning spec's task record. Derive a project-wide view on demand; never copy mutable status or blockers into this file. Use task commits and Git history for completed work.
 
 ## Related documents
 
