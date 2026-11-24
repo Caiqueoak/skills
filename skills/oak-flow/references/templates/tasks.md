@@ -23,6 +23,6 @@
     2. **Red:** {{TEST_TO_ADD}}; confirm failure for the intended behavior.
     3. **Green:** {{MINIMUM_IMPLEMENTATION}}.
     4. **Refactor:** {{READABILITY_OR_COHESION_IMPROVEMENT}} with tests green.
-    5. **Validate:** {{RELEVANT_TESTS_AND_FAILURE_CASES}}; stop if failed or unavailable.
+    5. **Validate:** {{RELEVANT_TESTS_AND_FAILURE_CASES}}; fix recoverable failures and retry; if still blocked, leave unchecked, record the blocker, and continue independent authorized work.
     6. **Commit:** Make one atomic commit containing code, test, relevant docs, and the checked task: `feat({{SCOPE}}): {{ACTION}} [{{SPEC_ID}}-T001]`, only after validation passes.
     7. **Confirm:** Verify commit and evidence; otherwise leave task unchecked and record blocker.
