@@ -1,6 +1,6 @@
 ---
 name: oak-flow
-description: Plan and deliver a software product using a portable spec workflow. Use for new app ideas, feature decomposition, PRD and architecture baselines, numbered requirements/design/tasks specs, or tracking TDD implementation progress.
+description: Plan and deliver a software product using a portable spec workflow. Use for new app ideas, feature decomposition, PRD and architecture baselines, numbered requirements/design/tasks specs, or tracking TDD implementation progress, or executing approved implementation end to end.
 ---
 
 <!-- skill-source: Caiqueoak/skills -->
@@ -84,6 +84,15 @@ Record the routing outcome concisely in the response (reused `W###`, or new `W##
 - Each task must map to requirements/acceptance criteria, have an observable completion check, and fit **one atomic commit**. Schedule in dependency order; finish a spec only when all tasks, validation, and docs meet acceptance.
 - Reconcile later scope changes with their canonical owner and affected downstream artifacts. Never mark unresolved choices as implementation-ready requirements.
 
+## One-go implementation
+
+When implementation is requested, execute the entire authorized scope in one continuous run: select ready tasks in dependency order, implement, validate, commit, confirm, update progress, and immediately proceed to the next task until the scope is complete. Do not stop for routine approvals, intermediate summaries, individual task completion, or recoverable failures. Planning-only requests retain their planning boundary.
+
+- Resolve routine, reversible decisions using the approved requirements, existing design, project conventions, and available evidence; record material assumptions in their canonical owner. Diagnose and fix recoverable failures, then retry relevant validation.
+- Pause only when a critical decision requires user authority (material scope or acceptance changes, incompatible architecture choices, irreversible or high-risk actions outside authorization) or an essential external prerequisite cannot be resolved safely. Continue independent authorized work first when possible. Ask one focused question with options, recommendation, and impact; preserve verified progress and the exact resume point. Never bypass validation or mark blocked tasks complete.
+- Use available subagents when independent work can safely run in parallel and the expected benefit exceeds coordination cost. Give each a bounded outcome, necessary context, acceptance checks, and exclusive write ownership in an isolated branch/worktree or equivalent. Delegate read-only investigation, testing, or review without overlapping writers. Keep dependent or tightly coupled tasks sequential; do not create agents just to follow a pattern.
+- The lead agent owns dependency scheduling, shared artifacts, integration, relevant regression checks, and final completion. Review subagent evidence and reconcile commits and task status; resolve integration issues before proceeding. If subagents are unavailable, execute directly without stopping.
+
 ## TDD task execution and atomic commits
 
 **Every `W###-T###` task entry** must explicitly reproduce seven task-specific numbered steps, in this order; a shared checklist alone is insufficient:
@@ -92,11 +101,11 @@ Record the routing outcome concisely in the response (reused `W###`, or new `W##
 2. **Red:** write a meaningful failing automated test and confirm it fails for the intended missing behavior, not environment failure.
 3. **Green:** make the smallest production change to pass.
 4. **Refactor:** improve readability/cohesion with tests green.
-5. **Validate:** run relevant regressions, acceptance and failure-path checks. If failed or unavailable, stop and record the blocker, without completing the task.
+5. **Validate:** run relevant regressions, acceptance and failure-path checks. Diagnose and resolve recoverable failures; if validation remains blocked, record the blocker and leave the task incomplete. Continue independent authorized work where possible.
 6. **Commit:** include code, test, relevant docs, and task checkbox in **one atomic commit** with `feat(<scope>): <action> [W###-T###]`. No separate red/green commits or unrelated tasks.
 7. **Confirm:** verify that the commit exists and covers the completed task; otherwise leave or restore the task as incomplete.
 
-Preserve unrelated changes. Parallel workers need separate file ownership and independent branches/specs; never let them concurrently edit global `_flow/` files. Put validation evidence and blockers in the PR.
+Preserve unrelated changes. Parallel workers need separate write ownership and isolated branches/worktrees or equivalent; never let them concurrently edit shared `_flow/` files. Put validation evidence and blockers in the PR.
 
 ## Completion checks
 
