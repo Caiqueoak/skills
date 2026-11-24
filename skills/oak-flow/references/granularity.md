@@ -14,14 +14,14 @@ Choose a **user-observable capability** as the default spec boundary. Each spec 
 
 ## Reuse an existing spec first
 
-Before proposing a spec, search the existing `_flow/specs/` inventory and `_flow/progress.md` for the canonical owner of the requested behavior. Compare likely candidates by **user outcome, responsibility, acceptance boundary, and dependencies**, not just matching keywords or touched files. Include completed specs in the search.
+Before proposing a spec, search the existing `_flow/specs/` directory inventory for the canonical owner of the requested behavior. Compare likely candidates by **user outcome, responsibility, acceptance boundary, and dependencies**, not just matching keywords or touched files. Include completed specs in the search.
 
 - **Reuse unchanged:** a requested implementation task is already covered by an existing requirement and acceptance criterion; add the next unused task ID if needed.
 - **Extend in place:** the request refines or adds behavior belonging to the same coherent outcome; update that spec's requirements, criteria, design, and tasks where impacted. Preserve unrelated text, approvals, completed tasks, and IDs.
 - **Create separately:** the request has an independent verifiable outcome, materially different rule set or release boundary, or would make the owner too broad or internally inconsistent. State why existing specs cannot own it.
 - **Reconcile overlap:** if multiple specs appear to own the behavior, select one canonical owner and link the others; move only what is necessary without duplicating normative requirements or rewriting historical IDs.
 
-Never create a spec just because a new request arrived, nor force unrelated work into an existing spec to minimize the count. Re-evaluate boundaries as a project evolves. A previously completed spec may be reopened for a new task with progress updated, but completed work stays traceable.
+Never create a spec just because a new request arrived, nor force unrelated work into an existing spec to minimize the count. Re-evaluate boundaries as a project evolves. A previously completed spec may be reopened for a new task with its local task record updated, but completed work stays traceable.
 
 ## Decomposition procedure
 

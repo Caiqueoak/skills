@@ -60,7 +60,7 @@ AGENTS.md
 
 ## Flow: spec-driven project planning
 
-The installed /oak-flow skill turns a product idea into a project-local _flow/ baseline with a PRD, technical architecture, progress tracker, and numbered specs containing requirements.md, design.md, and tasks.md. Extra spec documents belong in that spec's docs/ subdirectory. Each W###-T### task is implemented with TDD and one verified, traceable commit. The skill ships templates and an abstract spec-decomposition guide; it does not add a _flow/ directory to this skills repository. It is independent of other installed skills and accepts only project-provided inputs.
+The installed /oak-flow skill turns a product idea into a project-local _flow/ baseline with a PRD, technical architecture, a static progress guide, and numbered specs containing requirements.md, design.md, and tasks.md. Each spec's tasks.md owns its delivery state; progress.md never changes during normal work, and a project-wide view is derived from spec records on demand. Extra spec documents belong in that spec's docs/ subdirectory. Each W###-T### task is implemented with TDD and one verified, traceable commit. The skill ships templates and an abstract spec-decomposition guide; it does not add a _flow/ directory to this skills repository. It is independent of other installed skills and accepts only project-provided inputs.
 
 ## Code Best Practices
 

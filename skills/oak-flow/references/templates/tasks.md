@@ -3,6 +3,7 @@
 ## Quick navigation
 
 - [At a glance](#at-a-glance)
+- [Delivery state](#delivery-state)
 - [Work order](#work-order)
 
 ## At a glance
@@ -12,7 +13,15 @@
 - **Pending review:** {{OPEN_BLOCKERS_OR_NONE}}
 - **Next action:** {{FIRST_READY_TASK_ID_OR_BLOCKER}}
 
-> Checkboxes live here; spec status lives in [progress](../../progress.md). [Requirements](requirements.md) · [Design](design.md).
+> This file owns the spec's delivery state and task checkboxes. [Progress guide](../../progress.md) · [Requirements](requirements.md) · [Design](design.md).
+
+## Delivery state
+
+- **Status:** {{PLANNED_READY_IN_PROGRESS_BLOCKED_OR_DONE}}
+- **Dependencies:** {{SPEC_OR_TASK_IDS_OR_NONE}}
+- **Blockers:** {{OWNER_AND_UNBLOCK_CONDITION_OR_NONE}}
+
+Use the At a glance Next action field as the resume point; Pending review links to blockers here when needed. Do not duplicate the state in global documents. Only the assigned spec writer or integrating lead may update this file.
 
 ## Work order
 
